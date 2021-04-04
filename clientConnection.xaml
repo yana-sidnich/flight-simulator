@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="FlightGearTestExec.clientConnection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightGearTestExec"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Start Simulator" HorizontalAlignment="Left" Margin="344,188,0,0" VerticalAlignment="Top" Height="37" Width="190"/>
+        <Button Content="Connect To Simulator" HorizontalAlignment="Left" Margin="344,230,0,0" VerticalAlignment="Top" Height="36" Width="190"/>
+        <TextBox HorizontalAlignment="Left" Margin="408,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38"/>
+        <TextBox HorizontalAlignment="Left" Margin="408,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38"/>
+        <Label Content="IP" HorizontalAlignment="Left" Margin="352,94,0,0" VerticalAlignment="Top" Height="37" Width="41"/>
+        <Label Content="PORT" HorizontalAlignment="Left" Margin="352,139,0,0" VerticalAlignment="Top" Height="38" Width="41"/>
+
+    </Grid>
+</UserControl>

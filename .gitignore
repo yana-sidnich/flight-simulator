@@ -1,0 +1,4 @@
+bin/
+obj/
+.vs/
+FlightGearTestExec.csproj.user
