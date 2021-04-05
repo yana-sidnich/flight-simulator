@@ -8,47 +8,127 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Net;
 
 namespace FlightGearTestExec
 {
-    class FlightSimulator
+    class FlightSimulator : IFlightSimulator
     {
-        public ITcpClient myClient;
+        private ITcpClient myClient;
         Process simulatorExec;
-        public SimulatorConf conf;
-        private double throttle;
-        private double rudder;
-        private double elevator;
-        private double aileron;
+        private SimulatorConf conf;
+        private DataHandler dataHandler;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private int numOfRow;
-        private int speed = 100;
+        // can be configure from multiple threads.
+        private volatile int numOfRow;
+        private volatile int speed;
+        private volatile bool stopped;
 
         public FlightSimulator()
         {
             this.myClient = new MyTcpClient();
             string jsonString = File.ReadAllText("test.json");
+
             this.conf = JsonSerializer.Deserialize<SimulatorConf>(jsonString);
+
+            this.numOfRow = 0;
+
+            this.speed = 1000;
+            this.dataHandler = new DataHandler(this.conf.FlightCSVPath, this.conf.FlightXMLPath);
+            this.stopped = true;
         }
 
-        public void connectAndTransmit()
+        public void NotifyPropertyChanged(string propName)
         {
-            this.myClient.connect("localhost", 5400);
-            StreamReader reader = new StreamReader(File.OpenRead(this.conf.FlightCSVPath));
-            while (!reader.EndOfStream)
+            if (this.PropertyChanged != null)
             {
-                string line = reader.ReadLine();
-                Trace.WriteLine(line.Length);
-                line += System.Environment.NewLine;
-                Trace.WriteLine(line.Length);
-                byte[] byteLine = Encoding.ASCII.GetBytes(line);
-                this.myClient.send(byteLine);
-                Thread.Sleep(this.speed);
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
 
+        private void notifyAll()
+        {
+            foreach(string prop in this.dataHandler.DataByColumn.Keys)
+            {
+                this.NotifyPropertyChanged(prop);
+            }
+        }
+
+        public double getRequetedProp(string propName)
+        {
+            return this.dataHandler.DataByColumn[propName][this.numOfRow];
+        }
+
+        private void WaitForNextInput(int timeDiff)
+        {
+            // in correct the time taken to notify all changes, and wait only differnce needed.
+            if (timeDiff < this.speed)
+            {
+                Thread.Sleep(this.speed - timeDiff);
+            }
+        }
+        public void Start()
+        {
+            Trace.Write(this.isConnected());
+            Trace.Write(this.dataHandler.DataByRow.Count);
+            Thread t = new Thread (new ThreadStart((delegate()
+            {
+                this.stopped = false;
+
+                foreach (string line in this.dataHandler.DataByRow)
+                {
+                    Trace.WriteLine(line.Length);
+                    Trace.WriteLine("raw number is");
+                    Trace.WriteLine(numOfRow);
+                    byte[] byteLine = Encoding.ASCII.GetBytes(line + System.Environment.NewLine);
+                    this.myClient.send(byteLine);
+                    
+                    int before = DateTime.Now.Millisecond;
+                    this.notifyAll();
+                    int after = DateTime.Now.Millisecond;
+                    // check if not stopped
+                    if (stopped)
+                    {
+                        break;
+                    }
+                    WaitForNextInput(after - before);
+                    // check if after waiting
+                    if (stopped)
+                    {
+                        break;
+                    }
+                    // iterate to next line, please note that this variable can be configured from an outside source. 
+                    this.numOfRow++;
+                }
+            })));
+            t.Start();
+
+
+
+        }
+
+        public void Connect(string ip, int port)
+        {
+            this.myClient.connect(ip, port);
+        }
+
+        public void Disconnect()
+        {
+
+            this.myClient.disconnect();
+
+        }
+
+        public bool isConnected()
+        {
+            return this.myClient.isConnected();
+        }
+        public void Stop()
+        {
+            this.stopped = true;
+        }
         public void executeSimulator()
         {
             ProcessStartInfo info = new ProcessStartInfo(conf.SimulatorPath);
@@ -66,5 +146,9 @@ namespace FlightGearTestExec
 
         }
 
+        public bool isRunning()
+        {
+            return !(this.stopped);
+        }
     }
 }

@@ -117,7 +117,7 @@
                 </Canvas.RenderTransform>
                 <Canvas.Resources>
 
-                    <Storyboard x:Key="CenterKnob" Name="centerKnob" Completed="centerKnob_Completed">
+                    <Storyboard x:Key="CenterKnob" Name="centerKnob">
 
                         <DoubleAnimation Storyboard.TargetName="knobPosition"
                              Storyboard.TargetProperty="X" To="0" Duration="0:0:0.2">
@@ -134,14 +134,14 @@
                 </Canvas.Resources>
             </Canvas>
         </Canvas>
-        <Slider HorizontalAlignment="Center" Margin="0,407,0,0" VerticalAlignment="Top" Width="340" Height="43" RenderTransformOrigin="0.499,0.806" />
-        <Slider HorizontalAlignment="Left" Margin="21,182,0,0" VerticalAlignment="Top" Width="340" Height="43" RenderTransformOrigin="0.499,0.806" >
+        <Slider Value="{Binding vm_joystick_rudder}" HorizontalAlignment="Center" Margin="0,407,0,0" VerticalAlignment="Top" Width="340" Height="43" RenderTransformOrigin="0.499,0.806" />
+        <Slider Value="{Binding vm_joystick_throttle}" HorizontalAlignment="Left" Margin="13,182,0,0" VerticalAlignment="Top" Width="340" Height="43" RenderTransformOrigin="0.467,1.956" >
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-90.586"/>
-                    <TranslateTransform/>
+                    <RotateTransform Angle="-89.739"/>
+                    <TranslateTransform X="60.483" Y="-39.283"/>
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>

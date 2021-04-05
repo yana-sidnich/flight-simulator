@@ -16,13 +16,25 @@ using System.Windows.Shapes;
 namespace FlightGearTestExec
 {
     /// <summary>
-    /// Interaction logic for joystick.xaml
+    /// Interaction logic for Joystick.xaml
     /// </summary>
-    public partial class joystick : UserControl
+    public partial class Joystick : UserControl
     {
-        public joystick()
+        public Joystick()
         {
             InitializeComponent();
+            joystickViewModel vm = new joystickViewModel(new FlightSimulator());
+            DataContext = vm;
+        }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void centerKnob_Completed(Object sender, EventArgs e)
+        {
+            
         }
     }
 }

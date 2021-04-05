@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Threading;
 
 namespace FlightGearTestExec
 {
@@ -26,19 +27,15 @@ namespace FlightGearTestExec
         public MainWindow()
         {
             this.sim = new FlightSimulator();
+            joystickViewModel vm = new joystickViewModel(sim);
+            DataContext = vm;
             InitializeComponent();
+            //sim.executeSimulator();
+            sim.Connect("127.0.0.1", 5400);
+            sim.Start();
         }
 
-        private void connectToSimulator(object sender, RoutedEventArgs e)
-        {
-            sim.connectAndTransmit();
-        }
-
-        private void execSimulator(object sender, RoutedEventArgs e)
-        {
-            sim.executeSimulator();
-        }
-
+        
        
     }
 }

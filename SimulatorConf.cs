@@ -11,6 +11,8 @@ namespace FlightGearTestExec
     {
         public string SimulatorPath { get; set; }
         public string FlightCSVPath { get; set; }
+
+        public string FlightXMLPath { get; set; }
         public string FG_ROOT { get; set; }
     }
 
