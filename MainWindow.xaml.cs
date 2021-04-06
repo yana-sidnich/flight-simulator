@@ -23,16 +23,21 @@ namespace FlightGearTestExec
     public partial class MainWindow : Window
     {
         private FlightSimulator sim;
-        
+        private joystickViewModel joystick_vm;
+        private connectionViewModel connection_vm;
+
         public MainWindow()
         {
-            this.sim = new FlightSimulator();
-            joystickViewModel vm = new joystickViewModel(sim);
-            DataContext = vm;
             InitializeComponent();
+            this.sim = new FlightSimulator();
+            this.joystick_vm = new joystickViewModel(sim);
+            this.connection_vm = new connectionViewModel(sim);
+
+            this.joystick.DataContext = joystick_vm;
+            this.connection.DataContext = connection_vm;
             //sim.executeSimulator();
-            sim.Connect("127.0.0.1", 5400);
-            sim.Start();
+            
+            
         }
 
         

@@ -14,6 +14,7 @@ namespace FlightGearTestExec
 {
     class FlightSimulator : IFlightSimulator
     {
+       
         private ITcpClient myClient;
         Process simulatorExec;
         private SimulatorConf conf;
@@ -29,15 +30,15 @@ namespace FlightGearTestExec
         public FlightSimulator()
         {
             this.myClient = new MyTcpClient();
-            string jsonString = File.ReadAllText("test.json");
+            string jsonString = File.ReadAllText("FlightConf.json");
 
             this.conf = JsonSerializer.Deserialize<SimulatorConf>(jsonString);
 
             this.numOfRow = 0;
-
-            this.speed = 1000;
-            this.dataHandler = new DataHandler(this.conf.FlightCSVPath, this.conf.FlightXMLPath);
+            this.speed = 100;
             this.stopped = true;
+
+            this.dataHandler = new DataHandler(this.conf.FlightCSVPath, this.conf.FlightXMLPath);
         }
 
         public void NotifyPropertyChanged(string propName)
@@ -112,6 +113,7 @@ namespace FlightGearTestExec
         public void Connect(string ip, int port)
         {
             this.myClient.connect(ip, port);
+            this.Start();
         }
 
         public void Disconnect()

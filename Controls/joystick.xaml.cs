@@ -13,16 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlightGearTestExec
+namespace FlightGearTestExec.Controls
 {
     /// <summary>
-    /// Interaction logic for clientConnection.xaml
+    /// Interaction logic for joystick.xaml
     /// </summary>
-    public partial class clientConnection : UserControl
+    public partial class joystick : UserControl
     {
-        public clientConnection()
+        
+        public joystick()
         {
             InitializeComponent();
+        }
+
+        public void centerKnob_Completed(Object sender, EventArgs e)
+        {
+            
         }
     }
 }

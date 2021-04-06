@@ -4,12 +4,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace FlightGearTestExec
 {
     class joystickViewModel : INotifyPropertyChanged
     {
         private IFlightSimulator flightSimulatorModel;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public joystickViewModel(IFlightSimulator flightSimulatorModel)
         {
             this.flightSimulatorModel = flightSimulatorModel;
@@ -18,6 +22,11 @@ namespace FlightGearTestExec
                 {
                     this.NotifyPropertyChanged("vm_joystick_" + e.PropertyName);
                 };
+        }
+
+        private double convert(double d)
+        {
+            return 125 + 80 * d; 
         }
 
         public double vm_joystick_throttle
@@ -32,19 +41,16 @@ namespace FlightGearTestExec
         }
         public double vm_joystick_elevator
         {   
-            get { return flightSimulatorModel.getRequetedProp("elevator"); }
+            get {
+                Trace.WriteLine("worksssssssssssssssssssssssss  " + this.flightSimulatorModel.getRequetedProp("elevator"));
+                return convert(flightSimulatorModel.getRequetedProp("elevator")); }
             set { }
         }
         public double vm_joystick_aileron
         {
-            get { return flightSimulatorModel.getRequetedProp("aileron"); }
+            get { return convert(flightSimulatorModel.getRequetedProp("aileron")); }
             set { }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-
 
         public void NotifyPropertyChanged(string propName)
         {
