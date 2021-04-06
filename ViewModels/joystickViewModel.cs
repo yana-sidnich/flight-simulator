@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 
-namespace FlightGearTestExec
+namespace FlightGearTestExec.ViewModels
 {
     class joystickViewModel : INotifyPropertyChanged
     {
