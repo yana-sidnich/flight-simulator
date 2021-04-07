@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,11 +18,11 @@ namespace FlightGearTestExec
 
         private List<string> attributes;
 
-        private Dictionary<string, List<double>> dataByColumn;
+        private Dictionary<string, List<float>> dataByColumn;
 
         private List<string> dataByRow;
 
-        public Dictionary<string, List<double>> DataByColumn
+        public Dictionary<string, List<float>> DataByColumn
         {
             get { return dataByColumn; }
             set { }
@@ -50,7 +50,7 @@ namespace FlightGearTestExec
 
             attributes = new List<string>();
 
-            dataByColumn = new Dictionary<string, List<double>>();
+            dataByColumn = new Dictionary<string, List<float>>();
 
             dataByRow = new List<string>();
 
@@ -90,6 +90,27 @@ namespace FlightGearTestExec
 
             }
 
+            // deals with duplications in feature names
+            string[] names = attributes.ToArray();
+
+            Dictionary<string, int> count = new Dictionary<string, int>();
+
+            foreach (string name in attributes)
+            {
+                if (!count.ContainsKey(name))
+                    count.Add(name, 0);
+                else if (count[name] == 0)
+                    count[name] += 2;
+                else
+                    count[name]++;
+            }
+            for (int a = (names.Length - 1); a >= 0; a--)
+            {
+                if (count[names[a]] != 0)
+                    names[a] += "_" + (count[names[a]]--).ToString();
+            }
+            attributes = names.ToList<string>();
+
             sr.Close();
 
         }
@@ -103,9 +124,9 @@ namespace FlightGearTestExec
             foreach (string att in attributes)
 
             {
-                if(!dataByColumn.ContainsKey(att))
+                if (!dataByColumn.ContainsKey(att))
                 {
-                    dataByColumn.Add(att, new List<double>());
+                    dataByColumn.Add(att, new List<float>());
                 }
 
             }
@@ -127,7 +148,7 @@ namespace FlightGearTestExec
                 {
                     if (last_attr != attributes[i])
                     {
-                        dataByColumn[attributes[i]].Add(Convert.ToDouble(s_vals[i]));
+                        dataByColumn[attributes[i]].Add(float.Parse(s_vals[i]));
                     }
                     last_attr = attributes[i];
 
@@ -174,4 +195,3 @@ namespace FlightGearTestExec
     }
 
 }
-
