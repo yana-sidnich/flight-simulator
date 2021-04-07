@@ -20,9 +20,13 @@ namespace FlightGearTestExec.Controls
     /// </summary>
     public partial class connection : UserControl
     {
+        private connectionViewModel connection_vm;
         public connection()
         {
             InitializeComponent();
+            this.connection_vm = new connectionViewModel(FlightSimuatorSingleton.simulator);
+            this.DataContext = connection_vm;
+
         }
 
         /*private void Button_Click(object sender, RoutedEventArgs e)
@@ -54,7 +58,7 @@ namespace FlightGearTestExec.Controls
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
-            this.connectButton.IsEnabled = false;
+            
         }
     }
 }

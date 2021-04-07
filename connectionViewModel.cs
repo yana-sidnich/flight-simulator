@@ -20,6 +20,8 @@ namespace FlightGearTestExec
 
         public connectionViewModel(IFlightSimulator flightSimulatorModel)
         {
+            connectCommand = new ConnectCommand(this);
+
             this.flightSimulatorModel = flightSimulatorModel;
             this.flightSimulatorModel.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
@@ -47,11 +49,7 @@ namespace FlightGearTestExec
         {
             get
             {
-                if (connectCommand == null)
-                {
-                    connectCommand = new ConnectCommand(this);
-                }
-                return connectCommand;
+                 return connectCommand;
             }
             set { }
         }

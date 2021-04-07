@@ -32,13 +32,12 @@ namespace FlightGearTestExec
             this.myClient = new MyTcpClient();
             string jsonString = File.ReadAllText("FlightConf.json");
 
-            this.conf = JsonSerializer.Deserialize<SimulatorConf>(jsonString);
+            this.conf = new SimulatorConf();
 
             this.numOfRow = 0;
             this.speed = 100;
             this.stopped = true;
 
-            this.dataHandler = new DataHandler(this.conf.FlightCSVPath, this.conf.FlightXMLPath);
         }
 
         public void NotifyPropertyChanged(string propName)
@@ -59,7 +58,11 @@ namespace FlightGearTestExec
 
         public double getRequetedProp(string propName)
         {
-            return this.dataHandler.DataByColumn[propName][this.numOfRow];
+            if (this.dataHandler != null)
+            {
+                return this.dataHandler.DataByColumn[propName][this.numOfRow];
+            }
+            return 0.0;
         }
 
         private void WaitForNextInput(int timeDiff)
@@ -72,7 +75,9 @@ namespace FlightGearTestExec
         }
         public void Start()
         {
+
             Trace.Write(this.isConnected());
+            this.dataHandler = new DataHandler(this.conf.FlightTestCSVPath, this.conf.FlightXMLPath);
             Trace.Write(this.dataHandler.DataByRow.Count);
             Thread t = new Thread (new ThreadStart((delegate()
             {
@@ -134,12 +139,8 @@ namespace FlightGearTestExec
         public void executeSimulator()
         {
             ProcessStartInfo info = new ProcessStartInfo(conf.SimulatorPath);
-            //info.Environment.Add("FG_ROOT", conf.FG_ROOT);
-            //info.Environment.Add("FG_HOME", conf.FG_HOME);
-            //info.Environment.Add("FG_SCENERY",conf.FG_SCENERY);
-            //string playback_loc = "C:\\Program Files\\FlightGear 2019.1.2\\data\\Protocol\\playback_small";
             string playback_loc = "playback_small";
-            info.ArgumentList.Add($"--fg-root={conf.FG_ROOT}");
+            info.ArgumentList.Add($"--fg-root={conf.FgRoot}");
             info.ArgumentList.Add($"--fdm=null");
             info.ArgumentList.Add($"--generic=socket,in,10,127.0.0.1,5400,tcp,{playback_loc}");
             info.UseShellExecute = false;
@@ -151,6 +152,11 @@ namespace FlightGearTestExec
         public bool isRunning()
         {
             return !(this.stopped);
+        }
+
+        public SimulatorConf configuration()
+        {
+            return this.conf;
         }
     }
 }

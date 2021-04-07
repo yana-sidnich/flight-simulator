@@ -22,25 +22,21 @@ namespace FlightGearTestExec
     /// </summary>
     public partial class MainWindow : Window
     {
-        private FlightSimulator sim;
-        private joystickViewModel joystick_vm;
-        private connectionViewModel connection_vm;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.sim = new FlightSimulator();
-            this.joystick_vm = new joystickViewModel(sim);
-            this.connection_vm = new connectionViewModel(sim);
-
-            this.joystick.DataContext = joystick_vm;
-            this.connection.DataContext = connection_vm;
-            //sim.executeSimulator();
-            
             
         }
 
-        
-       
+        private void connection_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSimuatorSingleton.simulator.executeSimulator();
+        }
     }
 }

@@ -42,7 +42,6 @@ namespace FlightGearTestExec
         public double vm_joystick_elevator
         {   
             get {
-                Trace.WriteLine("worksssssssssssssssssssssssss  " + this.flightSimulatorModel.getRequetedProp("elevator"));
                 return convert(flightSimulatorModel.getRequetedProp("elevator")); }
             set { }
         }

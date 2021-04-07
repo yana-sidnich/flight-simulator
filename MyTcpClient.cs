@@ -24,7 +24,7 @@ namespace FlightGearTestExec
             myClient = new TcpClient();
             string jsonString = File.ReadAllText("FlightConf.json");
             SimulatorConf conf = JsonSerializer.Deserialize<SimulatorConf>(jsonString);
-            Trace.WriteLine(conf.FlightCSVPath);
+            Trace.WriteLine(conf.FlightTestCSVPath);
             Trace.WriteLine(conf.SimulatorPath);
 
 

@@ -26,7 +26,7 @@ namespace FlightGearTestExec
 
         public void Execute(object parameter)
         {
-            vm_connection.connect();
+            this.vm_connection.connect();
         }
     }
 }

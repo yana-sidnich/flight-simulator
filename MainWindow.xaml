@@ -7,17 +7,41 @@
         xmlns:controls="clr-namespace:FlightGearTestExec.Controls"
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1600">
-    <Grid Margin="0,0,0,0">
-        <Viewbox Height="300" HorizontalAlignment="Left" Margin="40,51,0,0"     
-        Name="viewbox1" VerticalAlignment="Top" Width="500"    
-        Stretch="Fill">
+        Title="MainWindow" Height="1000" Width="1557">
+    <Grid
+
+         ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="173*"></ColumnDefinition>
+            <ColumnDefinition Width="146*"></ColumnDefinition>
+            <ColumnDefinition Width="200*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="246*"></RowDefinition>
+            <RowDefinition Height="383*"></RowDefinition>
+            <RowDefinition Height="355*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <Viewbox Height="315"  Margin="7,39,20,0"     
+        Name="viewbox1"    
+        Stretch="Fill" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top">
             <controls:joystick x:Name="joystick"/>
         </Viewbox>
-        <Viewbox Height="300" Width="500" Margin="43,390,1057,294" >
-            <controls:connection x:Name="connection"/>
+        <DockPanel 
+              Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="223" Width="298">
+            <controls:connection x:Name="connection" Margin="20,50,0,0" Loaded="connection_Loaded" Width="278" Height="173"/>
+        </DockPanel>
 
+        <Viewbox
+            Height="279"  Margin="7,75,71,0"     
+        Name="viewbox2"    
+        Stretch="Fill" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
+            <controls:FileExplorer x:Name="FileExplorer"/>
         </Viewbox>
+        <Button Content="Start Simulator" HorizontalAlignment="Left" Margin="57,136,0,0" Grid.Row="2" VerticalAlignment="Top" Width="396" Height="60" Click="Button_Click" />
+
+
 
     </Grid>
 </Window>

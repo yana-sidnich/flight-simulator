@@ -4,21 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.ComponentModel;
+using System.Windows.Input;
+using FlightGearTestExec.Commands;
 
-namespace WPF_OpenFileExplorer
+namespace FlightGearTestExec
 {
-    public class FileExplorer_ViewModel
+    class FileExplorer_ViewModel : INotifyPropertyChanged
     {
-        // holds a Model Variable;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public FileExplorer_ViewModel(/*Model model*/)
+        private IFlightSimulator simulator;
+
+        public string vm_file_explorer_train_csv
         {
-            // this.model = model;
+            get { return simulator.configuration().FlightTrainCSVPath; }
+            set { simulator.configuration().FlightTrainCSVPath = value; }
         }
 
-        public void sendPaths(string pathTrainCSV, string pathTestCSV, string pathDLL)
+        public string vm_file_explorer_test_csv
         {
-            // model.setPaths
+            get { return simulator.configuration().FlightTestCSVPath; }
+            set { simulator.configuration().FlightTestCSVPath = value; }
+        }
+
+        public string vm_file_explorer_simulator_path
+        {
+            get { return simulator.configuration().SimulatorPath; }
+            set { simulator.configuration().SimulatorPath = value; }
+        }
+        public FileExplorer_ViewModel(IFlightSimulator simulator)
+        {
+            this.simulator = simulator;
+            this.simulator.PropertyChanged +=
+            delegate (Object sender, PropertyChangedEventArgs e)
+            {
+                this.NotifyPropertyChanged("vm_connection_" + e.PropertyName);
+            };
+        }
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
         }
     }
+
 }

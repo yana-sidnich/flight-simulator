@@ -20,10 +20,15 @@ namespace FlightGearTestExec.Controls
     /// </summary>
     public partial class joystick : UserControl
     {
-        
+        private joystickViewModel joystick_vm;
+
         public joystick()
         {
             InitializeComponent();
+
+            this.joystick_vm = new joystickViewModel(FlightSimuatorSingleton.simulator);
+            this.DataContext = joystick_vm;
+
         }
 
         public void centerKnob_Completed(Object sender, EventArgs e)

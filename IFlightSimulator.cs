@@ -22,6 +22,8 @@ namespace FlightGearTestExec
         public bool isRunning();
 
         public double getRequetedProp(string propName);
+        public void executeSimulator();
+        public SimulatorConf configuration();
 
     }
 }
