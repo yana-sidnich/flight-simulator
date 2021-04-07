@@ -12,9 +12,9 @@
 
          ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="173*"></ColumnDefinition>
-            <ColumnDefinition Width="146*"></ColumnDefinition>
-            <ColumnDefinition Width="200*"></ColumnDefinition>
+            <ColumnDefinition Width="436*"></ColumnDefinition>
+            <ColumnDefinition Width="568*"></ColumnDefinition>
+            <ColumnDefinition Width="553*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="246*"></RowDefinition>
@@ -25,21 +25,11 @@
 
         <Viewbox Height="315"  Margin="7,39,20,0"     
         Name="viewbox1"    
-        Stretch="Fill" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top">
+        Stretch="Fill" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
             <controls:joystick x:Name="joystick"/>
         </Viewbox>
-        <DockPanel 
-              Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="223" Width="298">
-            <controls:connection x:Name="connection" Margin="20,50,0,0" Loaded="connection_Loaded" Width="278" Height="173"/>
-        </DockPanel>
 
-        <Viewbox
-            Height="279"  Margin="7,75,71,0"     
-        Name="viewbox2"    
-        Stretch="Fill" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
-            <controls:FileExplorer x:Name="FileExplorer"/>
-        </Viewbox>
-        <Button Content="Start Simulator" HorizontalAlignment="Left" Margin="57,136,0,0" Grid.Row="2" VerticalAlignment="Top" Width="396" Height="60" Click="Button_Click" />
+
 
 
 

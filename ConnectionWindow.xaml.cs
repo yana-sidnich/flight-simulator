@@ -10,28 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Threading;
 
 namespace FlightGearTestExec
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ConnectionWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ConnectionWindow : Window
     {
-
-        public MainWindow()
+        public ConnectionWindow()
         {
             InitializeComponent();
-            
         }
 
         private void connection_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
+
     }
 }

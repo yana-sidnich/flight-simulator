@@ -29,26 +29,16 @@ namespace FlightGearTestExec.Controls
 
         }
 
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string port = this.portTextBox.Text;
-            if (validatedAndParsePort(port))
-            {
 
-            }
-            
-        }*/
-
-
-        /*private bool validatedAndParsePort(string portStr)
+        private bool validatedAndParsePort(string portStr)
         {
             int port = 0;
             if(int.TryParse(portStr, out port))
             {
                 return (port > 1024 && port < 49151);
-
             }
-        }*/
+            return false;
+        }
 
         private bool validateIp(string ip)
         {
@@ -58,7 +48,18 @@ namespace FlightGearTestExec.Controls
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
-            
+            //this.validatedAndParsePort()
+           // this.connection_vm.connect();
+            MainWindow mainWindow = new MainWindow();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
+        }
+
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSimuatorSingleton.simulator.executeSimulator();
         }
     }
 }

@@ -15,13 +15,10 @@ namespace FlightGearTestExec
         public event PropertyChangedEventHandler PropertyChanged;
         int port;
         string ip;
-        private ICommand connectCommand;
 
 
         public connectionViewModel(IFlightSimulator flightSimulatorModel)
         {
-            connectCommand = new ConnectCommand(this);
-
             this.flightSimulatorModel = flightSimulatorModel;
             this.flightSimulatorModel.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
@@ -44,15 +41,6 @@ namespace FlightGearTestExec
             }
         }
 
-
-        public ICommand vm_connection_ConnectCommand
-        {
-            get
-            {
-                 return connectCommand;
-            }
-            set { }
-        }
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
