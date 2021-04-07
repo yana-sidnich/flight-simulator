@@ -22,13 +22,13 @@ namespace FlightGearTestExec
         public MyTcpClient()
         {
             myClient = new TcpClient();
+
             string jsonString = File.ReadAllText("FlightConf.json");
             SimulatorConf conf = JsonSerializer.Deserialize<SimulatorConf>(jsonString);
             Trace.WriteLine(conf.FlightCSVPath);
             Trace.WriteLine(conf.SimulatorPath);
-
-
         }
+
         public void connect(string ip, int port)
         {
             try
