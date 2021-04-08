@@ -25,5 +25,15 @@ namespace FlightGearTestExec
         public void executeSimulator();
         public SimulatorConf configuration();
 
+        public float GetSpeed();
+        public void SetSpeed(float value);
+
+        public int GetCurrentLine();
+        public int GetNumLines();
+        public void SetCurrentLine(int value);
+
+        public void pauseRun();
+        public void unPauseRun();
+
     }
 }

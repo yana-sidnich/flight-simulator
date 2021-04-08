@@ -29,9 +29,11 @@ namespace FlightGearTestExec
             return 125 + 80 * d; 
         }
 
-        public double vm_joystick_throttle
+        public double vm_joystick_throttle_1
         {
-            get { return flightSimulatorModel.getRequetedProp("throttle"); }
+            get {
+                Trace.WriteLine($"throttle_1 val : {flightSimulatorModel.getRequetedProp("throttle_1")}"); 
+                return flightSimulatorModel.getRequetedProp("throttle_1"); }
             set { }
         }
         public double vm_joystick_rudder

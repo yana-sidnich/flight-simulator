@@ -29,6 +29,11 @@
             <controls:joystick x:Name="joystick"/>
         </Viewbox>
 
+        <Viewbox Height="315"  Margin="7,39,20,0"     
+        Name="viewbox2"    
+        Stretch="Fill" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top">
+            <controls:MediaPlayer x:Name="MediaPlayer"/>
+        </Viewbox>
 
 
 

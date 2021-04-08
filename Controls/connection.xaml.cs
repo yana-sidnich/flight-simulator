@@ -49,7 +49,7 @@ namespace FlightGearTestExec.Controls
         {
 
             //this.validatedAndParsePort()
-           // this.connection_vm.connect();
+            this.connection_vm.connect();
             MainWindow mainWindow = new MainWindow();
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
