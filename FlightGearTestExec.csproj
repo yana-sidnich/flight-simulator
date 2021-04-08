@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,22 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LiveChartsCore" Version="1.0.0" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="1.0.0" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="1.0.0" />
+    <PackageReference Include="LiveChartsCore" Version="1.0.3" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="1.0.3" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="1.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\SingleFeatureGraph.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\SingleFeatureGraph.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+	<!-- <ItemGroup> -->
+ <!--      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime> -->
+ <!--      <SubType>Designer</SubType> -->
+ <!--  </ItemGroup> -->
 
 </Project>
