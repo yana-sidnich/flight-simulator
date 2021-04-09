@@ -27,20 +27,6 @@ namespace FlightGearTestExec
                 };
         }
 
-        public string vm_connection_ip
-        {
-            get { return ip; }
-            set { ip = value; }
-        }
-        public int vm_connection_port
-        {
-            get { return port; }
-            set { port = value; 
-                Trace.WriteLine("port");
-                Trace.WriteLine(port);
-            }
-        }
-
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -49,9 +35,10 @@ namespace FlightGearTestExec
             }
         }
 
-        public void connect()
+        public void connect(string ip, string port)
         {
-            this.flightSimulatorModel.Connect(this.ip, this.port);
+            Trace.WriteLine($"ip {ip}, port {port}");
+            this.flightSimulatorModel.Connect(ip, Int32.Parse(port));
         }
 
     }

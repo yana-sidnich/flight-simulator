@@ -13,7 +13,7 @@ namespace FlightGearTestExec
 {
     class FlightSimulator : IFlightSimulator
     {
-        private const int BASE_SPEED = 100;
+        private const int DEFAULT_MILLIS_PER_TICK = 100;
         private ITcpClient myClient;
         Process simulatorExec;
         private SimulatorConf conf;
@@ -23,9 +23,11 @@ namespace FlightGearTestExec
         public event PropertyChangedEventHandler PropertyChanged;
         // can be configure from multiple threads.
         private volatile int numOfRow;
-        private volatile float speed;
+        private double speed;
+        private volatile bool forward;
         private volatile bool stopped;
         private volatile bool paused;
+
 
         public FlightSimulator()
         {
@@ -37,6 +39,7 @@ namespace FlightGearTestExec
             this.speed = 1.0f;
             this.stopped = true;
             this.paused = false;
+            this.forward = true;
 
         }
 
@@ -54,7 +57,6 @@ namespace FlightGearTestExec
             {
                 this.NotifyPropertyChanged(prop);
             }
-            this.NotifyPropertyChanged("current_line");
 
         }
 
@@ -70,8 +72,9 @@ namespace FlightGearTestExec
         private void WaitForNextInput(int timeDiff = 0)
         {
             // in correct the time taken to notify all changes, and wait only differnce needed.
-            int sleep = (int)(BASE_SPEED / this.speed);
-            if (timeDiff < this.speed)
+            int sleep = (int)(DEFAULT_MILLIS_PER_TICK / this.speed);
+            Trace.WriteLine($"speed: {this.speed}");
+            if (timeDiff < sleep)
             {
                 Thread.Sleep(sleep - timeDiff);
             }
@@ -110,10 +113,12 @@ namespace FlightGearTestExec
                         break;
                     }
                     // iterate to next line, please note that this variable can be configured from an outside source. 
-                    this.numOfRow++;
 
                     WaitForNextInput(after - before);
                     // check if after waiting
+                    this.numOfRow = this.forward ? Math.Min(this.numOfRow + 1, GetNumLines() - 1) : Math.Max(this.numOfRow -1, 0);
+
+                    this.NotifyPropertyChanged("current_line");
                     if (stopped)
                     {
                         break;
@@ -143,13 +148,13 @@ namespace FlightGearTestExec
         {
             this.stopped = true;
         }
-        public void executeSimulator()
+        public void executeSimulator(string ip, string port)
         {
-            ProcessStartInfo info = new ProcessStartInfo(conf.SimulatorPath);
+            ProcessStartInfo info = new ProcessStartInfo(conf.simulatorBinaryPath);
             string playback_loc = "playback_small";
             info.ArgumentList.Add($"--fg-root={conf.FgRoot}");
             info.ArgumentList.Add($"--fdm=null");
-            info.ArgumentList.Add($"--generic=socket,in,10,127.0.0.1,5400,tcp,{playback_loc}");
+            info.ArgumentList.Add($"--generic=socket,in,10,{ip},{port},tcp,{playback_loc}");
             info.UseShellExecute = false;
 
             simulatorExec = Process.Start(info);
@@ -166,15 +171,23 @@ namespace FlightGearTestExec
             return this.conf;
         }
 
-        public float GetSpeed()
+        public double GetSpeed()
         {
             return this.speed;
         }
-        public void SetSpeed(float value)
+        public void SetSpeed(double value)
         {
-            this.speed = value;
+            this.speed = Math.Round(value, 1);
+            this.NotifyPropertyChanged("speed");
         }
-
+        public void SetForward(bool forward)
+        {
+            this.forward = forward;
+        }
+        public bool GetForward()
+        {
+            return forward;
+        }
         public int GetCurrentLine()
         {
             return numOfRow;
@@ -182,7 +195,6 @@ namespace FlightGearTestExec
         public void SetCurrentLine(int value)
         {
             numOfRow = value;
-            NotifyPropertyChanged("current_line");
         }
         public int GetNumLines()
         {
@@ -198,5 +210,11 @@ namespace FlightGearTestExec
             this.paused = false;
 
         }
+        public float DefaultTicksPerSec()
+        {
+
+            return (float)(1000 / DEFAULT_MILLIS_PER_TICK);
+        }
+
     }
 }

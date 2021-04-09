@@ -26,7 +26,7 @@
                     <GradientStop Color="#FFDEEAD6" Offset="0.554"/>
                 </LinearGradientBrush>
             </Button.Background>
-            <Label Content="Select Train CSV File" Width="190" Height="40" VerticalAlignment="Stretch" HorizontalAlignment="Center"
+            <Label Content="Select Test CSV File" Width="190" Height="40" VerticalAlignment="Stretch" HorizontalAlignment="Center"
                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -79,7 +79,7 @@
                     <GradientStop Color="#FFDEEAD6" Offset="0.554"/>
                 </LinearGradientBrush>
             </Button.Background>
-            <Label Content="Select Test CSV File" Width="190" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <Label Content="Select Train CSV File" Width="190" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"
                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White">
                 <Label.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

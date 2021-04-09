@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FlightGearTestExec.Controls"
-              mc:Ignorable="d" Height="185" Width="614">
+             xmlns:converters="clr-namespace:FlightGearTestExec.Converters"
+             mc:Ignorable="d" Height="185" Width="614">
+    <UserControl.Resources>
+        <converters:TimeConverter x:Key="timeConverter"/>
+    </UserControl.Resources>
     <Grid Margin="10,10,18,6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="63*"/>
@@ -13,7 +16,7 @@
 
         </Grid.ColumnDefinitions>
 
-        <Slider x:Name="currentFrameSlider" Margin="32,10,48,128" TickPlacement="BottomRight" IsSnapToTickEnabled="True"  TickFrequency="1" Value="{Binding vm_media_player_current_line}" ValueChanged="Slider_ValueChanged" IsMoveToPointEnabled="True"/>
+        <Slider x:Name="currentFrameSlider" Margin="32,10,48,128" TickPlacement="BottomRight" IsSnapToTickEnabled="True"  TickFrequency="1" Value="{Binding vm_media_player_current_line}" IsMoveToPointEnabled="True"/>
 
         <Button  Width="35" Height="35" Click="forwardButton_Click" Margin="330,53,207,80">
             <Button.Template>
@@ -120,10 +123,10 @@
             </Button.Template>
         </Button>
 
-        <TextBox x:Name="speedTxt" Text="1.0" TextWrapping="Wrap" Margin="504,50,56,101" IsEnabled="False"/>
+        <TextBox x:Name="speedTxt" TextWrapping="Wrap" Margin="504,50,39,101" IsEnabled="False" Text="{Binding vm_media_player_speed}"/>
 
         <Label Content="Play Speed" Margin="434,45,86,96"/>
-        <Label x:Name="currentFrameLabel"  Margin="543,8,8,136" Content="0:00"/>
+        <Label x:Name="currentFrameLabel"  Margin="543,8,8,136" Content="{Binding vm_media_player_current_line, Converter={StaticResource timeConverter }}" />
         <Button Content="-" HorizontalAlignment="Left" Margin="440,70,0,0" VerticalAlignment="Top" Width="25" Height="21" Click="Minus_Click"></Button>
         <Button Content="+" HorizontalAlignment="Left" Margin="472,70,0,0" VerticalAlignment="Top" Width="25" Height="21" Click="Plus_Click"></Button>
 

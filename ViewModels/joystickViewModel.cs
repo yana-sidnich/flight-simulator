@@ -14,6 +14,7 @@ namespace FlightGearTestExec
         private IFlightSimulator flightSimulatorModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         public joystickViewModel(IFlightSimulator flightSimulatorModel)
         {
             this.flightSimulatorModel = flightSimulatorModel;
@@ -36,6 +37,8 @@ namespace FlightGearTestExec
                 return flightSimulatorModel.getRequetedProp("throttle_1"); }
             set { }
         }
+
+        
         public double vm_joystick_rudder
         {
         get { return flightSimulatorModel.getRequetedProp("rudder"); }

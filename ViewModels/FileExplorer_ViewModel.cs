@@ -38,7 +38,7 @@ namespace FlightGearTestExec
             this.simulator.PropertyChanged +=
             delegate (Object sender, PropertyChangedEventArgs e)
             {
-                this.NotifyPropertyChanged("vm_connection_" + e.PropertyName);
+                this.NotifyPropertyChanged("vm_file_explorer_" + e.PropertyName);
             };
         }
         public void NotifyPropertyChanged(string propName)

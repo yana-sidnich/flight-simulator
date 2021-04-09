@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlightGearTestExec;
+using System.Diagnostics;
+using System.Windows.Data;
+using FlightGearTestExec.Converters;
 
 namespace FlightGearTestExec.ViewModels
 {
@@ -12,11 +15,13 @@ namespace FlightGearTestExec.ViewModels
     {
 
         private IFlightSimulator simulator;
+        private IValueConverter time_converter;
         public event PropertyChangedEventHandler PropertyChanged;
         
         public MediaPlayerViewModel(IFlightSimulator simulator)
         {
             this.simulator = simulator;
+            this.time_converter = new TimeConverter();
             this.simulator.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("vm_media_player_" + e.PropertyName);
@@ -31,10 +36,30 @@ namespace FlightGearTestExec.ViewModels
             }
         }
 
-        int vm_media_player_current_line
+        public int vm_media_player_current_line
         {
-            get { return simulator.GetCurrentLine(); }
-            set { simulator.SetCurrentLine(value); }
+            get {
+                Trace.WriteLine("get current line");
+                return simulator.GetCurrentLine(); }
+            set { simulator.SetCurrentLine(value);
+                }
+        }
+
+        public double vm_media_player_speed
+        {
+            get
+            {
+                return simulator.GetSpeed();
+            }
+            set { }
+        }
+        public IValueConverter vm_media_player_time_converter
+        {
+            get
+            {
+                return time_converter;
+            }
+            set { }
         }
         public int getTotalFrameNumber() { return simulator.GetNumLines(); }
         public void pause()
@@ -43,6 +68,9 @@ namespace FlightGearTestExec.ViewModels
         }
         public void play()
         {
+            simulator.SetSpeed(1.0f);
+            simulator.SetForward(true);
+
             simulator.unPauseRun();
         }
         public void stop()
@@ -80,15 +108,31 @@ namespace FlightGearTestExec.ViewModels
             if (simulator.GetSpeed() > 0.2f)
                 simulator.SetSpeed(simulator.GetSpeed() - 0.1f);
         }
-        public void halfSpeed()
+        public void forward()
         {
-                simulator.SetSpeed(simulator.GetSpeed() / 2);
+            if (simulator.GetForward())
+            {
+                simulator.SetSpeed(simulator.GetSpeed() * 2);
+            }
+            else
+            {
+                simulator.SetForward(true);
+                simulator.SetSpeed(2.0f);
+            }
         }
-        public void doubleSpeed()
+        public void rewind()
         {
-            simulator.SetSpeed(simulator.GetSpeed() * 2);
+            if (!simulator.GetForward())
+            {
+                simulator.SetSpeed(simulator.GetSpeed() * 2);
+            }
+            else
+            {
+                simulator.SetForward(false);
+                simulator.SetSpeed(2.0f);
+            }
         }
-        public float getSpeed()
+        public double GetSpeed()
         {
             return simulator.GetSpeed();
         }

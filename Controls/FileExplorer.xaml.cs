@@ -30,19 +30,30 @@ namespace FlightGearTestExec.Controls
             this.DataContext = file_explorer_vm;
 
         }
+        private string dialog(FileDialog dialog)
+        {
+            dialog.ShowDialog();
+            string file = dialog.FileName;
+            Trace.WriteLine($"Dialog found file {file}");
+            return file;
+        }
+        private string dialog(System.Windows.Forms.FolderBrowserDialog dialog)
+        {
+            dialog.ShowDialog();
+            string folder = dialog.SelectedPath;
+            Trace.WriteLine($"Dialog found folder {folder}");
+            return folder;
+        }
         private void OpenExplorer(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.ShowDialog();
-            string s = ofd.FileName;
-            Trace.WriteLine(s);
             if (b == chooseTestCSV)
-                file_explorer_vm.vm_file_explorer_test_csv = s;
+                file_explorer_vm.vm_file_explorer_test_csv = dialog(new OpenFileDialog());
             else if (b == chooseTrainCSV)
-                file_explorer_vm.vm_file_explorer_train_csv = s;
+                file_explorer_vm.vm_file_explorer_train_csv = dialog(new OpenFileDialog());
             else if (b == chooseFlightSimulator)
-                file_explorer_vm.vm_file_explorer_simulator_path = s;
+                file_explorer_vm.vm_file_explorer_simulator_path = dialog(new System.Windows.Forms.FolderBrowserDialog());
             else
                 ;//pathDLL = s;
         }
