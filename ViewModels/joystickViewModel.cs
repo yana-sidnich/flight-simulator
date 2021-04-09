@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace FlightGearTestExec.ViewModels
 {
-    class joystickViewModel : INotifyPropertyChanged
+    public class joystickViewModel : INotifyPropertyChanged
     {
         private IFlightSimulator flightSimulatorModel;
         public event PropertyChangedEventHandler PropertyChanged;

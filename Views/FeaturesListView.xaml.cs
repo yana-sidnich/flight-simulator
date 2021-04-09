@@ -11,51 +11,42 @@ using FlightGearTestExec.ViewModels;
 
 namespace FlightGearTestExec.Views
 {
-    public partial class FeaturesListView : UserControl, INotifyPropertyChanged
+    public partial class FeaturesListView : UserControl
     {
         private struct ListItem
         {
             public string FeatureName { get; set; }
-            public string CorrelatedFeatures { get; set; }
+            public string CorrelatedName { get; set; }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public int Selected
-        {
-            get { return _selected; }
-            set
-            {
-                _selected = value;
-                NotifyPropertyChanged("Selected");
-            }
-        }
-
+        private FeaturesListViewModel vm;
         private int _selected;
-        // <src:UserControl DataContext="{Binding Path=DataContext.UserViewModel, RelativeSource={RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
-        // <someNamespace:EricsUserControl DataContext="{Binding InstanceOfBindingObject}"/>
+        
         public FeaturesListView()
         {
             InitializeComponent();
-            // vm = new FeaturesListViewModel();
             Dictionary<string, FlightDataContainer> dataDictionary = get_should_be_data_context();
             foreach (var pair in dataDictionary)
             {
-                ListItem temp = new ListItem { FeatureName = pair.Key, CorrelatedFeatures = pair.Value.correlatedFeatureName };
+                ListItem temp = new ListItem { FeatureName = pair.Key, CorrelatedName = pair.Value.correlatedFeatureName };
                 FeaturesList.Items.Add(temp);
             }
+
+            vm = DataContext as FeaturesListViewModel;
         }
 
         private void List_Selected(object sender, RoutedEventArgs e)
         {
             ListView list = sender as ListView;
-            Selected = list.SelectedIndex;
-        }
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            if (list != null && list.SelectedValue != null)
+            {
+                ListItem? item = list.SelectedValue as ListItem?;
+                if (item != null && vm != null)
+                {
+                    vm.VM_FeaturesList_SelectedString = item.Value.FeatureName;
+                    vm.VM_FeaturesList_CorrelatedString = item.Value.CorrelatedName;
+                }
+            }
         }
     }
 }

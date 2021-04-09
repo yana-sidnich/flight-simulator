@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Threading;
 using FlightGearTestExec.ViewModels;
+using FlightGearTestExec.Views;
 
 namespace FlightGearTestExec
 {
@@ -23,28 +24,19 @@ namespace FlightGearTestExec
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindow a;
+        private BaseViewModel _vm;
         private FlightSimulator sim;
-        private joystickViewModel joystick_vm;
-        private connectionViewModel connection_vm;
-        private GraphsViewModel graphs_vm;
-
         public MainWindow()
         {
-            InitializeComponent();
             this.sim = new FlightSimulator();
-            // this.joystick_vm = new joystickViewModel(sim);
-            // this.connection_vm = new connectionViewModel(sim);
-            this.graphs_vm = new GraphsViewModel(sim);
+            this._vm = new BaseViewModel(sim);
 
-            // this.joystick.DataContext = joystick_vm;
-            // this.connection.DataContext = connection_vm;
-            this.graphs.DataContext = graphs_vm;
             //sim.executeSimulator();
             
+            // this.DataContext = this;
+            InitializeComponent();
             
         }
-
-        
-       
     }
 }

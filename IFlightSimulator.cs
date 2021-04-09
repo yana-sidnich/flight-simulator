@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlightGearTestExec
 {
-    interface IFlightSimulator : INotifyPropertyChanged
+    public interface IFlightSimulator : INotifyPropertyChanged 
     {
         public void Connect(string IP, int Port);
 

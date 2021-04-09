@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlightGearTestExec
 {
-    class FlightDataContainer
+    public class FlightDataContainer
     {
         public string correlatedFeatureName { get; set; }
         public double[] values { get; set; }

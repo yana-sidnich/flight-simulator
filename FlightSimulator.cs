@@ -12,7 +12,7 @@ using System.Net;
 
 namespace FlightGearTestExec
 {
-    class FlightSimulator : IFlightSimulator
+    public class FlightSimulator : IFlightSimulator
     {
        
         private ITcpClient myClient;
@@ -20,12 +20,35 @@ namespace FlightGearTestExec
         private SimulatorConf conf;
         private DataHandler dataHandler;
 
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public Dictionary<string, FlightDataContainer> dataDictionary;
         // can be configure from multiple threads.
         private volatile int numOfRow;
         private volatile int speed;
         private volatile bool stopped;
+
+        private string _selectedString;
+        private string _correlatedString;
+
+        public string SelectedString
+        {
+            get { return _selectedString; }
+            set
+            {
+                _selectedString = value;
+                this.NotifyPropertyChanged("SelectedString");
+            }
+        }
+        public string CorrelatedString
+        {
+            get { return _correlatedString; }
+            set
+            {
+                _correlatedString = value;
+                this.NotifyPropertyChanged("CorrelatedString");
+            }
+        }
 
         public FlightSimulator()
         {
@@ -39,6 +62,7 @@ namespace FlightGearTestExec
             // this.stopped = true;
             //
             // this.dataHandler = new DataHandler(this.conf.FlightCSVPath, this.conf.FlightXMLPath);
+            dataDictionary = FlightDataContainer.get_should_be_data_context();
         }
 
         public void NotifyPropertyChanged(string propName)
