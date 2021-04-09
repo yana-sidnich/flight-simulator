@@ -13,20 +13,39 @@
         <UniformGrid.Resources>
             <Style TargetType="lvc:CartesianChart">
                 <Setter Property="ZoomMode" Value="None"></Setter>
-                <Setter Property="Width" Value="800"></Setter>
-                <Setter Property="Height" Value="800"></Setter>
                 <Setter Property="LegendPosition" Value="Hidden"></Setter>
                 <Setter Property="TooltipPosition" Value="Hidden"></Setter>
+                <Setter Property="Width" Value="600"></Setter>
+                <Setter Property="Height" Value="600"></Setter>
             </Style>
+            <!-- <Setter Property="ZoomMode" Value="Both"></Setter> -->
+            <!-- <Setter Property="Width" Value="700"></Setter> -->
+            <!--     <Setter Property="Height" Value="700"></Setter> -->
         </UniformGrid.Resources>
-        <DockPanel>
-            <Label DockPanel.Dock="Top" Content="{Binding VM_TwoFeaturesGraphs_SelectedString}"></Label>
-            <lvc:CartesianChart DockPanel.Dock="Bottom" Series="{Binding Series_0}"/>
-        </DockPanel>
-        <DockPanel>
-            <Label DockPanel.Dock="Top" Content="{Binding VM_TwoFeaturesGraphs_CorrelatedString}"></Label>
-            <lvc:CartesianChart DockPanel.Dock="Bottom" Series="{Binding Series_1}"/>
-        </DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Content="{Binding VM_TwoFeaturesGraphs_SelectedString}"></Label>
+            <lvc:CartesianChart x:Name="graph_0"
+                                Series="{Binding SeriesData[0].series}"
+                                XAxes="{Binding SeriesData[0].XAxes}"
+                                YAxes="{Binding SeriesData[0].YAxes}" Grid.Row="1"
+            />
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Content="{Binding VM_TwoFeaturesGraphs_CorrelatedString}"></Label>
+            <lvc:CartesianChart  x:Name="graph_1"
+                                 Series="{Binding SeriesData[1].series}"
+                                 XAxes="{Binding SeriesData[1].XAxes}"
+                                 YAxes="{Binding SeriesData[1].YAxes}" Grid.Row="1"
+            />
+        </Grid>
     </UniformGrid>
 
 

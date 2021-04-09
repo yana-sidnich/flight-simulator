@@ -23,7 +23,7 @@ namespace FlightGearTestExec
             const int SIZE = 54;
             const int POINTS_SIZE = 2314;
 
-            Random rnd = new Random();
+            Random rnd = new Random(1460);
             List<int> indexes = new List<int>();
             string[] featuresNames = new string[SIZE];
 

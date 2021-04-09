@@ -19,33 +19,35 @@ namespace FlightGearTestExec.Views
             public string CorrelatedName { get; set; }
         }
 
-        private FeaturesListViewModel vm;
-        private int _selected;
+        private readonly FeaturesListViewModel vm;
         
         public FeaturesListView()
         {
             InitializeComponent();
-            Dictionary<string, FlightDataContainer> dataDictionary = get_should_be_data_context();
-            foreach (var pair in dataDictionary)
-            {
-                ListItem temp = new ListItem { FeatureName = pair.Key, CorrelatedName = pair.Value.correlatedFeatureName };
-                FeaturesList.Items.Add(temp);
-            }
 
             vm = DataContext as FeaturesListViewModel;
+
+            Dictionary<string, FlightDataContainer> dataDictionary = vm?.getDictionary();
+
+            if (dataDictionary != null)
+            {
+                foreach (var pair in dataDictionary)
+                {
+                    ListItem temp = new ListItem
+                        {FeatureName = pair.Key, CorrelatedName = pair.Value.correlatedFeatureName};
+                    FeaturesList.Items.Add(temp);
+                }
+            }
         }
 
         private void List_Selected(object sender, RoutedEventArgs e)
         {
-            ListView list = sender as ListView;
-            if (list != null && list.SelectedValue != null)
+            if (sender is ListView list && list.SelectedValue != null)
             {
-                ListItem? item = list.SelectedValue as ListItem?;
-                if (item != null && vm != null)
-                {
-                    vm.VM_FeaturesList_SelectedString = item.Value.FeatureName;
-                    vm.VM_FeaturesList_CorrelatedString = item.Value.CorrelatedName;
-                }
+                if (list.SelectedValue is not ListItem item || vm == null) return;
+
+                vm.VM_FeaturesList_SelectedString = item.FeatureName;
+                vm.VM_FeaturesList_CorrelatedString = item.CorrelatedName;
             }
         }
     }

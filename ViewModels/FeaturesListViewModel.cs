@@ -26,6 +26,11 @@ namespace FlightGearTestExec.ViewModels
                 };
         }
 
+        public Dictionary<string, FlightDataContainer> getDictionary()
+        {
+            return _model?.dataDictionary;
+        }
+
         public string VM_FeaturesList_SelectedString
         {
             get { return _model.SelectedString; }

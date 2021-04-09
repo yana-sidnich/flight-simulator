@@ -18,9 +18,6 @@ using static FlightGearTestExec.FlightDataContainer;
 
 namespace FlightGearTestExec.Views
 {
-    /// <summary>
-    /// Interaction logic for GraphsView.xaml
-    /// </summary>
     public partial class GraphsView : UserControl
     {
         private GraphsViewModel vm;

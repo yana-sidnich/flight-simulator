@@ -33,36 +33,6 @@ namespace FlightGearTestExec.Views
         private ObservableCollection<ObservablePointF> points;
         public List<Axis> axesList;
 
-        private Dictionary<string, FlightDataContainer> dictionarrrrrrry;
-
-        // private double _xMin;
-        // private double _xMax;
-        //
-        // public double XMin
-        // {
-        //     get => this._xMin;
-        //     set
-        //     {
-        //         this._xMin = value;
-        //         if (PropertyChanged != null)
-        //             PropertyChanged(this, new PropertyChangedEventArgs("XMin"));
-        //     }
-        // }
-        //
-        // public double XMax
-        // {
-        //     get => this._xMax;
-        //     set
-        //     {
-        //         this._xMax = value;
-        //         if (PropertyChanged != null)
-        //             PropertyChanged(this, new PropertyChangedEventArgs("XMax"));
-        //     }
-        // }
-        //
-
-        /// 
-
         public List<Axis> XAxes { get; set; }
 
         public List<Axis> YAxes { get; set; }
@@ -70,69 +40,92 @@ namespace FlightGearTestExec.Views
         /// 
         private TwoFeaturesGraphsViewModel vm;
 
+        private CartesianChart char_0;
+
+        private CartesianChart char_1;
+
+        private Axis x_axis_0;
+
+        private Axis x_axis_1;
+
+        private readonly TimeSpan fastAnimationSpeed;
+
+        private TimeSpan originalAnimation_0;
+
+        private TimeSpan originalAnimation_1;
+
         public TwoFeaturesGraphView()
         {
             InitializeComponent();
+            fastAnimationSpeed = TimeSpan.FromMilliseconds(50);
             vm = this.DataContext as TwoFeaturesGraphsViewModel;
+            char_0 = graph_0 as CartesianChart;
+            char_1 = graph_1 as CartesianChart;
+            originalAnimation_0 = char_0.AnimationsSpeed;
+            originalAnimation_1 = char_1.AnimationsSpeed;
+            x_axis_0 = (char_0?.XAxes as List<Axis>)?[0];
+            x_axis_1 = (char_1?.XAxes as List<Axis>)?[0];
+
             vm.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     string name = e.PropertyName;
-                    if (name == "VM_TwoFeaturesGraphs_SelectedString" || name == "VM_TwoFeaturesGraphs_CorrelatedString")
+                    if (name == "VM_TwoFeaturesGraphs_SelectedString" ||
+                        name == "VM_TwoFeaturesGraphs_CorrelatedString")
                     {
-                        updatePoints(name);
+                        // temporarily faster the animation speed between points changes
+                        char_0.AnimationsSpeed = fastAnimationSpeed;
+                        char_1.AnimationsSpeed = fastAnimationSpeed;
+                        vm.updatePoints(name);
+                        
+                        // wait before restoring default speed
+                        Task.Run(() =>
+                        {
+                            Thread.Sleep(1000);
+                            char_0.AnimationsSpeed = originalAnimation_0;
+                            char_1.AnimationsSpeed = originalAnimation_1;
+                        });
+                    }
+
+                    else if (name == "VM_TwoFeaturesGraphs_CurrentLineNumber")
+                    {
+                        int lineNumber = vm.VM_TwoFeaturesGraphs_CurrentLineNumber;
+                        if (x_axis_0 != null)
+                            x_axis_0.MaxLimit = lineNumber;
+                        if (x_axis_1 != null)
+                            x_axis_1.MaxLimit = lineNumber;
+
                     }
                 };
-        }
 
-        private void updatePoints(string name)
-        {
-            List<ObservablePointF> points = new List<ObservablePointF>();
-            double[] values;
-            int SIZE;
-            int graphIndex = 0;
-            if (name == "VM_TwoFeaturesGraphs_SelectedString")
+            // FOR TESTING
+            Task.Run(() =>
             {
-                graphIndex = 0;
-                values = vm.getFeatureValues(vm.VM_TwoFeaturesGraphs_SelectedString);
-            }
-            else if (name == "VM_TwoFeaturesGraphs_CorrelatedString")
-            {
-                graphIndex = 1;
-                values = vm.getFeatureValues(vm.VM_TwoFeaturesGraphs_CorrelatedString);
-            }
-            else
-            {
-                return;
-            }
+                int lineNumber = 0;
+                while (true)
+                {
+                    Thread.Sleep(50);
+                    // if (Application.Current != null)
+                    // {
+                    //     Application.Current.Dispatcher.Invoke(() =>
+                    //     {
+                    //         BaseViewModel.modelllllllll.CurrentLineNumber++; 
+                    //     });
+                    // }   
+                    if (Application.Current != null)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            if (x_axis_0 != null)
+                                x_axis_0.MaxLimit = lineNumber;
+                            if (x_axis_1 != null)
+                                x_axis_1.MaxLimit = lineNumber;
+                            lineNumber++;
+                        });
+                    }
 
-            if (values == null)
-            {
-                return;
-            }
-
-            SIZE = values.Length;
-            for (int i = 0; i < SIZE; i++)
-            {
-                points.Add(new ObservablePointF(i, (float)values[i]));
-            }
-
-            vm.resetPoints(graphIndex, points);
-
+                }
+            });
         }
     }
-    // private void CreateAxes()
-    // {
-    //     axesList = new List<Axis> {
-    //         new Axis
-    //         {
-    //             MinLimit = -50, //XMin,
-    //             MaxLimit = 700,//XMax,
-    //         },
-    //         new Axis
-    //         {
-    //             MinLimit = -50, //YMin,
-    //             MaxLimit = 700,//YMax,
-    //         }
-    //     };
 }

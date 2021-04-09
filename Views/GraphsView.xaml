@@ -16,8 +16,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="2.4*"/>
+            <ColumnDefinition Width="3.4*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -25,8 +24,6 @@
         </Grid.RowDefinitions>
 
         <views:FeaturesListView Grid.Column="0" x:Name="ListUserControl" HorizontalAlignment="Stretch"/>
-
-        <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Width="5" VerticalAlignment="Stretch" Grid.Column="1"/>
 
         <Grid Grid.Column="2" HorizontalAlignment="Stretch">
             <Grid>

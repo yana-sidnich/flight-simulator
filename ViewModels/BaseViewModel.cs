@@ -14,10 +14,12 @@ namespace FlightGearTestExec.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected static IFlightSimulator model;
+        public static FlightSimulator modelllllllll;
 
         public BaseViewModel(IFlightSimulator flightSimulatorModel)
         {
             model = flightSimulatorModel;
+            modelllllllll = model as FlightSimulator;
         }
 
         public BaseViewModel()

@@ -31,6 +31,16 @@ namespace FlightGearTestExec
         private string _selectedString;
         private string _correlatedString;
 
+        public int CurrentLineNumber
+        {
+            get { return numOfRow; }
+            set
+            {
+                numOfRow = value;
+                this.NotifyPropertyChanged("CurrentLineNumber");
+            }
+        }
+
         public string SelectedString
         {
             get { return _selectedString; }
@@ -40,6 +50,7 @@ namespace FlightGearTestExec
                 this.NotifyPropertyChanged("SelectedString");
             }
         }
+
         public string CorrelatedString
         {
             get { return _correlatedString; }
