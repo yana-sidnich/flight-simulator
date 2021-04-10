@@ -32,14 +32,16 @@
             </Grid.OpacityMask>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <Border x:Name="Border0" Grid.Row="0" Grid.RowSpan="2" CornerRadius="15" Background="White" />
-            <Border Grid.Row="0" Grid.RowSpan="2" Background="#005b4f" av:IsHidden="True" />
+            <Border x:Name="Border0" Grid.Row="0" Grid.RowSpan="4" CornerRadius="15" Background="White" />
+            <Border Grid.Row="0" Grid.RowSpan="4" Background="#005b4f" av:IsHidden="True" />
             <TextBlock Grid.Row="0" TextAlignment="Center" Text="{Binding VM_TwoFeaturesGraphs_SelectedString}"
                        Padding="10, 10, 0, 5" Foreground="White" FontSize="18"/>
-            <lvc:CartesianChart x:Name="graph_0" Grid.Row="1"
+            <lvc:CartesianChart x:Name="graph_0" Grid.Row="3"
                                     Series="{Binding SeriesData[0].series}"
                                     XAxes="{Binding SeriesData[0].XAxes}"
                                     YAxes="{Binding SeriesData[0].YAxes}"
@@ -55,14 +57,16 @@
             </Grid.OpacityMask>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <Border x:Name="Border1" Grid.Row="0" Grid.RowSpan="2" CornerRadius="15" Background="White" />
-            <Border Grid.Row="0" Grid.RowSpan="2" Background="#007ac1" av:IsHidden="True" />
+            <Border x:Name="Border1" Grid.Row="0" Grid.RowSpan="4" CornerRadius="15" Background="White" />
+            <Border Grid.Row="0" Grid.RowSpan="4" Background="#007ac1" av:IsHidden="True" />
             <TextBlock Grid.Row="0" TextAlignment="Center" Text="{Binding VM_TwoFeaturesGraphs_CorrelatedString}"
                        Padding="10, 10, 0, 5" Foreground="White" FontSize="18"/>
-            <lvc:CartesianChart x:Name="graph_1" Grid.Row="1"
+            <lvc:CartesianChart x:Name="graph_1" Grid.Row="3"
                                     Series="{Binding SeriesData[1].series}"
                                     XAxes="{Binding SeriesData[1].XAxes}"
                                     YAxes="{Binding SeriesData[1].YAxes}"
