@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Globalization;
-
+using System.Diagnostics;
 namespace FlightGearTestExec.Converters
 {
     class TimeConverter : IValueConverter
@@ -15,6 +15,7 @@ namespace FlightGearTestExec.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int x = (int)((int)value / 10);
+            Trace.WriteLine($"conversion called {x}");
             if (x % 60 >= 10)
             {
                 return "" + x / 60 + ":" + x % 60;

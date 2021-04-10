@@ -17,7 +17,7 @@ using SkiaSharp;
 
 namespace FlightGearTestExec.ViewModels
 {
-    public class TwoFeaturesGraphsViewModel : BaseViewModel
+    class TwoFeaturesGraphsViewModel : BaseViewModel
     {
         public class SeriesHolder
         {
@@ -76,7 +76,7 @@ namespace FlightGearTestExec.ViewModels
         {
             ColorsArray = new SKColor[] { SKColors.DarkTurquoise, SKColors.DarkSeaGreen };
 
-            _model = model as FlightSimulator;
+            _model = simulator as FlightSimulator;
             _model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
@@ -168,6 +168,6 @@ namespace FlightGearTestExec.ViewModels
 
         public string VM_TwoFeaturesGraphs_CorrelatedString => _model.CorrelatedString;
 
-        public int VM_TwoFeaturesGraphs_CurrentLineNumber => _model.CurrentLineNumber;
+        public int VM_TwoFeaturesGraphs_CurrentLineNumber => _model.GetCurrentLine();
     }
 }

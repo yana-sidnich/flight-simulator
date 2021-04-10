@@ -30,6 +30,7 @@ namespace FlightGearTestExec
         private volatile bool paused;
         private string _selectedString;
         private string _correlatedString;
+        internal Dictionary<string, FlightDataContainer> dataDictionary;
 
         public string SelectedString
         {
@@ -98,6 +99,8 @@ namespace FlightGearTestExec
             Trace.WriteLine($"speed: {this.speed}");
             if (timeDiff < sleep)
             {
+                Trace.WriteLine($"sleeping: {sleep - timeDiff}");
+
                 Thread.Sleep(sleep - timeDiff);
             }
         }
