@@ -35,7 +35,7 @@ namespace FlightGearTestExec
         public string FlightTestCSVPath { get; set; }
         public string FlightTrainCSVPath { get; set; }
 
-        //public string FlightD { get; set; }
+        public string AnomaliyAlgorithmDLL { get; set; }
 
         public string FlightXMLPath { get { return flightXMLPath; } }
         public string FgRoot { get { return fgRoot; } }

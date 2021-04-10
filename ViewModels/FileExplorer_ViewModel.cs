@@ -31,6 +31,16 @@ namespace FlightGearTestExec.ViewModels
                 Trace.WriteLine($"change simulator path ${value}");
                 simulator.configuration().SimulatorPath = value; }
         }
+        public string vm_file_anomaly_algorithm_dll
+        {
+            get { return simulator.configuration().AnomaliyAlgorithmDLL; }
+            set
+            {
+                Trace.WriteLine($"change anomaly dll path ${value}");
+                simulator.configuration().AnomaliyAlgorithmDLL = value;
+            }
+        }
+
         public FileExplorer_ViewModel()
         {
             this.simulator.PropertyChanged +=

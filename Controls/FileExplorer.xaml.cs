@@ -55,8 +55,8 @@ namespace FlightGearTestExec.Controls
                 file_explorer_vm.vm_file_explorer_train_csv = dialog(new OpenFileDialog());
             else if (b == chooseFlightSimulator)
                 file_explorer_vm.vm_file_explorer_simulator_path = dialog(new System.Windows.Forms.FolderBrowserDialog());
-            else
-                ;//pathDLL = s;
+            else if (b == chooseDLL)
+                file_explorer_vm.vm_file_anomaly_algorithm_dll = dialog(new OpenFileDialog());
         }
     }
 }
