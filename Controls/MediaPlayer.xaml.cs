@@ -27,7 +27,7 @@ namespace FlightGearTestExec.Controls
         public MediaPlayer()
         {
             InitializeComponent();
-            this.vm = new MediaPlayerViewModel(FlightSimuatorSingleton.simulator);
+            this.vm = new MediaPlayerViewModel();
 
             currentFrameSlider.Maximum = vm.getTotalFrameNumber();
             currentFrameSlider.Minimum = 0;

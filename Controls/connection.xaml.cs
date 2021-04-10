@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightGearTestExec.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace FlightGearTestExec.Controls
         public connection()
         {
             InitializeComponent();
-            this.connection_vm = new connectionViewModel(FlightSimuatorSingleton.simulator);
+            this.connection_vm = new connectionViewModel();
             this.DataContext = connection_vm;
 
         }
@@ -38,7 +39,7 @@ namespace FlightGearTestExec.Controls
             {
                 this.connection_vm.connect(this.ipTextBox.Text, this.portTextBox.Text);
             }
-            catch (Exception )
+            catch (Exception)
             {
                 ErrorMessageWindow errWindow = new ErrorMessageWindow();
                 Application.Current.MainWindow = errWindow;
@@ -54,7 +55,7 @@ namespace FlightGearTestExec.Controls
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            FlightSimuatorSingleton.simulator.executeSimulator(this.ipTextBox.Text, this.portTextBox.Text);
+            this.connection_vm.executeSimulator(this.ipTextBox.Text, this.portTextBox.Text);
         }
     }
 }

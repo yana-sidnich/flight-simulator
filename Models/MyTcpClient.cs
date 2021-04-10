@@ -15,9 +15,6 @@ namespace FlightGearTestExec
     class MyTcpClient : ITcpClient
     {
         private TcpClient myClient;
-       //private IPEndPoint endPoint;
-
-        //private string filePath = @"C:\Users\yanaStudy\source\repos\FlighyGearConnection\reg_flight.csv";
 
         public MyTcpClient()
         {

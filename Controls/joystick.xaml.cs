@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightGearTestExec.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace FlightGearTestExec.Controls
         {
             InitializeComponent();
 
-            this.joystick_vm = new joystickViewModel(FlightSimuatorSingleton.simulator);
+            this.joystick_vm = new joystickViewModel();
             this.DataContext = joystick_vm;
 
         }

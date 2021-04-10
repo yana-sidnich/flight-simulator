@@ -11,29 +11,16 @@ using FlightGearTestExec.Converters;
 
 namespace FlightGearTestExec.ViewModels
 {
-    class MediaPlayerViewModel : INotifyPropertyChanged
+    class MediaPlayerViewModel : BaseViewModel
     {
 
-        private IFlightSimulator simulator;
-        private IValueConverter time_converter;
-        public event PropertyChangedEventHandler PropertyChanged;
         
-        public MediaPlayerViewModel(IFlightSimulator simulator)
+        public MediaPlayerViewModel()
         {
-            this.simulator = simulator;
-            this.time_converter = new TimeConverter();
             this.simulator.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("vm_media_player_" + e.PropertyName);
             };
-        }
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
         }
 
         public int vm_media_player_current_line
@@ -50,14 +37,6 @@ namespace FlightGearTestExec.ViewModels
             get
             {
                 return simulator.GetSpeed();
-            }
-            set { }
-        }
-        public IValueConverter vm_media_player_time_converter
-        {
-            get
-            {
-                return time_converter;
             }
             set { }
         }
@@ -80,10 +59,12 @@ namespace FlightGearTestExec.ViewModels
         }
         public void startOverLines()
         {
+            simulator.pauseRun();
             simulator.SetCurrentLine(0);
         }
         public void finishLines()
         {
+            simulator.pauseRun();
             simulator.SetCurrentLine(getTotalFrameNumber() - 1);
         }
         public void moveToLine(int x)

@@ -14,6 +14,7 @@ namespace FlightGearTestExec
     class FlightSimulator : IFlightSimulator
     {
         private const int DEFAULT_MILLIS_PER_TICK = 100;
+
         private ITcpClient myClient;
         Process simulatorExec;
         private SimulatorConf conf;
@@ -22,11 +23,32 @@ namespace FlightGearTestExec
 
         public event PropertyChangedEventHandler PropertyChanged;
         // can be configure from multiple threads.
-        private volatile int numOfRow;
+        private volatile int currentLine;
         private double speed;
         private volatile bool forward;
         private volatile bool stopped;
         private volatile bool paused;
+        private string _selectedString;
+        private string _correlatedString;
+
+        public string SelectedString
+        {
+            get { return _selectedString; }
+            set
+            {
+                _selectedString = value;
+                this.NotifyPropertyChanged("SelectedString");
+            }
+        }
+        public string CorrelatedString
+        {
+            get { return _correlatedString; }
+            set
+            {
+                _correlatedString = value;
+                this.NotifyPropertyChanged("CorrelatedString");
+            }
+        }
 
 
         public FlightSimulator()
@@ -35,7 +57,7 @@ namespace FlightGearTestExec
 
             this.conf = new SimulatorConf();
 
-            this.numOfRow = 0;
+            this.currentLine = 0;
             this.speed = 1.0f;
             this.stopped = true;
             this.paused = false;
@@ -64,7 +86,7 @@ namespace FlightGearTestExec
         {
             if (this.dataHandler != null)
             {
-                return this.dataHandler.DataByColumn[propName][this.numOfRow];
+                return this.dataHandler.DataByColumn[propName][this.currentLine];
             }
             return 0.0;
         }
@@ -78,6 +100,19 @@ namespace FlightGearTestExec
             {
                 Thread.Sleep(sleep - timeDiff);
             }
+        }
+        public void executeSimulator(string ip, string port)
+        {
+            ProcessStartInfo info = new ProcessStartInfo(conf.simulatorBinaryPath);
+            string playback_loc = "playback_small";
+            info.ArgumentList.Add($"--fg-root={conf.FgRoot}");
+            info.ArgumentList.Add($"--fdm=null");
+            info.ArgumentList.Add($"--generic=socket,in,10,{ip},{port},tcp,{playback_loc}");
+            info.UseShellExecute = false;
+            Trace.WriteLine($"executing: --fg-root={conf.FgRoot}, --generic=socket,in,10,{ip},{port},tcp,{playback_loc}");
+
+            this.simulatorExec = Process.Start(info);
+
         }
         public void Start()
         {
@@ -99,8 +134,8 @@ namespace FlightGearTestExec
                         continue;
                     }
                     Trace.WriteLine("raw number is");
-                    Trace.WriteLine(numOfRow);
-                    string line = this.dataHandler.DataByRow[numOfRow];
+                    Trace.WriteLine(currentLine);
+                    string line = this.dataHandler.DataByRow[currentLine];
                     byte[] byteLine = Encoding.ASCII.GetBytes(line + System.Environment.NewLine);
                     this.myClient.send(byteLine);
                     
@@ -116,7 +151,7 @@ namespace FlightGearTestExec
 
                     WaitForNextInput(after - before);
                     // check if after waiting
-                    this.numOfRow = this.forward ? Math.Min(this.numOfRow + 1, GetNumLines() - 1) : Math.Max(this.numOfRow -1, 0);
+                    this.currentLine = this.forward ? Math.Min(this.currentLine + 1, GetNumLines() - 1) : Math.Max(this.currentLine -1, 0);
 
                     this.NotifyPropertyChanged("current_line");
                     if (stopped)
@@ -148,18 +183,6 @@ namespace FlightGearTestExec
         {
             this.stopped = true;
         }
-        public void executeSimulator(string ip, string port)
-        {
-            ProcessStartInfo info = new ProcessStartInfo(conf.simulatorBinaryPath);
-            string playback_loc = "playback_small";
-            info.ArgumentList.Add($"--fg-root={conf.FgRoot}");
-            info.ArgumentList.Add($"--fdm=null");
-            info.ArgumentList.Add($"--generic=socket,in,10,{ip},{port},tcp,{playback_loc}");
-            info.UseShellExecute = false;
-
-            simulatorExec = Process.Start(info);
-
-        }
 
         public bool isRunning()
         {
@@ -190,11 +213,11 @@ namespace FlightGearTestExec
         }
         public int GetCurrentLine()
         {
-            return numOfRow;
+            return currentLine;
         }
         public void SetCurrentLine(int value)
         {
-            numOfRow = value;
+            currentLine = value;
         }
         public int GetNumLines()
         {

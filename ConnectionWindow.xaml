@@ -15,7 +15,7 @@
 
         </Grid.ColumnDefinitions>
 
-        <controls:connection x:Name="connection" Grid.Column="0" Loaded="connection_Loaded"/>
+        <controls:connection x:Name="connection" Grid.Column="0"/>
         <controls:FileExplorer x:Name="FileExplorer" Grid.Column="1"/>
 
     </Grid>

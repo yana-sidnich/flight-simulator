@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Diagnostics;
 
-namespace FlightGearTestExec
+namespace FlightGearTestExec.ViewModels
 {
-    class FileExplorer_ViewModel : INotifyPropertyChanged
+    class FileExplorer_ViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private IFlightSimulator simulator;
-
         public string vm_file_explorer_train_csv
         {
             get { return simulator.configuration().FlightTrainCSVPath; }
@@ -30,23 +27,17 @@ namespace FlightGearTestExec
         public string vm_file_explorer_simulator_path
         {
             get { return simulator.configuration().SimulatorPath; }
-            set { simulator.configuration().SimulatorPath = value; }
+            set {
+                Trace.WriteLine($"change simulator path ${value}");
+                simulator.configuration().SimulatorPath = value; }
         }
-        public FileExplorer_ViewModel(IFlightSimulator simulator)
+        public FileExplorer_ViewModel()
         {
-            this.simulator = simulator;
             this.simulator.PropertyChanged +=
             delegate (Object sender, PropertyChangedEventArgs e)
             {
                 this.NotifyPropertyChanged("vm_file_explorer_" + e.PropertyName);
             };
-        }
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
         }
     }
 

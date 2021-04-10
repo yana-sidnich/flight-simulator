@@ -7,39 +7,28 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace FlightGearTestExec
+namespace FlightGearTestExec.ViewModels
 {
-    class connectionViewModel : INotifyPropertyChanged
+    class connectionViewModel : BaseViewModel
     {
-        private IFlightSimulator flightSimulatorModel;
-        public event PropertyChangedEventHandler PropertyChanged;
-        int port;
-        string ip;
-
-
-        public connectionViewModel(IFlightSimulator flightSimulatorModel)
+        public connectionViewModel()
         {
-            this.flightSimulatorModel = flightSimulatorModel;
-            this.flightSimulatorModel.PropertyChanged +=
+            this.simulator.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("vm_connection_" + e.PropertyName);
                 };
         }
 
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
         public void connect(string ip, string port)
         {
             Trace.WriteLine($"ip {ip}, port {port}");
-            this.flightSimulatorModel.Connect(ip, Int32.Parse(port));
+            this.simulator.Connect(ip, Int32.Parse(port));
         }
 
+        public void executeSimulator(string ip, string port)
+        {
+            this.simulator.executeSimulator(ip, port);
+        }
     }
 }

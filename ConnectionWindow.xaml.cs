@@ -24,10 +24,5 @@ namespace FlightGearTestExec
             InitializeComponent();
         }
 
-        private void connection_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }

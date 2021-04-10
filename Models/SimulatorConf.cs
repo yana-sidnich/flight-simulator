@@ -24,6 +24,9 @@ namespace FlightGearTestExec
                 this.simulatorBinaryPath = Path.Combine(this.simulatorPath, @"bin\fgfs");
                 this.flightXMLPath = Path.Combine(this.simulatorPath, @"data\Protocol\playback_small.xml");
                 this.fgRoot = Path.Combine(this.simulatorPath, @"data\");
+                Trace.Write(this.simulatorPath);
+
+
                 // + "\\bin\\fgfs";
                 //this.flightXMLPath = value + "\\data\\Protocol\\playback_small.xml";
                 //this.fgRoot = value + "\\data\\";

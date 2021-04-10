@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using FlightGearTestExec.ViewModels;
 
 namespace FlightGearTestExec.Controls
 {
@@ -26,7 +27,7 @@ namespace FlightGearTestExec.Controls
         public FileExplorer()
         {
             InitializeComponent();
-            this.file_explorer_vm = new FileExplorer_ViewModel(FlightSimuatorSingleton.simulator);
+            this.file_explorer_vm = new FileExplorer_ViewModel();
             this.DataContext = file_explorer_vm;
 
         }

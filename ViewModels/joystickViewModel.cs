@@ -7,61 +7,51 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 
-namespace FlightGearTestExec
+namespace FlightGearTestExec.ViewModels
 {
-    class joystickViewModel : INotifyPropertyChanged
+    class joystickViewModel : BaseViewModel
     {
-        private IFlightSimulator flightSimulatorModel;
-        public event PropertyChangedEventHandler PropertyChanged;
 
-
-        public joystickViewModel(IFlightSimulator flightSimulatorModel)
+        public joystickViewModel()
         {
-            this.flightSimulatorModel = flightSimulatorModel;
-            this.flightSimulatorModel.PropertyChanged +=
+            this.simulator.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("vm_joystick_" + e.PropertyName);
                 };
         }
 
-        private double convert(double d)
-        {
-            return 125 + 80 * d; 
-        }
 
         public double vm_joystick_throttle_1
         {
             get {
-                Trace.WriteLine($"throttle_1 val : {flightSimulatorModel.getRequetedProp("throttle_1")}"); 
-                return flightSimulatorModel.getRequetedProp("throttle_1"); }
+                Trace.WriteLine($"throttle_1 val : {simulator.getRequetedProp("throttle_1")}"); 
+                return simulator.getRequetedProp("throttle_1"); }
             set { }
         }
 
-        
         public double vm_joystick_rudder
         {
-        get { return flightSimulatorModel.getRequetedProp("rudder"); }
+        get { return simulator.getRequetedProp("rudder"); }
             set { }
         }
         public double vm_joystick_elevator
         {   
             get {
-                return convert(flightSimulatorModel.getRequetedProp("elevator")); }
+                return convert(simulator.getRequetedProp("elevator")); }
             set { }
         }
         public double vm_joystick_aileron
         {
-            get { return convert(flightSimulatorModel.getRequetedProp("aileron")); }
+            get { return convert(simulator.getRequetedProp("aileron")); }
             set { }
         }
 
-        public void NotifyPropertyChanged(string propName)
+        //TODO CREATE CONVERTER IN VIEW
+        private double convert(double d)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            return 125 + 80 * d; 
         }
+
     }
 }
