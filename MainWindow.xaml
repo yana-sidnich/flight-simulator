@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightGearTestExec"
         xmlns:controls="clr-namespace:FlightGearTestExec.Controls"
-
+        xmlns:views="clr-namespace:FlightGearTestExec.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1557">
     <Grid
@@ -35,8 +35,9 @@
             <controls:MediaPlayer x:Name="MediaPlayer"/>
         </Viewbox>
 
+        <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
 
-
-
+        <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.RowSpan="2"/>
     </Grid>
+
 </Window>

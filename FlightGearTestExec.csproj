@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,5 +6,16 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveChartsCore" Version="1.0.3" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="1.0.3" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="1.0.3" />
+  </ItemGroup>
+
+	<!-- <ItemGroup> -->
+ <!--      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime> -->
+ <!--      <SubType>Designer</SubType> -->
+ <!--  </ItemGroup> -->
 
 </Project>
