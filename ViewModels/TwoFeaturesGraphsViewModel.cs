@@ -58,11 +58,7 @@ namespace FlightGearTestExec.ViewModels
         }
 
 
-        public ObservableCollection<SeriesHolder> SeriesData
-        {
-            get { return _seriesData; }
-            set { _seriesData = value; }
-        }
+        public ObservableCollection<SeriesHolder> SeriesData { get; set; } = new ObservableCollection<SeriesHolder>();
 
         private readonly FlightSimulator _model;
 
@@ -71,34 +67,18 @@ namespace FlightGearTestExec.ViewModels
         private Visibility _isGraphVisible = Visibility.Visible;
         public Visibility IsGraphVisible
         {
-            get
-            {
-                return _isGraphVisible;
-            }
+            get => _isGraphVisible;
             set
             {
-                if (value != _isGraphVisible)
-                {
-                    _isGraphVisible = value;
-                    NotifyPropertyChanged("IsGraphVisible");
-                    NotifyPropertyChanged("IsErrorVisible");
-                }
+                if (value == _isGraphVisible) return;
+                _isGraphVisible = value;
+                NotifyPropertyChanged("IsGraphVisible");
+                NotifyPropertyChanged("IsErrorVisible");
             }
         }
 
-        public Visibility IsErrorVisible
-        {
-            get
-            {
-                if (IsGraphVisible == Visibility.Hidden)
-                    return Visibility.Visible;
-                else
-                    return Visibility.Hidden;
-            }
-        }
+        public Visibility IsErrorVisible => IsGraphVisible == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
 
-
-        private ObservableCollection<SeriesHolder> _seriesData = new ObservableCollection<SeriesHolder>();
 
         const int GRAPHS_NUM = 2;
 
@@ -117,13 +97,13 @@ namespace FlightGearTestExec.ViewModels
         {
             for (int i = 0; i < GRAPHS_NUM; i++)
             {
-                _seriesData.Add(new SeriesHolder());
+                SeriesData.Add(new SeriesHolder());
 
-                _seriesData[i].series = new ObservableCollection<ISeries>
+                SeriesData[i].series = new ObservableCollection<ISeries>
                 {
                     new LineSeries<ObservablePointF>
                     {
-                        Values = _seriesData[i].points,
+                        Values = SeriesData[i].points,
                         Fill = null,
                         GeometryFill = null,
                         GeometrySize = 0,
@@ -148,7 +128,7 @@ namespace FlightGearTestExec.ViewModels
                     index = 0;
                     if (string.IsNullOrEmpty(VM_TwoFeaturesGraphs_SelectedString))
                     {
-                        _seriesData[index].points.Clear();
+                        SeriesData[index].points.Clear();
                         return;
                     }
                     data = getFeatureData(VM_TwoFeaturesGraphs_SelectedString);
@@ -167,13 +147,13 @@ namespace FlightGearTestExec.ViewModels
                     return;
             }
 
-            int OLD_SIZE = _seriesData[index].points.Count;;
+            int OLD_SIZE = SeriesData[index].points.Count;
             int NEW_SIZE = data.values.Length;
             
             // if new points size is bigger than current - clean all current points
             if (OLD_SIZE > NEW_SIZE)
             {
-                _seriesData[index].points.Clear();
+                SeriesData[index].points.Clear();
                 OLD_SIZE = 0;
             }
 
@@ -183,18 +163,18 @@ namespace FlightGearTestExec.ViewModels
             for (x = 0; x < OLD_SIZE; x++)
             {
                 y = (float)data.values[x];
-                _seriesData[index].points[x].Y = y;
+                SeriesData[index].points[x].Y = y;
             }
             // add additional points
             for (; x < NEW_SIZE; x++)
             {
                 y = (float)data.values[x];
-                _seriesData[index].points.Add(new ObservablePointF(x, y));
+                SeriesData[index].points.Add(new ObservablePointF(x, y));
             }
 
             // set y axis range a bit bigger than min and max values
-            _seriesData[index].YAxes[0].MinLimit = data.minValue * 1.1;
-            _seriesData[index].YAxes[0].MaxLimit = data.maxValue * 1.1;
+            SeriesData[index].YAxes[0].MinLimit = data.minValue * 1.1;
+            SeriesData[index].YAxes[0].MaxLimit = data.maxValue * 1.1;
         }
 
         public FlightDataContainer getFeatureData(string name)
