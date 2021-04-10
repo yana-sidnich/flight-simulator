@@ -28,8 +28,10 @@ namespace FlightGearTestExec.ViewModels
             public List<Axis> XAxes { get; set; }
 
             public List<Axis> YAxes { get; set; }
+
             public SeriesHolder()
             {
+                SolidColorPaintTask separatorsBrush = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = 0.3f };
                 points = new ObservableCollection<ObservablePointF>();
 
                 XAxes = new List<Axis>
@@ -38,12 +40,15 @@ namespace FlightGearTestExec.ViewModels
                     {
                         MaxLimit = 1,
                         MinStep = 1,
-                    }
+                        SeparatorsBrush = separatorsBrush,  }
                 };
                 YAxes = new List<Axis>
                 {
                     new Axis
                     {
+                        ShowSeparatorLines = false,
+                        ShowSeparatorWedges = false,
+                        SeparatorsBrush = separatorsBrush,
                         MinStep = 1,
                     }
                 };
@@ -80,7 +85,6 @@ namespace FlightGearTestExec.ViewModels
             setGraphValues();
 
         }
-
         private void setGraphValues()
         {
             for (int i = 0; i < GRAPHS_NUM; i++)
@@ -94,7 +98,9 @@ namespace FlightGearTestExec.ViewModels
                         Fill = null,
                         GeometryFill = null,
                         GeometrySize = 0,
-                        Stroke = new SolidColorPaintTask { Color = ColorsArray[i], StrokeThickness = STROKE_THICKNESS },
+                        LineSmoothness = 0.1,
+                        // Stroke = new SolidColorPaintTask { Color = ColorsArray[i], StrokeThickness = STROKE_THICKNESS },
+                        Stroke = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = STROKE_THICKNESS },
                     }
                 };
             }
