@@ -10,20 +10,20 @@ using System.Threading;
 
 namespace FlightGearTestExec.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    class BaseViewModel : INotifyPropertyChanged
     {
+        private static IFlightSimulator model = new FlightSimulator();
+
         public event PropertyChangedEventHandler PropertyChanged;
-        protected static IFlightSimulator model;
-        public static FlightSimulator modelllllllll;
+        protected IFlightSimulator simulator;
 
-        public BaseViewModel(IFlightSimulator flightSimulatorModel)
+        public static void  SetModel(IFlightSimulator simulator_model)
         {
-            model = flightSimulatorModel;
-            modelllllllll = model as FlightSimulator;
+            model = simulator_model;
         }
-
         public BaseViewModel()
         {
+            this.simulator = model;
         }
 
         protected void NotifyPropertyChanged(string propName)

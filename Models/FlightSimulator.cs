@@ -11,7 +11,7 @@ using System.Net;
 
 namespace FlightGearTestExec
 {
-    public class FlightSimulator : IFlightSimulator
+    class FlightSimulator : IFlightSimulator
     {
         private const int DEFAULT_MILLIS_PER_TICK = 100;
 
@@ -20,9 +20,8 @@ namespace FlightGearTestExec
         private SimulatorConf conf;
         private DataHandler dataHandler;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public Dictionary<string, FlightDataContainer> dataDictionary;
+        public event PropertyChangedEventHandler PropertyChanged;
         // can be configure from multiple threads.
         private volatile int currentLine;
         private double speed;
@@ -51,26 +50,6 @@ namespace FlightGearTestExec
             }
         }
 
-        public FlightSimulator()
-        {
-            get { return numOfRow; }
-            set
-            {
-                numOfRow = value;
-                this.NotifyPropertyChanged("CurrentLineNumber");
-            }
-        }
-
-            this.conf = new SimulatorConf();
-        public string SelectedString
-        {
-            get { return _selectedString; }
-            set
-            {
-                _selectedString = value;
-                this.NotifyPropertyChanged("SelectedString");
-            }
-        }
 
         public FlightSimulator()
         {
@@ -84,8 +63,6 @@ namespace FlightGearTestExec
             this.paused = false;
             this.forward = true;
 
-            // this.dataHandler = new DataHandler(this.conf.FlightCSVPath, this.conf.FlightXMLPath);
-            dataDictionary = FlightDataContainer.get_should_be_data_context();
         }
 
         public void NotifyPropertyChanged(string propName)

@@ -7,27 +7,33 @@
         xmlns:controls="clr-namespace:FlightGearTestExec.Controls"
         xmlns:views="clr-namespace:FlightGearTestExec.Views"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="MainWindow" Height="1000" Width="1600">
+        Title="MainWindow" Height="1000" Width="1557">
+    <Grid
 
-    <Grid>
+         ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="436*"></ColumnDefinition>
+            <ColumnDefinition Width="568*"></ColumnDefinition>
+            <ColumnDefinition Width="553*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="246*"></RowDefinition>
+            <RowDefinition Height="383*"></RowDefinition>
+            <RowDefinition Height="355*"></RowDefinition>
         </Grid.RowDefinitions>
 
 
-        <!-- <controls:joystick x:Name="joystick" HorizontalAlignment="Center" -->
-        <!--                    VerticalAlignment="Center"     -->
-        <!--                    Grid.Row="0" Grid.Column="0"/> -->
+        <Viewbox Height="315"  Margin="7,39,20,0"     
+        Name="viewbox1"    
+        Stretch="Fill" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
+            <controls:joystick x:Name="joystick"/>
+        </Viewbox>
 
-        <controls:connection x:Name="connection" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Viewbox Height="315"  Margin="7,39,20,0"     
+        Name="viewbox2"    
+        Stretch="Fill" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top">
+            <controls:MediaPlayer x:Name="MediaPlayer"/>
+        </Viewbox>
 
         <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
 

@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace FlightGearTestExec.ViewModels
 {
-    public class joystickViewModel : INotifyPropertyChanged
+    class joystickViewModel : BaseViewModel
     {
 
         public joystickViewModel()
