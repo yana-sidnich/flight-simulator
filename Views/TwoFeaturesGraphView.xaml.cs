@@ -72,7 +72,18 @@ namespace FlightGearTestExec.Views
                     if (name == "VM_TwoFeaturesGraphs_SelectedString" ||
                         name == "VM_TwoFeaturesGraphs_CorrelatedString")
                     {
+                        // temporarily faster the animation speed between points changes
+                        char_0.AnimationsSpeed = fastAnimationSpeed;
+                        char_1.AnimationsSpeed = fastAnimationSpeed;
                         vm.UpdatePoints(name);
+                        
+                        // wait before restoring default speed
+                        Task.Run(() =>
+                        {
+                            Thread.Sleep(1000);
+                            char_0.AnimationsSpeed = originalAnimation_0;
+                            char_1.AnimationsSpeed = originalAnimation_1;
+                        });
                     }
 
                     else if (name == "VM_TwoFeaturesGraphs_CurrentLineNumber")
