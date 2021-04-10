@@ -134,6 +134,7 @@ namespace FlightGearTestExec
                         // in case we are pasued - we do busy waiting, stopping for the same time between frames.
                         // THat way we can lose a maximum if a frame when unpaused/ stopped.
                         WaitForNextInput();
+                        // TODO change how you wait on pause
                         continue;
                     }
                     Trace.WriteLine("raw number is");
@@ -155,6 +156,10 @@ namespace FlightGearTestExec
                     WaitForNextInput(after - before);
                     // check if after waiting
                     this.currentLine = this.forward ? Math.Min(this.currentLine + 1, GetNumLines() - 1) : Math.Max(this.currentLine -1, 0);
+                    if ((this.forward && this.currentLine == GetNumLines() - 1) || (!this.forward && this.currentLine == 0))
+                    {
+                        this.paused = true;
+                    }
 
                     this.NotifyPropertyChanged("current_line");
                     if (stopped)

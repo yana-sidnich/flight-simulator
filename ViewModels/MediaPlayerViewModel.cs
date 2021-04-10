@@ -41,6 +41,21 @@ namespace FlightGearTestExec.ViewModels
             set { }
         }
         public int getTotalFrameNumber() { return simulator.GetNumLines(); }
+
+        private void SetWithCheck(double speed)
+        {
+            if (speed < 0.2f)
+            {
+                Trace.WriteLine($"cannot update speed to {speed} - speed too low");
+                return;
+            }
+            else if (speed > 32.0f)
+            {
+                Trace.WriteLine($"cannot update speed to {speed} - speed too high");
+                return;
+            }
+                simulator.SetSpeed(speed);
+        }
         public void pause()
         {
             simulator.pauseRun();
@@ -82,18 +97,17 @@ namespace FlightGearTestExec.ViewModels
 
         public void increaseSpeed()
         {
-            simulator.SetSpeed(simulator.GetSpeed() + 0.1f);
+            SetWithCheck(simulator.GetSpeed() + 0.1f);
         }
         public void decreaseSpeed()
         {
-            if (simulator.GetSpeed() > 0.2f)
-                simulator.SetSpeed(simulator.GetSpeed() - 0.1f);
+            SetWithCheck(simulator.GetSpeed() - 0.1f);
         }
         public void forward()
         {
             if (simulator.GetForward())
             {
-                simulator.SetSpeed(simulator.GetSpeed() * 2);
+                SetWithCheck(simulator.GetSpeed() * 2);
             }
             else
             {
@@ -105,7 +119,7 @@ namespace FlightGearTestExec.ViewModels
         {
             if (!simulator.GetForward())
             {
-                simulator.SetSpeed(simulator.GetSpeed() * 2);
+                SetWithCheck(simulator.GetSpeed() * 2);
             }
             else
             {
