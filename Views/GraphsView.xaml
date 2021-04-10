@@ -23,7 +23,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <views:FeaturesListView Grid.Column="0" x:Name="ListUserControl" HorizontalAlignment="Stretch"/>
 
         <Grid Grid.Column="2" HorizontalAlignment="Stretch">
             <Grid>
@@ -45,6 +44,9 @@
 
             </Grid>
         </Grid>
+
+        <views:FeaturesListView Grid.Column="0" x:Name="ListUserControl" HorizontalAlignment="Stretch"/>
     </Grid>
+
 
 </UserControl>
