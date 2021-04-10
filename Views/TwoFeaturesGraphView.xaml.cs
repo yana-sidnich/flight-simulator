@@ -57,7 +57,7 @@ namespace FlightGearTestExec.Views
         public TwoFeaturesGraphView()
         {
             InitializeComponent();
-            fastAnimationSpeed = TimeSpan.FromMilliseconds(50);
+            fastAnimationSpeed = TimeSpan.FromMilliseconds(10);
             vm = this.DataContext as TwoFeaturesGraphsViewModel;
             char_0 = graph_0 as CartesianChart;
             char_1 = graph_1 as CartesianChart;

@@ -139,8 +139,6 @@ namespace FlightGearTestExec.ViewModels
             if (name == null)
                 return;
 
-            List<ObservablePointF> points = new List<ObservablePointF>();
-            int SIZE;
             int index;
 
             FlightDataContainer data;
@@ -169,20 +167,26 @@ namespace FlightGearTestExec.ViewModels
                     return;
             }
 
-            _seriesData[index].points.Clear();
-
-            if (data?.values == null)
+            int OLD_SIZE = _seriesData[index].points.Count;;
+            int NEW_SIZE = data.values.Length;
+            
+            // if new points size is bigger than current - clean all current points
+            if (OLD_SIZE > NEW_SIZE)
             {
-                // force restart of points
-                ObservablePointF temp = new ObservablePointF(0, 0);
-                _seriesData[index].points.Add(temp);
-                return;
+                _seriesData[index].points.Clear();
+                OLD_SIZE = 0;
             }
 
             float y;
-            SIZE = data.values.Length;
-
-            for (int x = 0; x < SIZE; x++)
+            int x = 0;
+            // first update old points values to new
+            for (x = 0; x < OLD_SIZE; x++)
+            {
+                y = (float)data.values[x];
+                _seriesData[index].points[x].Y = y;
+            }
+            // add additional points
+            for (; x < NEW_SIZE; x++)
             {
                 y = (float)data.values[x];
                 _seriesData[index].points.Add(new ObservablePointF(x, y));
