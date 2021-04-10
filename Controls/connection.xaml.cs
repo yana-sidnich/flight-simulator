@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightGearTestExec.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,41 +21,41 @@ namespace FlightGearTestExec.Controls
     /// </summary>
     public partial class connection : UserControl
     {
+        private connectionViewModel connection_vm;
         public connection()
         {
             InitializeComponent();
+            this.connection_vm = new connectionViewModel();
+            this.DataContext = connection_vm;
+
         }
 
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string port = this.portTextBox.Text;
-            if (validatedAndParsePort(port))
-            {
-
-            }
-            
-        }*/
-
-
-        /*private bool validatedAndParsePort(string portStr)
-        {
-            int port = 0;
-            if(int.TryParse(portStr, out port))
-            {
-                return (port > 1024 && port < 49151);
-
-            }
-        }*/
-
-        private bool validateIp(string ip)
-        {
-            return true;
-        }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
-            this.connectButton.IsEnabled = false;
+            //this.validatedAndParsePort()
+            try
+            {
+                this.connection_vm.connect(this.ipTextBox.Text, this.portTextBox.Text);
+            }
+            catch (Exception)
+            {
+                ErrorMessageWindow errWindow = new ErrorMessageWindow();
+                Application.Current.MainWindow = errWindow;
+                errWindow.Show();
+                return;
+            }
+            MainWindow mainWindow = new MainWindow();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
+        }
+
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.connection_vm.executeSimulator(this.ipTextBox.Text, this.portTextBox.Text);
         }
     }
 }

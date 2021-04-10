@@ -133,8 +133,8 @@
                 </Canvas.Resources>
             </Canvas>
         </Canvas>
-        <Slider Value="{Binding vm_joystick_rudder}" HorizontalAlignment="Left" Margin="151,370,0,0" VerticalAlignment="Top" Width="340" Height="43" RenderTransformOrigin="0.499,0.806" Minimum="0" Maximum="1" />
-        <Slider Value="{Binding vm_joystick_throttle}" HorizontalAlignment="Left" Margin="-3,150,0,0" VerticalAlignment="Top" Width="262" Height="43" RenderTransformOrigin="0.467,1.956" >
+        <Slider Value="{Binding vm_joystick_rudder}" Minimum="-1" Maximum="1" HorizontalAlignment="Left" Margin="151,370,0,0" VerticalAlignment="Top" Width="340" Height="43" RenderTransformOrigin="0.499,0.806"  />
+        <Slider Value="{Binding vm_joystick_throttle_1}" Minimum="0" Maximum="1" HorizontalAlignment="Left" Margin="-3,150,0,0" VerticalAlignment="Top" Width="262" Height="43" RenderTransformOrigin="0.467,1.956" >
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

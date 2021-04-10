@@ -15,9 +15,6 @@ namespace FlightGearTestExec
     class MyTcpClient : ITcpClient
     {
         private TcpClient myClient;
-       //private IPEndPoint endPoint;
-
-        //private string filePath = @"C:\Users\yanaStudy\source\repos\FlighyGearConnection\reg_flight.csv";
 
         public MyTcpClient()
         {
@@ -25,32 +22,32 @@ namespace FlightGearTestExec
 
             string jsonString = File.ReadAllText("FlightConf.json");
             SimulatorConf conf = JsonSerializer.Deserialize<SimulatorConf>(jsonString);
-            Trace.WriteLine(conf.FlightCSVPath);
+            Trace.WriteLine(conf.FlightTestCSVPath);
             Trace.WriteLine(conf.SimulatorPath);
         }
 
         public void connect(string ip, int port)
         {
-            try
-            {
+        //    try
+        //    {
                 this.myClient.Connect(ip, port);
-            }
-            catch (ArgumentNullException e)
-            {
-                Trace.WriteLine($"IP address given is null: '{e}'");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Trace.WriteLine($"Port number is invalid: '{e}'");
-            }
-            catch (SocketException e)
-            {
-                Trace.WriteLine($"An error occurred when accessing the socket: '{e}'");
-            }
-            catch (ObjectDisposedException e)
-            {
-                Trace.WriteLine($"TcpClient is closed.: '{e}'");
-            }
+        //    }
+        //    catch (ArgumentNullException e)
+        //    {
+        //        Trace.WriteLine($"IP address given is null: '{e}'");
+        //    }
+        //    catch (ArgumentOutOfRangeException e)
+        //    {
+        //        Trace.WriteLine($"Port number is invalid: '{e}'");
+        //    }
+        //    catch (SocketException e)
+        //    {
+        //        Trace.WriteLine($"An error occurred when accessing the socket: '{e}'");
+        //    }
+        //    catch (ObjectDisposedException e)
+        //    {
+        //        Trace.WriteLine($"TcpClient is closed.: '{e}'");
+        //    }
         }
 
         public void disconnect()

@@ -1,0 +1,17 @@
+﻿<Window x:Class="FlightGearTestExec.ErrorMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlightGearTestExec"
+        mc:Ignorable="d"
+        Title="ErrorMessageWindow" Height="140" Width="220">
+    <Grid>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="88,60,0,0" VerticalAlignment="Top" Height="21" Width="36" Click="Button_Click"/>
+        <TextBlock TextAlignment="Center" Margin="2,6,-2,31">
+            Connection Failed!<LineBreak/>
+            Please Verify your IP and Port number<LineBreak/> 
+            and verify that FlightGear is running<LineBreak/>
+        </TextBlock>
+    </Grid>
+</Window>

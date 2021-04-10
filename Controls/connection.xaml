@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightGearTestExec.Controls"
              mc:Ignorable="d" Height="201" Width="270">
-    <Grid>
+    <Grid Margin="0,0,0,-29">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="connectButton" Content="Connect To Simulator" HorizontalAlignment="Left" Margin="43,136,0,0" VerticalAlignment="Top" Height="36" Width="190" Click="connectButton_Click" Command = "{Binding vm_connection_ConnectCommand}"/>
-        <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Margin="104,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38" Text="{Binding vm_connection_ip}"/>
-        <TextBox x:Name="portTextBox" HorizontalAlignment="Left" Margin="104,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38" Text="{Binding vm_connection_port}"/>
+        <Button x:Name="connectButton" Content="Connect To Simulator" HorizontalAlignment="Left" Margin="43,136,0,0" VerticalAlignment="Top" Height="36" Width="190" Click="connectButton_Click"/>
+        <Button x:Name="startButton" Content="Start Flight Gear" HorizontalAlignment="Left" Margin="42,179,0,0" VerticalAlignment="Top" Height="36" Width="190" Click="startButton_Click"/>
+        <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Margin="104,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38" Text="127.0.0.1"/>
+        <TextBox x:Name="portTextBox" HorizontalAlignment="Left" Margin="104,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38" Text="5400"/>
         <Label Content="IP" HorizontalAlignment="Left" Margin="48,36,0,0" VerticalAlignment="Top" Height="37" Width="41"/>
         <Label Content="PORT" HorizontalAlignment="Left" Margin="48,81,0,0" VerticalAlignment="Top" Height="38" Width="41"/>
 

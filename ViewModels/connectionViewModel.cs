@@ -7,66 +7,28 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace FlightGearTestExec
+namespace FlightGearTestExec.ViewModels
 {
-    class connectionViewModel : INotifyPropertyChanged
+    class connectionViewModel : BaseViewModel
     {
-        private IFlightSimulator flightSimulatorModel;
-        public event PropertyChangedEventHandler PropertyChanged;
-        int port;
-        string ip;
-        private ICommand connectCommand;
-
-
-        public connectionViewModel(IFlightSimulator flightSimulatorModel)
+        public connectionViewModel()
         {
-            this.flightSimulatorModel = flightSimulatorModel;
-            this.flightSimulatorModel.PropertyChanged +=
+            this.simulator.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("vm_connection_" + e.PropertyName);
                 };
         }
 
-        public string vm_connection_ip
+        public void connect(string ip, string port)
         {
-            get { return ip; }
-            set { ip = value; }
-        }
-        public int vm_connection_port
-        {
-            get { return port; }
-            set { port = value; 
-                Trace.WriteLine("port");
-                Trace.WriteLine(port);
-            }
+            Trace.WriteLine($"ip {ip}, port {port}");
+            this.simulator.Connect(ip, Int32.Parse(port));
         }
 
-
-        public ICommand vm_connection_ConnectCommand
+        public void executeSimulator(string ip, string port)
         {
-            get
-            {
-                if (connectCommand == null)
-                {
-                    connectCommand = new ConnectCommand(this);
-                }
-                return connectCommand;
-            }
-            set { }
+            this.simulator.executeSimulator(ip, port);
         }
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
-        public void connect()
-        {
-            this.flightSimulatorModel.Connect(this.ip, this.port);
-        }
-
     }
 }

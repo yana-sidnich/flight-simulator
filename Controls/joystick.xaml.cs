@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightGearTestExec.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,15 @@ namespace FlightGearTestExec.Controls
     /// </summary>
     public partial class joystick : UserControl
     {
-        
+        private joystickViewModel joystick_vm;
+
         public joystick()
         {
             InitializeComponent();
+
+            this.joystick_vm = new joystickViewModel();
+            this.DataContext = joystick_vm;
+
         }
 
         public void centerKnob_Completed(Object sender, EventArgs e)

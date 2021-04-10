@@ -11,53 +11,47 @@ namespace FlightGearTestExec.ViewModels
 {
     public class joystickViewModel : INotifyPropertyChanged
     {
-        private IFlightSimulator flightSimulatorModel;
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public joystickViewModel(IFlightSimulator flightSimulatorModel)
+        public joystickViewModel()
         {
-            this.flightSimulatorModel = flightSimulatorModel;
-            this.flightSimulatorModel.PropertyChanged +=
+            this.simulator.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("vm_joystick_" + e.PropertyName);
                 };
         }
 
-        private double convert(double d)
-        {
-            return 125 + 80 * d; 
-        }
 
-        public double vm_joystick_throttle
+        public double vm_joystick_throttle_1
         {
-            get { return flightSimulatorModel.getRequetedProp("throttle"); }
+            get {
+                Trace.WriteLine($"throttle_1 val : {simulator.getRequetedProp("throttle_1")}"); 
+                return simulator.getRequetedProp("throttle_1"); }
             set { }
         }
+
         public double vm_joystick_rudder
         {
-        get { return flightSimulatorModel.getRequetedProp("rudder"); }
+        get { return simulator.getRequetedProp("rudder"); }
             set { }
         }
         public double vm_joystick_elevator
         {   
             get {
-                Trace.WriteLine("worksssssssssssssssssssssssss  " + this.flightSimulatorModel.getRequetedProp("elevator"));
-                return convert(flightSimulatorModel.getRequetedProp("elevator")); }
+                return convert(simulator.getRequetedProp("elevator")); }
             set { }
         }
         public double vm_joystick_aileron
         {
-            get { return convert(flightSimulatorModel.getRequetedProp("aileron")); }
+            get { return convert(simulator.getRequetedProp("aileron")); }
             set { }
         }
 
-        public void NotifyPropertyChanged(string propName)
+        //TODO CREATE CONVERTER IN VIEW
+        private double convert(double d)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            return 125 + 80 * d; 
         }
+
     }
 }

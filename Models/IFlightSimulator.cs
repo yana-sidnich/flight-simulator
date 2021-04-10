@@ -22,6 +22,21 @@ namespace FlightGearTestExec
         public bool isRunning();
 
         public double getRequetedProp(string propName);
+        public void executeSimulator(string ip, string port);
+        public SimulatorConf configuration();
+
+        public double GetSpeed();
+        public void SetSpeed(double value);
+        public void SetForward(bool forward);
+        public bool GetForward();
+
+        public int GetCurrentLine();
+        public int GetNumLines();
+        public void SetCurrentLine(int value);
+
+        public void pauseRun();
+        public void unPauseRun();
+        public float DefaultTicksPerSec();
 
     }
 }
