@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Markup;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
@@ -66,7 +67,36 @@ namespace FlightGearTestExec.ViewModels
         private readonly FlightSimulator _model;
 
         private const int STROKE_THICKNESS = 5;
-        private SKColor[] ColorsArray { get; set; }
+
+        private Visibility _isGraphVisible = Visibility.Visible;
+        public Visibility IsGraphVisible
+        {
+            get
+            {
+                return _isGraphVisible;
+            }
+            set
+            {
+                if (value != _isGraphVisible)
+                {
+                    _isGraphVisible = value;
+                    NotifyPropertyChanged("IsGraphVisible");
+                    NotifyPropertyChanged("IsErrorVisible");
+                }
+            }
+        }
+
+        public Visibility IsErrorVisible
+        {
+            get
+            {
+                if (IsGraphVisible == Visibility.Hidden)
+                    return Visibility.Visible;
+                else
+                    return Visibility.Hidden;
+            }
+        }
+
 
         private ObservableCollection<SeriesHolder> _seriesData = new ObservableCollection<SeriesHolder>();
 
@@ -74,22 +104,21 @@ namespace FlightGearTestExec.ViewModels
 
         public TwoFeaturesGraphsViewModel()
         {
-            ColorsArray = new SKColor[] { SKColors.DarkTurquoise, SKColors.DarkSeaGreen };
-
             _model = model as FlightSimulator;
             _model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("VM_TwoFeaturesGraphs_" + e.PropertyName);
                 };
-            setGraphValues();
+            SetGraphValues();
 
         }
-        private void setGraphValues()
+        private void SetGraphValues()
         {
             for (int i = 0; i < GRAPHS_NUM; i++)
             {
                 _seriesData.Add(new SeriesHolder());
+
                 _seriesData[i].series = new ObservableCollection<ISeries>
                 {
                     new LineSeries<ObservablePointF>
@@ -99,14 +128,13 @@ namespace FlightGearTestExec.ViewModels
                         GeometryFill = null,
                         GeometrySize = 0,
                         LineSmoothness = 0.1,
-                        // Stroke = new SolidColorPaintTask { Color = ColorsArray[i], StrokeThickness = STROKE_THICKNESS },
                         Stroke = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = STROKE_THICKNESS },
                     }
                 };
             }
         }
 
-        public void updatePoints(string name)
+        public void UpdatePoints(string name)
         {
             if (name == null)
                 return;
@@ -120,10 +148,21 @@ namespace FlightGearTestExec.ViewModels
             {
                 case "VM_TwoFeaturesGraphs_SelectedString":
                     index = 0;
+                    if (string.IsNullOrEmpty(VM_TwoFeaturesGraphs_SelectedString))
+                    {
+                        _seriesData[index].points.Clear();
+                        return;
+                    }
                     data = getFeatureData(VM_TwoFeaturesGraphs_SelectedString);
                     break;
                 case "VM_TwoFeaturesGraphs_CorrelatedString":
                     index = 1;
+                    if (string.IsNullOrEmpty(VM_TwoFeaturesGraphs_CorrelatedString))
+                    {
+                        IsGraphVisible = Visibility.Hidden;
+                        return;
+                    }
+                    IsGraphVisible = Visibility.Visible;
                     data = getFeatureData(VM_TwoFeaturesGraphs_CorrelatedString);
                     break;
                 default:
@@ -156,6 +195,7 @@ namespace FlightGearTestExec.ViewModels
 
         public FlightDataContainer getFeatureData(string name)
         {
+            if (string.IsNullOrEmpty(name)) return null;
             if (_model.dataDictionary.ContainsKey(name))
             {
                 return _model.dataDictionary[name];

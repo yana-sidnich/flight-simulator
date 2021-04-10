@@ -27,17 +27,16 @@ namespace FlightGearTestExec.Views
 
             vm = DataContext as FeaturesListViewModel;
 
-            Dictionary<string, FlightDataContainer> dataDictionary = vm?.getDictionary();
-
-            if (dataDictionary != null)
-            {
-                foreach (var pair in dataDictionary)
+            vm.PropertyChanged +=
+                delegate (Object sender, PropertyChangedEventArgs e)
                 {
-                    ListItem temp = new ListItem
-                        {FeatureName = pair.Key, CorrelatedName = pair.Value.correlatedFeatureName};
-                    FeaturesList.Items.Add(temp);
-                }
-            }
+                    if (e.PropertyName == "VM_FeatureList_Dictionary")
+                    {
+                        UpdateListItems();
+                    }
+                };
+
+            UpdateListItems();
         }
 
         private void List_Selected(object sender, RoutedEventArgs e)
@@ -48,6 +47,21 @@ namespace FlightGearTestExec.Views
 
                 vm.VM_FeaturesList_SelectedString = item.FeatureName;
                 vm.VM_FeaturesList_CorrelatedString = item.CorrelatedName;
+            }
+        }
+
+        private void UpdateListItems()
+        {
+            Dictionary<string, FlightDataContainer> dataDictionary = vm?.getDictionary();
+
+            if (dataDictionary != null)
+            {
+                foreach (var pair in dataDictionary)
+                {
+                    ListItem temp = new ListItem
+                        {FeatureName = pair.Key ?? "", CorrelatedName = pair.Value.correlatedFeatureName  ?? ""};
+                    FeaturesList.Items.Add(temp);
+                }
             }
         }
     }

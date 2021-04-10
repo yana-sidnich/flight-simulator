@@ -76,7 +76,7 @@ namespace FlightGearTestExec.Views
                         // temporarily faster the animation speed between points changes
                         char_0.AnimationsSpeed = fastAnimationSpeed;
                         char_1.AnimationsSpeed = fastAnimationSpeed;
-                        vm.updatePoints(name);
+                        vm.UpdatePoints(name);
                         
                         // wait before restoring default speed
                         Task.Run(() =>

@@ -41,6 +41,10 @@ namespace FlightGearTestExec
                 FlightDataContainer feature = new FlightDataContainer();
 
                 feature.correlatedFeatureName = featuresNames[shuffeld_indexes[i]];
+                if (rnd.Next(0, 10) == 5)
+                {
+                    feature.correlatedFeatureName = "";
+                }
                 feature.values = new double[POINTS_SIZE];
 
                 //Make Random Numbers
