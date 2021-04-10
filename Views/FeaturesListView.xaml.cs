@@ -37,6 +37,9 @@ namespace FlightGearTestExec.Views
                 };
 
             UpdateListItems();
+            
+            // set default value
+            FeaturesList.SelectedIndex = 0;
         }
 
         private void List_Selected(object sender, RoutedEventArgs e)

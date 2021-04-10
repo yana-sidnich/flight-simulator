@@ -53,7 +53,9 @@
 
             <views:FeaturesListView Grid.Column="0" VerticalAlignment="Stretch" x:Name="ListUserControl"/>
         </Grid>
-    </materialDesign:Card>
+
+        <views:FeaturesListView Grid.Column="0" x:Name="ListUserControl" HorizontalAlignment="Stretch"/>
+    </Grid>
 
 
 </UserControl>
