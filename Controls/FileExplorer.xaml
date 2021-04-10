@@ -4,122 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightGearTestExec.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="160" d:DesignWidth="190">
-    <Grid Height="130"
-        ShowGridLines="False">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="190*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="50*"></RowDefinition>
-            <RowDefinition Height="50*"></RowDefinition>
-        </Grid.RowDefinitions>
+             d:DesignHeight="350" d:DesignWidth="400">
 
-        <Button x:Name="chooseTestCSV" Grid.Row="0" Grid.Column="0" Click="OpenExplorer" HorizontalAlignment="Center" Height="40" VerticalAlignment="Bottom" 
-                Width="190" Foreground="Black" BorderBrush="White" FontWeight="Bold" FontSize="16" FontFamily="Arial">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFDEEAD6" Offset="0.554"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Label Content="Select Test CSV File" Width="190" Height="40" VerticalAlignment="Stretch" HorizontalAlignment="Center"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White">
-                <Label.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF2B80B0" Offset="0.23"/>
-                    </LinearGradientBrush>
-                </Label.Background>
-                <Label.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.9"/>
-                    </LinearGradientBrush>
-                </Label.Foreground>
-            </Label>
-        </Button>
+    <materialDesign:Card Padding="30" Margin="10">
+        <StackPanel>
+            <TextBlock TextAlignment="Center" Style="{DynamicResource MaterialDesignHeadline6TextBlock}">Please enter flight gear settings:</TextBlock>
 
+            <Grid>
+                <Grid.Resources >
+                    <Style TargetType="Border" >
+                        <Setter Property="Padding" Value="10,10,10,10" />
+                    </Style>
+                </Grid.Resources>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
 
-        <Button x:Name="chooseDLL"  Grid.Row="1" Grid.Column="0" Click="OpenExplorer" HorizontalAlignment="Center" Height="40" 
-                VerticalAlignment="Bottom" Width="190" Foreground="White" BorderBrush="#FFC3C3C3" 
-                FontWeight="Bold" FontSize="16" FontFamily="Arial">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFDEEAD6" Offset="0.554"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Label Content="Select Algorithm DLL" Width="190" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White">
-                <Label.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF2B80B0" Offset="0.23"/>
-                    </LinearGradientBrush>
-                </Label.Background>
-                <Label.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.9"/>
-                    </LinearGradientBrush>
-                </Label.Foreground>
-            </Label>
-        </Button>
+                <Border Grid.Row="0"  Grid.Column="0">
+                    <Button x:Name="chooseTestCSV" Click="OpenExplorer" Content="Select CSV Test File"/>
+                </Border>
 
-        <Button x:Name="chooseTrainCSV" Grid.Row="2" Grid.Column="0" Click="OpenExplorer" HorizontalAlignment="Center" Height="40" 
-                VerticalAlignment="Bottom" Width="190" Foreground="White" BorderBrush="#FFC3C3C3" 
-                FontWeight="Bold" FontSize="16" FontFamily="Arial" >
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFDEEAD6" Offset="0.554"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Label Content="Select Train CSV File" Width="190" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White">
-                <Label.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF2B80B0" Offset="0.23"/>
-                    </LinearGradientBrush>
-                </Label.Background>
-                <Label.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.9"/>
-                    </LinearGradientBrush>
-                </Label.Foreground>
-            </Label>
-        </Button>
+                <Border Grid.Row="1"  Grid.Column="0">
+                    <Button x:Name="chooseDLL" Click="OpenExplorer" Content="Select Algorithm DLL"/>
+                </Border>
 
-        <Button x:Name="chooseFlightSimulator" Grid.Row="3" Grid.Column="0" Click="OpenExplorer" HorizontalAlignment="Center" Height="40" 
-                VerticalAlignment="Bottom" Width="190" Foreground="White" BorderBrush="#FFC3C3C3" 
-                FontWeight="Bold" FontSize="16" FontFamily="Arial">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFDEEAD6" Offset="0.554"/>
-                </LinearGradientBrush>
-            </Button.Background>
-            <Label Content="Select Flight Simulator Path" Width="190" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="White">
-                <Label.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF2B80B0" Offset="0.23"/>
-                    </LinearGradientBrush>
-                </Label.Background>
-                <Label.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.9"/>
-                    </LinearGradientBrush>
-                </Label.Foreground>
-            </Label>
-        </Button>
-    </Grid>
+                <Border Grid.Row="2"  Grid.Column="0">
+                    <Button x:Name="chooseTrainCSV" Click="OpenExplorer" Content="Select Train CSV File"/>
+                </Border>
+
+                <Border Grid.Row="3"  Grid.Column="0">
+                    <Button x:Name="chooseFlightSimulator" Click="OpenExplorer" Content="Select Flight Simulator Path"/>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+    </materialDesign:Card>
+
 </UserControl>

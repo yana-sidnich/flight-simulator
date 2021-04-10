@@ -4,18 +4,65 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightGearTestExec.Controls"
-             mc:Ignorable="d" Height="201" Width="270">
-    <Grid Margin="0,0,0,-29">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="connectButton" Content="Connect To Simulator" HorizontalAlignment="Left" Margin="43,136,0,0" VerticalAlignment="Top" Height="36" Width="190" Click="connectButton_Click"/>
-        <Button x:Name="startButton" Content="Start Flight Gear" HorizontalAlignment="Left" Margin="42,179,0,0" VerticalAlignment="Top" Height="36" Width="190" Click="startButton_Click"/>
-        <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Margin="104,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38" Text="127.0.0.1"/>
-        <TextBox x:Name="portTextBox" HorizontalAlignment="Left" Margin="104,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="126" Height="38" Text="5400"/>
-        <Label Content="IP" HorizontalAlignment="Left" Margin="48,36,0,0" VerticalAlignment="Top" Height="37" Width="41"/>
-        <Label Content="PORT" HorizontalAlignment="Left" Margin="48,81,0,0" VerticalAlignment="Top" Height="38" Width="41"/>
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             mc:Ignorable="d" Height="350" Width="400">
 
-    </Grid>
+    <materialDesign:Card Padding="30" Margin="10">
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Style="{DynamicResource MaterialDesignHeadline6TextBlock}">Please enter flight gear settings:</TextBlock>
+
+            <Grid HorizontalAlignment="Center">
+                <Grid.Resources >
+                    <Style TargetType="Border" >
+                        <Setter Property="Padding" Value="10,10,10,10" />
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"  Grid.Column="0">
+                    <Label Content="IP" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="Auto" Width="41"/>
+                </Border>
+
+                <Border Grid.Row="0"  Grid.Column="1">
+                    <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="126" Height="Auto" Text="127.0.0.1"/>
+                </Border>
+
+                <Border Grid.Row="1"  Grid.Column="0">
+                    <Label Content="PORT" HorizontalAlignment="Left" VerticalAlignment="Center" Height="Auto" Width="41" Grid.Row="1"/>
+                </Border>
+
+                <Border Grid.Row="1"  Grid.Column="1">
+                    <TextBox x:Name="portTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="126" Height="Auto" Text="5400"/>
+                </Border>
+
+                <Border Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0">
+                    <Button x:Name="connectButton" Content="Connect To Simulator" HorizontalAlignment="Stretch" Height="36" Click="connectButton_Click"/>
+                </Border>
+
+                <Border Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0">
+                    <Button x:Name="startButton" Content="Start Flight Gear" HorizontalAlignment="Stretch" Height="36" Click="startButton_Click"/>
+                </Border>
+            </Grid>
+            
+        </StackPanel>
+
+    </materialDesign:Card>
+
 </UserControl>

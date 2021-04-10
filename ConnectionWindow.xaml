@@ -5,18 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightGearTestExec"
         xmlns:controls="clr-namespace:FlightGearTestExec.Controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="ConnectionWindow" Height="281" Width="550">
-    <Grid
-        ShowGridLines="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="275*"></ColumnDefinition>
-            <ColumnDefinition Width="275*"></ColumnDefinition>
+        Title="ConnectionWindow"
+        WindowState="Normal"
+        SizeToContent="WidthAndHeight"
+        MinHeight="300"
+        MinWidth="600">
 
-        </Grid.ColumnDefinitions>
+    <materialDesign:Card Padding="3" Margin="5">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="275*"></ColumnDefinition>
+                    <ColumnDefinition Width="275*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        <controls:connection x:Name="connection" Grid.Column="0"/>
-        <controls:FileExplorer x:Name="FileExplorer" Grid.Column="1"/>
-
-    </Grid>
+                <controls:connection x:Name="connection" Grid.Column="0"/>
+                <controls:FileExplorer x:Name="FileExplorer" Grid.Column="1"/>
+            </Grid>
+        </StackPanel>
+    </materialDesign:Card>
 </Window>
