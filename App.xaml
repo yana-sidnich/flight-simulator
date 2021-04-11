@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:FlightGearTestExec"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             StartupUri="ConnectionWindow.xaml"
+             StartupUri="MainWindow.xaml"
              >
+    <!-- StartupUri="ConnectionWindow.xaml" -->
 
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +13,7 @@
                 <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Teal" SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="styleless" />
         </ResourceDictionary>
     </Application.Resources>
 

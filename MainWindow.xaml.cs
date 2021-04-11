@@ -29,8 +29,9 @@ namespace FlightGearTestExec
         private FlightSimulator sim;
         public MainWindow()
         {
-            //this.sim = new FlightSimulator();
-            //this._vm = new BaseViewModel(sim);
+            this.sim = new FlightSimulator();
+            this._vm = new BaseViewModel(sim);
+            BaseViewModel.SetModel(this.sim);
 
             //sim.executeSimulator();
             

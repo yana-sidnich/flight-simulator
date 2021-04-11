@@ -12,16 +12,23 @@ namespace FlightGearTestExec.ViewModels
 {
     class BaseViewModel : INotifyPropertyChanged
     {
-        protected static IFlightSimulator model = new FlightSimulator();
+        // protected static IFlightSimulator model = new FlightSimulator();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected IFlightSimulator simulator;
+        protected static IFlightSimulator model;
 
         public static void  SetModel(IFlightSimulator simulator_model)
         {
             model = simulator_model;
         }
+
+        public BaseViewModel(IFlightSimulator modell)
+        {
+            this.simulator = model;
+        }
+        
         public BaseViewModel()
         {
             this.simulator = model;

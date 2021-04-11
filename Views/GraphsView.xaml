@@ -5,48 +5,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:FlightGearTestExec.ViewModels"
              xmlns:views="clr-namespace:FlightGearTestExec.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"        
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="800">
 
     <UserControl.DataContext>
         <viewModels:GraphsViewModel/>
     </UserControl.DataContext>
 
-    <Grid HorizontalAlignment="Stretch" Width="auto" Height="auto" Background="White">
+    <materialDesign:Card>
+        <Grid HorizontalAlignment="Stretch" Width="Auto" Height="Auto">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3.4*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
 
-        <Grid Grid.Column="2" HorizontalAlignment="Stretch">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <views:TwoFeaturesGraphView  x:Name="twoGraphs" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch"/>
-
-                <DockPanel DockPanel.Dock="Bottom" Grid.Row="1" Grid.Column="0">
-                    <Label DockPanel.Dock="Top" Content="Label DLL graph"/>
-                    <Label Content="PUT here DLL"></Label>
-                </DockPanel>
-
+            <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+            
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+            
+                    <views:TwoFeaturesGraphView  x:Name="twoGraphs" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch"/>
+            
+                    <DockPanel DockPanel.Dock="Bottom" Grid.Row="1" Grid.Column="0">
+                        <Label DockPanel.Dock="Top" Content="Label DLL graph"/>
+                        <Label Content="PUT here DLL"></Label>
+                    </DockPanel>
+            
+                </Grid>
             </Grid>
-        </Grid>
 
-        <views:FeaturesListView Grid.Column="0" x:Name="ListUserControl" HorizontalAlignment="Stretch"/>
-    </Grid>
+            <views:FeaturesListView Grid.Column="0" x:Name="ListUserControl"/>
+        </Grid>
+    </materialDesign:Card>
 
 
 </UserControl>

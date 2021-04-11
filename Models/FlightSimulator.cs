@@ -54,15 +54,16 @@ namespace FlightGearTestExec
 
         public FlightSimulator()
         {
-            this.myClient = new MyTcpClient();
-
-            this.conf = new SimulatorConf();
+            // this.myClient = new MyTcpClient();
+            //
+            // this.conf = new SimulatorConf();
 
             this.currentLine = 0;
             this.speed = 1.0f;
             this.stopped = true;
             this.paused = false;
             this.forward = true;
+            this.dataDictionary = FlightDataContainer.get_should_be_data_context();
 
         }
 
@@ -119,7 +120,7 @@ namespace FlightGearTestExec
         }
         public void Start()
         {
-            Trace.Write(this.isConnected());
+            // Trace.Write(this.isConnected());
             this.dataHandler = new DataHandler(this.conf.FlightTestCSVPath, this.conf.FlightXMLPath);
             Trace.Write(this.dataHandler.DataByRow.Count);
             Thread t = new Thread (new ThreadStart((delegate()
@@ -173,7 +174,7 @@ namespace FlightGearTestExec
 
         public void Connect(string ip, int port)
         {
-            this.myClient.connect(ip, port);
+            // this.myClient.connect(ip, port);
             this.Start();
         }
 

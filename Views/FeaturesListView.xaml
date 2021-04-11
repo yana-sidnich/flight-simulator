@@ -5,20 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightGearTestExec.Views"
              xmlns:viewModels="clr-namespace:FlightGearTestExec.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="250">
+             d:DesignHeight="450" d:DesignWidth="350">
 
     <UserControl.DataContext>
         <viewModels:FeaturesListViewModel/>
     </UserControl.DataContext>
 
-    <ListView Name="FeaturesList" SelectionChanged ="List_Selected" HorizontalContentAlignment="Left">
-        <ListView.View>
-            <GridView>
-                <GridViewColumn Width="auto" Header="Features   " DisplayMemberBinding="{Binding Path=FeatureName}"/>
-                <GridViewColumn Width="auto"  Header="Correlated Feature   " DisplayMemberBinding="{Binding Path=CorrelatedName}"/>
-            </GridView>
-        </ListView.View>
-    </ListView>
+    <!-- <materialDesign:Card> -->
+        <Grid MaxHeight="1000">
+            <ListView Name="FeaturesList" SelectionChanged ="List_Selected" MaxHeight="{Binding ElementName=ParentGrid, Path=ActualHeight}"
+            >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="auto" Header="Features   " DisplayMemberBinding="{Binding Path=FeatureName}"/>
+                        <GridViewColumn Width="auto"  Header="Correlated Feature   " DisplayMemberBinding="{Binding Path=CorrelatedName}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+    <!-- </materialDesign:Card> -->
 
 </UserControl>
