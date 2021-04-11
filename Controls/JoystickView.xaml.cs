@@ -17,19 +17,16 @@ using System.Windows.Shapes;
 namespace FlightGearTestExec.Controls
 {
     /// <summary>
-    /// Interaction logic for joystick.xaml
+    /// Interaction logic for JoystickView.xaml
     /// </summary>
-    public partial class joystick : UserControl
+    public partial class JoystickView : UserControl
     {
-        private joystickViewModel joystick_vm;
+        private JoystickViewModel joystick_vm;
 
-        public joystick()
+        public JoystickView()
         {
             InitializeComponent();
-
-            this.joystick_vm = new joystickViewModel();
-            this.DataContext = joystick_vm;
-
+            joystick_vm = DataContext as JoystickViewModel;
         }
 
         public void centerKnob_Completed(Object sender, EventArgs e)

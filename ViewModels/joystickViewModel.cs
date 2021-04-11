@@ -9,20 +9,20 @@ using System.Diagnostics;
 
 namespace FlightGearTestExec.ViewModels
 {
-    class joystickViewModel : BaseViewModel
+    class JoystickViewModel : BaseViewModel
     {
 
-        public joystickViewModel()
+        public JoystickViewModel()
         {
             this.simulator.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
-                    this.NotifyPropertyChanged("vm_joystick_" + e.PropertyName);
+                    this.NotifyPropertyChanged("VM_Joystick_" + e.PropertyName);
                 };
         }
 
 
-        public double vm_joystick_throttle_1
+        public double VM_Joystick_throttle_1
         {
             get {
                 Trace.WriteLine($"throttle_1 val : {simulator.getRequetedProp("throttle_1")}"); 
@@ -30,18 +30,18 @@ namespace FlightGearTestExec.ViewModels
             set { }
         }
 
-        public double vm_joystick_rudder
+        public double VM_Joystick_rudder
         {
         get { return simulator.getRequetedProp("rudder"); }
             set { }
         }
-        public double vm_joystick_elevator
+        public double VM_Joystick_elevator
         {   
             get {
                 return convert(simulator.getRequetedProp("elevator")); }
             set { }
         }
-        public double vm_joystick_aileron
+        public double VM_Joystick_aileron
         {
             get { return convert(simulator.getRequetedProp("aileron")); }
             set { }

@@ -19,34 +19,72 @@
 
     <materialDesign:Card>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="4*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" CanContentScroll="True" DockPanel.Dock="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
 
 
-            <!-- <Viewbox Height="315"  Margin="7,39,20,0" -->
-            <!--      Name="viewbox1"  -->
-            <!--     Stretch="Fill" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"> -->
-            <!--     <controls:joystick x:Name="joystick"/> -->
-            <!-- </Viewbox> -->
-            <!-- -->
-            <!-- <Viewbox Height="315"  Margin="7,39,20,0" -->
-            <!--     Name="viewbox2" -->
-            <!--     Stretch="Fill" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top"> -->
-            <!--     <controls:MediaPlayer x:Name="MediaPlayer"/> -->
-            <!-- </Viewbox> -->
+                    <!-- <Viewbox Height="315"  Margin="7,39,20,0" -->
+                    <!--      Name="viewbox1"  -->
+                    <!--     Stretch="Fill" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"> -->
+                    <!--     <controls:JoystickView x:Name="joystick"/> -->
+                    <!-- </Viewbox> -->
+                    <!-- -->
 
-            <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="3" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
+                    <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="3" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
 
-            <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"/>
+                    <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"/>
+                </Grid>
+            </ScrollViewer>
+
+            <controls:MediaPlayer Grid.Row="1" x:Name="MediaPlayer" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
         </Grid>
     </materialDesign:Card>
+
+    <!-- <materialDesign:Card> -->
+    <!--     <DockPanel LastChildFill="False"> -->
+    <!--         <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True" DockPanel.Dock="Top"> -->
+    <!--             <Grid> -->
+    <!--                 <Grid.ColumnDefinitions> -->
+    <!--                     <ColumnDefinition Width="2*"></ColumnDefinition> -->
+    <!--                     <ColumnDefinition Width="Auto"></ColumnDefinition> -->
+    <!--                     <ColumnDefinition Width="4*"></ColumnDefinition> -->
+    <!--                 </Grid.ColumnDefinitions> -->
+    <!--                 <Grid.RowDefinitions> -->
+    <!--                     <RowDefinition Height="*"></RowDefinition> -->
+    <!--                     <RowDefinition Height="*"></RowDefinition> -->
+    <!--                     <RowDefinition Height="*"></RowDefinition> -->
+    <!--                 </Grid.RowDefinitions> -->
+    <!--          -->
+    <!--          -->
+    <!--                 ~1~ <Viewbox Height="315"  Margin="7,39,20,0" @1@ -->
+    <!--                 ~1~      Name="viewbox1"  @1@ -->
+    <!--                 ~1~     Stretch="Fill" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"> @1@ -->
+    <!--                 ~1~     <controls:JoystickView x:Name="joystick"/> @1@ -->
+    <!--                 ~1~ </Viewbox> @1@ -->
+    <!--                 ~1~ @1@ -->
+    <!--          -->
+    <!--                 <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="3" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/> -->
+    <!--          -->
+    <!--                 <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"/> -->
+    <!--             </Grid> -->
+    <!--         </ScrollViewer> -->
+    <!-- -->
+    <!--         <controls:MediaPlayer x:Name="MediaPlayer" DockPanel.Dock="Bottom" MinHeight="250" Height="250" MaxHeight="350" HorizontalAlignment="Stretch"/> -->
+    <!--     </DockPanel> -->
+    <!-- </materialDesign:Card> -->
 
 </Window>

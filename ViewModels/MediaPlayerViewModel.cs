@@ -13,23 +13,32 @@ namespace FlightGearTestExec.ViewModels
 {
     class MediaPlayerViewModel : BaseViewModel
     {
-
-        
+        private int _maxLine;
         public MediaPlayerViewModel()
         {
             this.simulator.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("vm_media_player_" + e.PropertyName);
             };
+            _maxLine = getTotalFrameNumber();
+        }
+
+        public int vm_media_player_last_line
+        {
+            get { return _maxLine;
+            }
         }
 
         public int vm_media_player_current_line
         {
             get {
                 Trace.WriteLine("get current line");
-                return simulator.GetCurrentLine(); }
-            set { simulator.SetCurrentLine(value);
-                }
+                return simulator.GetCurrentLine();
+            }
+            set { 
+                simulator.SetCurrentLine(value);
+                vm_media_player_PlayPercent = (int) value / _maxLine * 100;
+            }
         }
 
         public double vm_media_player_speed
@@ -39,6 +48,19 @@ namespace FlightGearTestExec.ViewModels
                 return simulator.GetSpeed();
             }
             set { }
+        }
+
+        private int _playPercent;
+        public int vm_media_player_PlayPercent
+        {
+            get
+            {
+                return _playPercent;
+            }
+            set
+            {
+                _playPercent = value;
+            }
         }
         public int getTotalFrameNumber() { return simulator.GetNumLines(); }
 

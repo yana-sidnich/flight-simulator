@@ -230,6 +230,7 @@ namespace FlightGearTestExec
         }
         public int GetNumLines()
         {
+            return 2314;
             return this.dataHandler.DataByColumn.First().Value.Count; ;
         }
 

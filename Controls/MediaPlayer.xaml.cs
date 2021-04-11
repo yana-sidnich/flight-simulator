@@ -24,6 +24,7 @@ namespace FlightGearTestExec.Controls
     {
 
         private MediaPlayerViewModel vm;
+        public int maxLine;
         public MediaPlayer()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace FlightGearTestExec.Controls
 
             currentFrameSlider.Maximum = vm.getTotalFrameNumber();
             currentFrameSlider.Minimum = 0;
+            maxLine = vm.getTotalFrameNumber();
             this.DataContext = this.vm;
         }
         private void TextBox_TextChanged(object sender, KeyEventArgs e)
@@ -82,9 +84,28 @@ namespace FlightGearTestExec.Controls
             vm.increaseSpeed();
 
         }
+
+        private void PlusTimesFive_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                vm.increaseSpeed();
+            }            
+
+        }
+
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
             vm.decreaseSpeed();
+
+        }
+
+        private void MinusTimesFive_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                vm.decreaseSpeed();
+            }
 
         }
     }
