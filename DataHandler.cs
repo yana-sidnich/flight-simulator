@@ -161,17 +161,17 @@ namespace FlightGearTestExec
 
 
 
-        private void createCSV()
+        private void createCSV(string pathToCSV, string nameOfNewCSV);
 
         {
 
-            StreamReader sr = File.OpenText(pathCSV);
+            StreamReader sr = File.OpenText(pathToCSV);
 
             string text = sr.ReadToEnd();
 
             sr.Close();
 
-            StreamWriter sw = File.CreateText(timeseriesCSV);
+            StreamWriter sw = File.CreateText(nameOfNewCSV);
 
             string s = attributes[0];
 
