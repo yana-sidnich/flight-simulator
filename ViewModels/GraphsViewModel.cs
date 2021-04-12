@@ -15,10 +15,10 @@ namespace FlightGearTestExec.ViewModels
 {
     class GraphsViewModel : BaseViewModel
     {
-        private readonly FlightSimulator _model;
+        private readonly IFlightSimulator _model;
         public GraphsViewModel()
         {
-            _model = simulator as FlightSimulator;
+            _model = simulator;
             _model.PropertyChanged +=
                 delegate(Object sender, PropertyChangedEventArgs e)
                 {

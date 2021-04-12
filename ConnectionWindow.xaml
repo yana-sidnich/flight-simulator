@@ -18,18 +18,20 @@
         WindowState="Normal"
         SizeToContent="WidthAndHeight"
         MinHeight="300"
-        MinWidth="600">
+        MinWidth="1000">
 
     <materialDesign:Card Padding="3" Margin="5">
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="275*"></ColumnDefinition>
-                    <ColumnDefinition Width="275*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <controls:connection x:Name="connection" Grid.Column="0"/>
-                <controls:FileExplorer x:Name="FileExplorer" Grid.Column="1"/>
+                <controls:FileExplorerView x:Name="FileExplorer" Height="Auto" Grid.Column="0" Loaded="FileExplorer_Loaded" VerticalAlignment="Stretch"/>
+                <controls:ConnectionView x:Name="connection" Grid.Column="1" Width="Auto" Height="Auto"
+                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                />
             </Grid>
         </StackPanel>
     </materialDesign:Card>

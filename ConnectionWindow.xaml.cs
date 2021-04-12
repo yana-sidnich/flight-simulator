@@ -24,5 +24,9 @@ namespace FlightGearTestExec
             InitializeComponent();
         }
 
+        private void FileExplorer_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

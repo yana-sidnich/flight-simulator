@@ -23,9 +23,6 @@ namespace FlightGearTestExec
 
         public double getRequetedProp(string propName);
         public void executeSimulator(string ip, string port);
-        public SimulatorConf configuration();
-
-        public double GetSpeed();
         public void SetSpeed(double value);
         public void SetForward(bool forward);
         public bool GetForward();
@@ -37,6 +34,41 @@ namespace FlightGearTestExec
         public void pauseRun();
         public void unPauseRun();
         public float DefaultTicksPerSec();
+
+        // PROPERTIES
+
+        public SimulatorConf Configuration
+        {
+            get;
+        }
+
+        public double Speed
+        {
+            get;
+        }
+
+        public string SelectedString
+        {
+            get;
+            set;
+        }
+        public string CorrelatedString
+        {
+            get;
+            set;
+        }
+
+        public Dictionary<string, string> CorrelatedFeatures
+        {
+            get;
+            set;
+        }
+
+        public Dictionary<string, FlightDataContainer> DataDictionary
+        {
+            get;
+            set;
+        }        
 
     }
 }

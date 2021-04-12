@@ -19,18 +19,18 @@ using FlightGearTestExec.ViewModels;
 namespace FlightGearTestExec.Controls
 {
     /// <summary>
-    /// Interaction logic for FileExplorer.xaml
+    /// Interaction logic for FileExplorerView.xaml
     /// </summary>
-    public partial class FileExplorer : UserControl
+    public partial class FileExplorerView : UserControl
     {
-        private FileExplorer_ViewModel file_explorer_vm;
-        public FileExplorer()
+        private FileExplorerViewModel _vm;
+        public FileExplorerView()
         {
             InitializeComponent();
-            this.file_explorer_vm = new FileExplorer_ViewModel();
-            this.DataContext = file_explorer_vm;
+            _vm = DataContext as FileExplorerViewModel;
 
         }
+
         private string dialog(FileDialog dialog)
         {
             dialog.ShowDialog();
@@ -49,14 +49,27 @@ namespace FlightGearTestExec.Controls
         {
             Button b = sender as Button;
             OpenFileDialog ofd = new OpenFileDialog();
+            string output;
             if (b == chooseTestCSV)
-                file_explorer_vm.vm_file_explorer_test_csv = dialog(new OpenFileDialog());
+            {
+                output = dialog(new OpenFileDialog());
+                _vm.VM_FileExplorer_FlightTestCSVPath = output ?? "";
+            }
             else if (b == chooseTrainCSV)
-                file_explorer_vm.vm_file_explorer_train_csv = dialog(new OpenFileDialog());
+            {
+                output = dialog(new OpenFileDialog());
+                _vm.VM_FileExplorer_FlightTrainCSVPath = output ?? "";
+            }
             else if (b == chooseFlightSimulator)
-                file_explorer_vm.vm_file_explorer_simulator_path = dialog(new System.Windows.Forms.FolderBrowserDialog());
+            {
+                output = dialog(new System.Windows.Forms.FolderBrowserDialog());
+                _vm.VM_FileExplorer_SimulatorPath = output ?? "";
+            }
             else if (b == chooseDLL)
-                file_explorer_vm.vm_file_anomaly_algorithm_dll = dialog(new OpenFileDialog());
+            {
+                output = dialog(new System.Windows.Forms.FolderBrowserDialog());
+                _vm.VM_FileExplorer_AnomalyAlgorithmDLL = output ?? "";
+            }
         }
     }
 }

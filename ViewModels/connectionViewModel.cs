@@ -9,11 +9,13 @@ using System.Windows.Input;
 
 namespace FlightGearTestExec.ViewModels
 {
-    class connectionViewModel : BaseViewModel
+    class ConnectionViewModel : BaseViewModel
     {
-        public connectionViewModel()
+        private readonly IFlightSimulator model;
+        public ConnectionViewModel()
         {
-            this.simulator.PropertyChanged +=
+            this.model = simulator;
+            this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("vm_connection_" + e.PropertyName);
@@ -23,12 +25,12 @@ namespace FlightGearTestExec.ViewModels
         public void connect(string ip, string port)
         {
             Trace.WriteLine($"ip {ip}, port {port}");
-            this.simulator.Connect(ip, Int32.Parse(port));
+            this.model.Connect(ip, Int32.Parse(port));
         }
 
         public void executeSimulator(string ip, string port)
         {
-            this.simulator.executeSimulator(ip, port);
+            this.model.executeSimulator(ip, port);
         }
     }
 }

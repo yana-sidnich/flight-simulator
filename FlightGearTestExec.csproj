@@ -12,12 +12,6 @@
     <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="1.0.3" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="1.0.3" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Toolkit.Wpf.UI.Controls" Version="6.1.2" />
   </ItemGroup>
-
-	<!-- <ItemGroup> -->
- <!--      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime> -->
- <!--      <SubType>Designer</SubType> -->
- <!--  </ItemGroup> -->
 
 </Project>

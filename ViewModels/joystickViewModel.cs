@@ -11,10 +11,11 @@ namespace FlightGearTestExec.ViewModels
 {
     class JoystickViewModel : BaseViewModel
     {
-
+        private readonly IFlightSimulator model;
         public JoystickViewModel()
         {
-            this.simulator.PropertyChanged +=
+            this.model = simulator;
+            this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     this.NotifyPropertyChanged("VM_Joystick_" + e.PropertyName);
@@ -25,25 +26,25 @@ namespace FlightGearTestExec.ViewModels
         public double VM_Joystick_throttle_1
         {
             get {
-                Trace.WriteLine($"throttle_1 val : {simulator.getRequetedProp("throttle_1")}"); 
-                return simulator.getRequetedProp("throttle_1"); }
+                Trace.WriteLine($"throttle_1 val : {this.model.getRequetedProp("throttle_1")}"); 
+                return this.model.getRequetedProp("throttle_1"); }
             set { }
         }
 
         public double VM_Joystick_rudder
         {
-        get { return simulator.getRequetedProp("rudder"); }
+        get { return this.model.getRequetedProp("rudder"); }
             set { }
         }
         public double VM_Joystick_elevator
         {   
             get {
-                return convert(simulator.getRequetedProp("elevator")); }
+                return convert(this.model.getRequetedProp("elevator")); }
             set { }
         }
         public double VM_Joystick_aileron
         {
-            get { return convert(simulator.getRequetedProp("aileron")); }
+            get { return convert(this.model.getRequetedProp("aileron")); }
             set { }
         }
 

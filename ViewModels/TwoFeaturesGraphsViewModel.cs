@@ -60,7 +60,7 @@ namespace FlightGearTestExec.ViewModels
 
         public ObservableCollection<SeriesHolder> SeriesData { get; set; } = new ObservableCollection<SeriesHolder>();
 
-        private readonly FlightSimulator _model;
+        private readonly IFlightSimulator _model;
 
         private const int STROKE_THICKNESS = 5;
 
@@ -84,7 +84,7 @@ namespace FlightGearTestExec.ViewModels
 
         public TwoFeaturesGraphsViewModel()
         {
-            _model = model as FlightSimulator;
+            _model = simulator;
             _model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
@@ -148,7 +148,7 @@ namespace FlightGearTestExec.ViewModels
             }
 
             int OLD_SIZE = SeriesData[index].points.Count;
-            int NEW_SIZE = data.values.Length;
+            int NEW_SIZE = data.values.Count;
             
             // if new points size is bigger than current - clean all current points
             if (OLD_SIZE > NEW_SIZE)
@@ -162,13 +162,13 @@ namespace FlightGearTestExec.ViewModels
             // first update old points values to new
             for (x = 0; x < OLD_SIZE; x++)
             {
-                y = (float)data.values[x];
+                y = data.values[x];
                 SeriesData[index].points[x].Y = y;
             }
             // add additional points
             for (; x < NEW_SIZE; x++)
             {
-                y = (float)data.values[x];
+                y = data.values[x];
                 SeriesData[index].points.Add(new ObservablePointF(x, y));
             }
 
@@ -180,9 +180,9 @@ namespace FlightGearTestExec.ViewModels
         public FlightDataContainer getFeatureData(string name)
         {
             if (string.IsNullOrEmpty(name)) return null;
-            if (_model.dataDictionary.ContainsKey(name))
+            if (_model.DataDictionary.ContainsKey(name))
             {
-                return _model.dataDictionary[name];
+                return _model.DataDictionary[name];
             }
 
             return null;

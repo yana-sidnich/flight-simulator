@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,10 +28,12 @@ using static FlightGearTestExec.FlightDataContainer;
 
 namespace FlightGearTestExec.Views
 {
-    public partial class TwoFeaturesGraphView : UserControl
+    public partial class TwoFeaturesGraphsView : UserControl
     {
         public SolidColorPaintTask strokeColor;
+
         private ObservableCollection<ObservablePointF> points;
+
         public List<Axis> axesList;
 
         public List<Axis> XAxes { get; set; }
@@ -54,7 +57,7 @@ namespace FlightGearTestExec.Views
 
         private TimeSpan originalAnimation_1;
 
-        public TwoFeaturesGraphView()
+        public TwoFeaturesGraphsView()
         {
             InitializeComponent();
             fastAnimationSpeed = TimeSpan.FromMilliseconds(10);
@@ -77,7 +80,7 @@ namespace FlightGearTestExec.Views
                         char_0.AnimationsSpeed = fastAnimationSpeed;
                         char_1.AnimationsSpeed = fastAnimationSpeed;
                         vm.UpdatePoints(name);
-                        
+
                         // wait before restoring default speed
                         Task.Run(() =>
                         {

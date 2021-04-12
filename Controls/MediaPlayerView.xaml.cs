@@ -18,14 +18,14 @@ using System.Diagnostics;
 namespace FlightGearTestExec.Controls
 {
     /// <summary>
-    /// Interaction logic for MediaPlayer.xaml
+    /// Interaction logic for MediaPlayerView.xaml
     /// </summary>
-    public partial class MediaPlayer : UserControl
+    public partial class MediaPlayerView : UserControl
     {
 
         private MediaPlayerViewModel vm;
         public int maxLine;
-        public MediaPlayer()
+        public MediaPlayerView()
         {
             InitializeComponent();
             this.vm = new MediaPlayerViewModel();
@@ -34,14 +34,6 @@ namespace FlightGearTestExec.Controls
             currentFrameSlider.Minimum = 0;
             maxLine = vm.getTotalFrameNumber();
             this.DataContext = this.vm;
-        }
-        private void TextBox_TextChanged(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                TextBox tx = (TextBox)sender;
-                vm.updatePlaySpeed(tx.Text);
-            }
         }
 
         private void pauseButton_Click(object sender, RoutedEventArgs e)

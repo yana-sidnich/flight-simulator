@@ -30,7 +30,11 @@ namespace FlightGearTestExec
         private volatile bool paused;
         private string _selectedString;
         private string _correlatedString;
-        internal Dictionary<string, FlightDataContainer> dataDictionary;
+        private Dictionary<string, FlightDataContainer> _dataDictionary;
+        private Dictionary<string, string> _correlatedFeatures;
+
+        // PROPERTIES
+        public double Speed => this.speed;
 
         public string SelectedString
         {
@@ -51,19 +55,52 @@ namespace FlightGearTestExec
             }
         }
 
+        public Dictionary<string, string> CorrelatedFeatures
+        {
+            get
+            {
+                _correlatedFeatures.Clear();
+                foreach (var pair in DataDictionary)
+                {
+                    _correlatedFeatures[pair.Key] = pair.Value.correlatedFeatureName;
+                }
+
+                return _correlatedFeatures;
+            }
+            set
+            {
+                foreach (var pair in value)
+                {
+                    _dataDictionary[pair.Key].correlatedFeatureName = pair.Value;
+                }
+
+                this.NotifyPropertyChanged("CorrelatedFeatures");
+            }
+        }
+
+        public Dictionary<string, FlightDataContainer> DataDictionary
+        {
+            get
+            {
+                return _dataDictionary;
+            }
+            set
+            {
+                this.NotifyPropertyChanged("DataDictionary");
+            }
+        }
 
         public FlightSimulator()
         {
-            // this.myClient = new MyTcpClient();
-            //
-            // this.conf = new SimulatorConf();
-
+            this.myClient = new MyTcpClient();
+            this.conf = new SimulatorConf();
+            this._correlatedFeatures = new Dictionary<string, string>();
+            this._dataDictionary = new Dictionary<string, FlightDataContainer>();
             this.currentLine = 0;
             this.speed = 1.0f;
             this.stopped = true;
             this.paused = false;
             this.forward = true;
-            this.dataDictionary = FlightDataContainer.get_should_be_data_context();
 
         }
 
@@ -77,7 +114,7 @@ namespace FlightGearTestExec
 
         private void notifyAll()
         {
-            foreach(string prop in this.dataHandler.DataByColumn.Keys)
+            foreach (string prop in this.dataHandler.DataByColumn.Keys)
             {
                 this.NotifyPropertyChanged(prop);
             }
@@ -123,59 +160,63 @@ namespace FlightGearTestExec
             // Trace.Write(this.isConnected());
             this.dataHandler = new DataHandler(this.conf.FlightTestCSVPath, this.conf.FlightXMLPath);
             Trace.Write(this.dataHandler.DataByRow.Count);
-            Thread t = new Thread (new ThreadStart((delegate()
-            {
-                this.stopped = false;
+            Thread t = new Thread(new ThreadStart((delegate ()
+           {
+               this.stopped = false;
 
-                //foreach (string line in this.dataHandler.DataByRow)
-                while (!this.stopped)
-                {
-                    if (paused)
-                    {
-                        // in case we are pasued - we do busy waiting, stopping for the same time between frames.
-                        // THat way we can lose a maximum if a frame when unpaused/ stopped.
-                        WaitForNextInput();
-                        // TODO change how you wait on pause
-                        continue;
-                    }
-                    Trace.WriteLine("raw number is");
-                    Trace.WriteLine(currentLine);
-                    string line = this.dataHandler.DataByRow[currentLine];
-                    byte[] byteLine = Encoding.ASCII.GetBytes(line + System.Environment.NewLine);
-                    this.myClient.send(byteLine);
-                    
-                    int before = DateTime.Now.Millisecond;
-                    this.notifyAll();
-                    int after = DateTime.Now.Millisecond;
-                    // check if not stopped
-                    if (stopped)
-                    {
-                        break;
-                    }
-                    // iterate to next line, please note that this variable can be configured from an outside source. 
+               //foreach (string line in this.dataHandler.DataByRow)
+               while (!this.stopped)
+               {
+                   if (paused)
+                   {
+                       // in case we are paused - we do busy waiting, stopping for the same time between frames.
+                       // THat way we can lose a maximum if a frame when unpaused/ stopped.
+                       WaitForNextInput();
+                       // TODO change how you wait on pause
+                       continue;
+                   }
+                   Trace.WriteLine("raw number is");
+                   Trace.WriteLine(currentLine);
+                   string line = this.dataHandler.DataByRow[currentLine];
+                   byte[] byteLine = Encoding.ASCII.GetBytes(line + System.Environment.NewLine);
+                   this.myClient.send(byteLine);
 
-                    WaitForNextInput(after - before);
-                    // check if after waiting
-                    this.currentLine = this.forward ? Math.Min(this.currentLine + 1, GetNumLines() - 1) : Math.Max(this.currentLine -1, 0);
-                    if ((this.forward && this.currentLine == GetNumLines() - 1) || (!this.forward && this.currentLine == 0))
-                    {
-                        this.paused = true;
-                    }
+                   int before = DateTime.Now.Millisecond;
+                   this.notifyAll();
+                   int after = DateTime.Now.Millisecond;
+                   // check if not stopped
+                   if (stopped)
+                   {
+                       break;
+                   }
+                   // iterate to next line, please note that this variable can be configured from an outside source. 
 
-                    this.NotifyPropertyChanged("current_line");
-                    if (stopped)
-                    {
-                        break;
-                    }
-                }
-            })));
+                   WaitForNextInput(after - before);
+                   // check if after waiting
+                   this.currentLine = this.forward ? Math.Min(this.currentLine + 1, GetNumLines() - 1) : Math.Max(this.currentLine - 1, 0);
+                   if ((this.forward && this.currentLine == GetNumLines() - 1) || (!this.forward && this.currentLine == 0))
+                   {
+                       this.paused = true;
+                   }
+
+                   this.NotifyPropertyChanged("current_line");
+                   if (stopped)
+                   {
+                       break;
+                   }
+               }
+           })));
             t.Start();
         }
 
         public void Connect(string ip, int port)
         {
-            // this.myClient.connect(ip, port);
+            this.myClient.connect(ip, port);
             this.Start();
+            if (this.dataHandler != null)
+            {
+                this._dataDictionary = this.dataHandler.DataDictionary;
+            }
         }
 
         public void Disconnect()
@@ -198,15 +239,8 @@ namespace FlightGearTestExec
             return !(this.stopped);
         }
 
-        public SimulatorConf configuration()
-        {
-            return this.conf;
-        }
+        public SimulatorConf Configuration => this.conf;
 
-        public double GetSpeed()
-        {
-            return this.speed;
-        }
         public void SetSpeed(double value)
         {
             this.speed = Math.Round(value, 1);

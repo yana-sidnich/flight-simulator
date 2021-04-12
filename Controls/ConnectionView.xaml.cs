@@ -1,6 +1,7 @@
 ﻿using FlightGearTestExec.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,28 +20,27 @@ namespace FlightGearTestExec.Controls
     /// <summary>
     /// Interaction logic for connection.xaml
     /// </summary>
-    public partial class connection : UserControl
+    public partial class ConnectionView : UserControl
     {
-        private connectionViewModel connection_vm;
-        public connection()
+        private ConnectionViewModel _vm;
+        public ConnectionView()
         {
             InitializeComponent();
-            this.connection_vm = new connectionViewModel();
-            this.DataContext = connection_vm;
-
+            _vm = DataContext as ConnectionViewModel;
         }
 
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
-            //this.validatedAndParsePort()
+            // this.validatedAndParsePort();
             try
             {
-                this.connection_vm.connect(this.ipTextBox.Text, this.portTextBox.Text);
+                this._vm.connect(this.ipTextBox.Text, this.portTextBox.Text);
             }
-            catch (Exception)
+            catch (Exception er)
             {
+                Debug.Print(e);
                 ErrorMessageWindow errWindow = new ErrorMessageWindow();
                 Application.Current.MainWindow = errWindow;
                 errWindow.Show();
@@ -55,7 +55,7 @@ namespace FlightGearTestExec.Controls
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            this.connection_vm.executeSimulator(this.ipTextBox.Text, this.portTextBox.Text);
+            this._vm.executeSimulator(this.ipTextBox.Text, this.portTextBox.Text);
         }
     }
 }

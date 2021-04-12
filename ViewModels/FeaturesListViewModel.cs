@@ -15,10 +15,10 @@ namespace FlightGearTestExec.ViewModels
 {
     class FeaturesListViewModel : BaseViewModel
     {
-        private readonly FlightSimulator _model;
+        private readonly IFlightSimulator _model;
         public FeaturesListViewModel()
         {
-            _model = simulator as FlightSimulator;
+            _model = simulator;
             _model.PropertyChanged +=
                 delegate(Object sender, PropertyChangedEventArgs e)
                 {
@@ -28,7 +28,7 @@ namespace FlightGearTestExec.ViewModels
 
         public Dictionary<string, FlightDataContainer> getDictionary()
         {
-            return _model?.dataDictionary;
+            return _model?.DataDictionary;
         }
 
         public string VM_FeaturesList_SelectedString

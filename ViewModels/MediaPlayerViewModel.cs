@@ -14,44 +14,48 @@ namespace FlightGearTestExec.ViewModels
     class MediaPlayerViewModel : BaseViewModel
     {
         private int _maxLine;
+
+        private readonly IFlightSimulator model;
         public MediaPlayerViewModel()
         {
-            this.simulator.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            this.model = simulator;
+            this.model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("vm_media_player_" + e.PropertyName);
+                NotifyPropertyChanged("VM_MediaPlayer_" + e.PropertyName);
             };
             _maxLine = getTotalFrameNumber();
         }
 
-        public int vm_media_player_last_line
+        public int VM_MediaPlayer_last_line
         {
-            get { return _maxLine;
+            get { 
+                return _maxLine;
             }
         }
 
-        public int vm_media_player_current_line
+        public int VM_MediaPlayer_current_line
         {
             get {
                 Trace.WriteLine("get current line");
-                return simulator.GetCurrentLine();
+                return this.model.GetCurrentLine();
             }
             set { 
-                simulator.SetCurrentLine(value);
-                vm_media_player_PlayPercent = (int) value / _maxLine * 100;
+                this.model.SetCurrentLine(value);
+                VM_MediaPlayer_PlayPercent = (int) value / _maxLine * 100;
             }
         }
 
-        public double vm_media_player_speed
+        public double VM_MediaPlayer_speed
         {
             get
             {
-                return simulator.GetSpeed();
+                return this.model.Speed;
             }
             set { }
         }
 
         private int _playPercent;
-        public int vm_media_player_PlayPercent
+        public int VM_MediaPlayer_PlayPercent
         {
             get
             {
@@ -76,82 +80,78 @@ namespace FlightGearTestExec.ViewModels
                 Trace.WriteLine($"cannot update speed to {speed} - speed too high");
                 return;
             }
-                simulator.SetSpeed(speed);
+            this.model.SetSpeed(speed);
         }
         public void pause()
         {
-            simulator.pauseRun();
+            this.model.pauseRun();
         }
         public void play()
         {
-            simulator.SetSpeed(1.0f);
-            simulator.SetForward(true);
+            this.model.SetSpeed(1.0f);
+            this.model.SetForward(true);
 
-            simulator.unPauseRun();
+            this.model.unPauseRun();
         }
         public void stop()
         {
-            simulator.pauseRun();
-            simulator.SetCurrentLine(0);
+            this.model.pauseRun();
+            this.model.SetCurrentLine(0);
         }
         public void startOverLines()
         {
-            simulator.pauseRun();
-            simulator.SetCurrentLine(0);
+            this.model.pauseRun();
+            this.model.SetCurrentLine(0);
         }
         public void finishLines()
         {
-            simulator.pauseRun();
-            simulator.SetCurrentLine(getTotalFrameNumber() - 1);
+            this.model.pauseRun();
+            this.model.SetCurrentLine(getTotalFrameNumber() - 1);
         }
         public void moveToLine(int x)
         {
-            simulator.SetCurrentLine(x);
+            this.model.SetCurrentLine(x);
         }
         public void updatePlaySpeed(String s)
         {
             float f;
             if (float.TryParse(s, out f))
             {
-                simulator.SetSpeed(f);
+                this.model.SetSpeed(f);
             }
         }
 
         public void increaseSpeed()
         {
-            SetWithCheck(simulator.GetSpeed() + 0.1f);
+            SetWithCheck(this.model.Speed + 0.1f);
         }
         public void decreaseSpeed()
         {
-            SetWithCheck(simulator.GetSpeed() - 0.1f);
+            SetWithCheck(this.model.Speed - 0.1f);
         }
         public void forward()
         {
-            if (simulator.GetForward())
+            if (this.model.GetForward())
             {
-                SetWithCheck(simulator.GetSpeed() * 2);
+                SetWithCheck(this.model.Speed * 2);
             }
             else
             {
-                simulator.SetForward(true);
-                simulator.SetSpeed(2.0f);
+                this.model.SetForward(true);
+                this.model.SetSpeed(2.0f);
             }
         }
         public void rewind()
         {
-            if (!simulator.GetForward())
+            if (!this.model.GetForward())
             {
-                SetWithCheck(simulator.GetSpeed() * 2);
+                SetWithCheck(this.model.Speed * 2);
             }
             else
             {
-                simulator.SetForward(false);
-                simulator.SetSpeed(2.0f);
+                this.model.SetForward(false);
+                this.model.SetSpeed(2.0f);
             }
-        }
-        public double GetSpeed()
-        {
-            return simulator.GetSpeed();
         }
     }
 }
