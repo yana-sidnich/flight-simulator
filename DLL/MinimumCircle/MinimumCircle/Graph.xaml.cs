@@ -1,4 +1,4 @@
-﻿using LiveChartsCore;
+using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -248,9 +248,9 @@ namespace MinimumCircle
         public Dictionary<string, string> UpdateThreshold(float newThreshold)
         {
             graph.updateThreshold(newThreshold);
-            return getCorrelatedFeatures();
+            return GetCorrelatedFeatures();
         }
-        public Dictionary<string, string> getCorrelatedFeatures()
+        public Dictionary<string, string> GetCorrelatedFeatures()
         {
             Dictionary<string, string> cf = new Dictionary<string, string>();
             foreach (MinimumCircle_cf c in graph.detector.getNormalData())
