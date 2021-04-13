@@ -9,55 +9,50 @@ using System.Diagnostics;
 
 namespace FlightGearTestExec.ViewModels
 {
-    public class joystickViewModel : INotifyPropertyChanged
+    class JoystickViewModel : BaseViewModel
     {
-        private IFlightSimulator flightSimulatorModel;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public joystickViewModel(IFlightSimulator flightSimulatorModel)
+        private readonly IFlightSimulator model;
+        public JoystickViewModel()
         {
-            this.flightSimulatorModel = flightSimulatorModel;
-            this.flightSimulatorModel.PropertyChanged +=
+            this.model = simulator;
+            this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
-                    this.NotifyPropertyChanged("vm_joystick_" + e.PropertyName);
+                    this.NotifyPropertyChanged("VM_Joystick_" + e.PropertyName);
                 };
         }
 
+
+        public double VM_Joystick_throttle_1
+        {
+            get {
+                Trace.WriteLine($"throttle_1 val : {this.model.getRequetedProp("throttle_1")}"); 
+                return this.model.getRequetedProp("throttle_1"); }
+            set { }
+        }
+
+        public double VM_Joystick_rudder
+        {
+        get { return this.model.getRequetedProp("rudder"); }
+            set { }
+        }
+        public double VM_Joystick_elevator
+        {   
+            get {
+                return convert(this.model.getRequetedProp("elevator")); }
+            set { }
+        }
+        public double VM_Joystick_aileron
+        {
+            get { return convert(this.model.getRequetedProp("aileron")); }
+            set { }
+        }
+
+        //TODO CREATE CONVERTER IN VIEW
         private double convert(double d)
         {
             return 125 + 80 * d; 
         }
 
-        public double vm_joystick_throttle
-        {
-            get { return flightSimulatorModel.getRequetedProp("throttle"); }
-            set { }
-        }
-        public double vm_joystick_rudder
-        {
-        get { return flightSimulatorModel.getRequetedProp("rudder"); }
-            set { }
-        }
-        public double vm_joystick_elevator
-        {   
-            get {
-                Trace.WriteLine("worksssssssssssssssssssssssss  " + this.flightSimulatorModel.getRequetedProp("elevator"));
-                return convert(flightSimulatorModel.getRequetedProp("elevator")); }
-            set { }
-        }
-        public double vm_joystick_aileron
-        {
-            get { return convert(flightSimulatorModel.getRequetedProp("aileron")); }
-            set { }
-        }
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
     }
 }

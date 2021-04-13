@@ -10,23 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Threading;
-using FlightGearTestExec.ViewModels;
-using FlightGearTestExec.Views;
 
 namespace FlightGearTestExec
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ErrorMessageWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ErrorMessageWindow : Window
     {
-        public MainWindow()
+        public ErrorMessageWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var myWindow = Window.GetWindow(this);
+            myWindow.Close();
+
         }
     }
 }

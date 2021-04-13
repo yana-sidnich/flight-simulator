@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using FlightGearTestExec.Models;
 
 namespace FlightGearTestExec
 {
@@ -18,13 +19,21 @@ namespace FlightGearTestExec
 
         private List<string> attributes;
 
-        private Dictionary<string, List<float>> dataByColumn;
+        private Dictionary<string, List<float>> _dataByColumn;
+
+        private Dictionary<string, FlightDataContainer> _dataDictionary;
 
         private List<string> dataByRow;
 
+        public Dictionary<string, FlightDataContainer> DataDictionary
+        {
+            get { return _dataDictionary; }
+            set { }
+        }
+
         public Dictionary<string, List<float>> DataByColumn
         {
-            get { return dataByColumn; }
+            get { return _dataByColumn; }
             set { }
         }
 
@@ -34,14 +43,9 @@ namespace FlightGearTestExec
             set { }
         }
 
-
-
-
-
         public DataHandler(string csv, string xml)
 
         {
-
             this.pathCSV = csv;
 
             this.pathXML = xml;
@@ -50,7 +54,9 @@ namespace FlightGearTestExec
 
             attributes = new List<string>();
 
-            dataByColumn = new Dictionary<string, List<float>>();
+            _dataByColumn = new Dictionary<string, List<float>>();
+
+            _dataDictionary = new Dictionary<string, FlightDataContainer>();
 
             dataByRow = new List<string>();
 
@@ -58,6 +64,7 @@ namespace FlightGearTestExec
             Trace.Write(this.attributes);
 
             this.initData();
+
             this.createCSV();
 
         }
@@ -124,10 +131,15 @@ namespace FlightGearTestExec
             foreach (string att in attributes)
 
             {
-                if (!dataByColumn.ContainsKey(att))
+                if (!_dataByColumn.ContainsKey(att))
                 {
-                    dataByColumn.Add(att, new List<float>());
+                    _dataByColumn.Add(att, new List<float>());
                 }
+
+                if (!_dataDictionary.ContainsKey(att))
+                {
+                    _dataDictionary.Add(att, new FlightDataContainer());
+                }                
 
             }
 
@@ -146,10 +158,19 @@ namespace FlightGearTestExec
                 for (int i = 0; i < s_vals.Length; i++)
 
                 {
+                    // if first line contains column names - continue
+                    if (!float.TryParse(s_vals[i], out _))
+                        continue;
                     if (last_attr != attributes[i])
                     {
-                        dataByColumn[attributes[i]].Add(float.Parse(s_vals[i]));
+                        _dataByColumn[attributes[i]].Add(float.Parse(s_vals[i]));
                     }
+
+                    if (last_attr != attributes[i])
+                    {
+                        _dataDictionary[attributes[i]].addValue(float.Parse(s_vals[i]));
+                    }
+                                        
                     last_attr = attributes[i];
 
 

@@ -10,15 +10,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
+using static FlightGearTestExec.Models.FlightDataContainer;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using FlightGearTestExec.Models;
 
 namespace FlightGearTestExec.ViewModels
 {
-    public class TwoFeaturesGraphsViewModel : BaseViewModel
+    class TwoFeaturesGraphsViewModel : BaseViewModel
     {
         public class SeriesHolder
         {
@@ -34,6 +36,7 @@ namespace FlightGearTestExec.ViewModels
             {
                 SolidColorPaintTask separatorsBrush = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = 0.3f };
                 points = new ObservableCollection<ObservablePointF>();
+                points.Add(new ObservablePointF(-1, 0));
 
                 XAxes = new List<Axis>
                 {
@@ -51,6 +54,8 @@ namespace FlightGearTestExec.ViewModels
                         ShowSeparatorWedges = false,
                         SeparatorsBrush = separatorsBrush,
                         MinStep = 1,
+                        MinLimit = -5000,
+                        MaxLimit = 5000,
                     }
                 };
             }
@@ -58,53 +63,46 @@ namespace FlightGearTestExec.ViewModels
         }
 
 
-        public ObservableCollection<SeriesHolder> SeriesData
+        public ObservableCollection<SeriesHolder> SeriesData { get; set; } = new ObservableCollection<SeriesHolder>();
+
+        private readonly IFlightSimulator _model;
+
+        private const int STROKE_THICKNESS = 7;
+
+        private Visibility _isGraphVisible2 = Visibility.Visible;
+        public Visibility IsGraphVisible2
         {
-            get { return _seriesData; }
-            set { _seriesData = value; }
+            get => _isGraphVisible2;
+            set
+            {
+                if (value == _isGraphVisible2) return;
+                _isGraphVisible2 = value;
+                NotifyPropertyChanged("IsGraphVisible2");
+                NotifyPropertyChanged("IsErrorVisible2");
+            }
         }
-
-        private readonly FlightSimulator _model;
-
-        private const int STROKE_THICKNESS = 5;
 
         private Visibility _isGraphVisible = Visibility.Visible;
         public Visibility IsGraphVisible
         {
-            get
-            {
-                return _isGraphVisible;
-            }
+            get => _isGraphVisible;
             set
             {
-                if (value != _isGraphVisible)
-                {
-                    _isGraphVisible = value;
-                    NotifyPropertyChanged("IsGraphVisible");
-                    NotifyPropertyChanged("IsErrorVisible");
-                }
+                if (value == _isGraphVisible) return;
+                _isGraphVisible = value;
+                NotifyPropertyChanged("IsGraphVisible");
+                NotifyPropertyChanged("IsErrorVisible");
             }
         }
 
-        public Visibility IsErrorVisible
-        {
-            get
-            {
-                if (IsGraphVisible == Visibility.Hidden)
-                    return Visibility.Visible;
-                else
-                    return Visibility.Hidden;
-            }
-        }
+        public Visibility IsErrorVisible => IsGraphVisible == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
 
-
-        private ObservableCollection<SeriesHolder> _seriesData = new ObservableCollection<SeriesHolder>();
 
         const int GRAPHS_NUM = 2;
 
         public TwoFeaturesGraphsViewModel()
         {
-            _model = model as FlightSimulator;
+            _model = simulator;
             _model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
@@ -117,13 +115,13 @@ namespace FlightGearTestExec.ViewModels
         {
             for (int i = 0; i < GRAPHS_NUM; i++)
             {
-                _seriesData.Add(new SeriesHolder());
+                SeriesData.Add(new SeriesHolder());
 
-                _seriesData[i].series = new ObservableCollection<ISeries>
+                SeriesData[i].series = new ObservableCollection<ISeries>
                 {
                     new LineSeries<ObservablePointF>
                     {
-                        Values = _seriesData[i].points,
+                        Values = SeriesData[i].points,
                         Fill = null,
                         GeometryFill = null,
                         GeometrySize = 0,
@@ -148,9 +146,11 @@ namespace FlightGearTestExec.ViewModels
                     index = 0;
                     if (string.IsNullOrEmpty(VM_TwoFeaturesGraphs_SelectedString))
                     {
-                        _seriesData[index].points.Clear();
+                        SeriesData[index].points.Clear();
                         return;
                     }
+
+                    // IsGraphVisible2 = Visibility.Hidden;
                     data = getFeatureData(VM_TwoFeaturesGraphs_SelectedString);
                     break;
                 case "VM_TwoFeaturesGraphs_CorrelatedString":
@@ -166,43 +166,64 @@ namespace FlightGearTestExec.ViewModels
                 default:
                     return;
             }
-
-            int OLD_SIZE = _seriesData[index].points.Count;;
-            int NEW_SIZE = data.values.Length;
+            // int OLD_SIZE = SeriesData[index].points.Count;
+            // int NEW_SIZE = data.values.Count;
+            
+            // // if new points size is bigger than current - clean all current points
+            //     while (OLD_SIZE > 0)
+            //     {
+            //         SeriesData[index].points.RemoveAt(0);
+            //         OLD_SIZE--;
+            //     }
+            //
+            // float y;
+            // int x = 0;
+            // // add additional points
+            // for (; x < NEW_SIZE; x++)
+            // {
+            //     y = data.values[x];
+            //     SeriesData[index].points.Add(new ObservablePointF(x, y));
+            // }
+            int OLD_SIZE = SeriesData[index].points.Count;
+            int NEW_SIZE = data.values.Count;
             
             // if new points size is bigger than current - clean all current points
-            if (OLD_SIZE > NEW_SIZE)
+            if (OLD_SIZE > NEW_SIZE && OLD_SIZE > 0 && NEW_SIZE > 0)
             {
-                _seriesData[index].points.Clear();
-                OLD_SIZE = 0;
+                int i = OLD_SIZE - NEW_SIZE;
+                while (i > 0)
+                {
+                    SeriesData[index].points.RemoveAt(0);
+                    i--;
+                }
             }
-
+            
             float y;
             int x = 0;
             // first update old points values to new
-            for (x = 0; x < OLD_SIZE; x++)
+            for (x = 0; x < OLD_SIZE && x < NEW_SIZE; x++)
             {
-                y = (float)data.values[x];
-                _seriesData[index].points[x].Y = y;
+                y = data.values[x];
+                SeriesData[index].points[x].Y = y;
             }
             // add additional points
             for (; x < NEW_SIZE; x++)
             {
-                y = (float)data.values[x];
-                _seriesData[index].points.Add(new ObservablePointF(x, y));
+                y = data.values[x];
+                SeriesData[index].points.Add(new ObservablePointF(x, y));
             }
-
             // set y axis range a bit bigger than min and max values
-            _seriesData[index].YAxes[0].MinLimit = data.minValue * 1.1;
-            _seriesData[index].YAxes[0].MaxLimit = data.maxValue * 1.1;
+            SeriesData[index].YAxes[0].MinLimit = Math.Min(data.minValue * 1.1, -5);
+            SeriesData[index].YAxes[0].MaxLimit = Math.Max(data.maxValue * 1.1, 5);
+            // IsGraphVisible2 = Visibility.Visible;
         }
 
         public FlightDataContainer getFeatureData(string name)
         {
             if (string.IsNullOrEmpty(name)) return null;
-            if (_model.dataDictionary.ContainsKey(name))
+            if (_model.DataDictionary.ContainsKey(name))
             {
-                return _model.dataDictionary[name];
+                return _model.DataDictionary[name];
             }
 
             return null;
@@ -212,6 +233,6 @@ namespace FlightGearTestExec.ViewModels
 
         public string VM_TwoFeaturesGraphs_CorrelatedString => _model.CorrelatedString;
 
-        public int VM_TwoFeaturesGraphs_CurrentLineNumber => _model.CurrentLineNumber;
+        public int VM_TwoFeaturesGraphs_CurrentLineNumber => _model.GetCurrentLine();
     }
 }

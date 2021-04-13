@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,15 +23,17 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WPF;
-using static FlightGearTestExec.FlightDataContainer;
+using static FlightGearTestExec.Models.FlightDataContainer;
 
 
 namespace FlightGearTestExec.Views
 {
-    public partial class TwoFeaturesGraphView : UserControl
+    public partial class TwoFeaturesGraphsView : UserControl
     {
         public SolidColorPaintTask strokeColor;
+
         private ObservableCollection<ObservablePointF> points;
+
         public List<Axis> axesList;
 
         public List<Axis> XAxes { get; set; }
@@ -54,18 +57,15 @@ namespace FlightGearTestExec.Views
 
         private TimeSpan originalAnimation_1;
 
-        public TwoFeaturesGraphView()
+        public TwoFeaturesGraphsView()
         {
             InitializeComponent();
             fastAnimationSpeed = TimeSpan.FromMilliseconds(10);
             vm = this.DataContext as TwoFeaturesGraphsViewModel;
             char_0 = graph_0 as CartesianChart;
             char_1 = graph_1 as CartesianChart;
-            originalAnimation_0 = char_0.AnimationsSpeed;
-            originalAnimation_1 = char_1.AnimationsSpeed;
             x_axis_0 = (char_0?.XAxes as List<Axis>)?[0];
             x_axis_1 = (char_1?.XAxes as List<Axis>)?[0];
-
             vm.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
@@ -99,33 +99,33 @@ namespace FlightGearTestExec.Views
                 };
 
             // FOR TESTING
-            Task.Run(() =>
-            {
-                int lineNumber = 0;
-                while (true)
-                {
-                    Thread.Sleep(50);
-                    // if (Application.Current != null)
-                    // {
-                    //     Application.Current.Dispatcher.Invoke(() =>
-                    //     {
-                    //         BaseViewModel.modelllllllll.CurrentLineNumber++; 
-                    //     });
-                    // }   
-                    if (Application.Current != null)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            if (x_axis_0 != null)
-                                x_axis_0.MaxLimit = lineNumber;
-                            if (x_axis_1 != null)
-                                x_axis_1.MaxLimit = lineNumber;
-                            lineNumber++;
-                        });
-                    }
+            // Task.Run(() =>
+            // {
+            //     int lineNumber = 0;
+            //     while (true)
+            //     {
+            //         Thread.Sleep(50);
+            //         // if (Application.Current != null)
+            //         // {
+            //         //     Application.Current.Dispatcher.Invoke(() =>
+            //         //     {
+            //         //         BaseViewModel.modelllllllll.CurrentLineNumber++; 
+            //         //     });
+            //         // }   
+            //         if (Application.Current != null)
+            //         {
+            //             Application.Current.Dispatcher.Invoke(() =>
+            //             {
+            //                 if (x_axis_0 != null)
+            //                     x_axis_0.MaxLimit = lineNumber;
+            //                 if (x_axis_1 != null)
+            //                     x_axis_1.MaxLimit = lineNumber;
+            //                 lineNumber++;
+            //             });
+            //         }
 
-                }
-            });
+            //     }
+            // });
         }
     }
 }

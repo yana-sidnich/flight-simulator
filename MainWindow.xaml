@@ -6,32 +6,55 @@
         xmlns:local="clr-namespace:FlightGearTestExec"
         xmlns:controls="clr-namespace:FlightGearTestExec.Controls"
         xmlns:views="clr-namespace:FlightGearTestExec.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" 
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="1000" Width="1600">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+    <materialDesign:Card>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" CanContentScroll="True" DockPanel.Dock="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+                    <StackPanel>
+                    <Viewbox Height="315"
+                         Name="viewbox1"
+                        Stretch="Fill" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
+                        <controls:JoystickView x:Name="joystick"/>
+                    </Viewbox>
 
+                        <views:LiveMapsView/>
+                    </StackPanel>
 
-        <!-- <controls:joystick x:Name="joystick" HorizontalAlignment="Center" -->
-        <!--                    VerticalAlignment="Center"     -->
-        <!--                    Grid.Row="0" Grid.Column="0"/> -->
+                    <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="3" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
 
-        <controls:connection x:Name="connection" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"/>
+                </Grid>
+            </ScrollViewer>
 
-        <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
+            <controls:MediaPlayerView Grid.Row="1" x:Name="MediaPlayer" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+        </Grid>
+    </materialDesign:Card>
 
-        <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.RowSpan="2"/>
-    </Grid>
 
 </Window>

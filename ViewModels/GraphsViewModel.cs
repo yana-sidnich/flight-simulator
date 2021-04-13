@@ -13,12 +13,12 @@ using LiveChartsCore.SkiaSharpView.Painting;
 
 namespace FlightGearTestExec.ViewModels
 {
-    public class GraphsViewModel : BaseViewModel
+    class GraphsViewModel : BaseViewModel
     {
-        private readonly FlightSimulator _model;
+        private readonly IFlightSimulator _model;
         public GraphsViewModel()
         {
-            _model = model as FlightSimulator;
+            _model = simulator;
             _model.PropertyChanged +=
                 delegate(Object sender, PropertyChangedEventArgs e)
                 {
