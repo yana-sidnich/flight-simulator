@@ -31,7 +31,7 @@ namespace FlightGearTestExec.Views
             vm.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
-                    if (e.PropertyName == "VM_FeatureList_CorrelatedFeatures")
+                    if (e.PropertyName == "VM_FeaturesList_CorrelatedFeatures")
                     {
                         UpdateListItems();
                     }
