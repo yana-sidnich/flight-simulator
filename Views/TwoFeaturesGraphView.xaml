@@ -27,8 +27,8 @@
             <UniformGrid.Resources>
                 <Style TargetType="{x:Type lvc:CartesianChart}">
                     <Setter Property="ZoomMode" Value="None"/>
-                    <Setter Property="LegendPosition" Value="Hidden"/>
                     <Setter Property="TooltipPosition" Value="Hidden"/>
+                    <Setter Property="LegendPosition" Value="Hidden"/>
                 </Style>
                 <!-- <Setter Property="Width" Value="600"/> -->
                 <!-- <Setter Property="Height" Value="600"/> -->
@@ -55,6 +55,7 @@
                        Text="{Binding VM_TwoFeaturesGraphs_SelectedString}"
                        Padding="10, 10, 0, 5" Foreground="White" FontSize="18"/>
                 <lvc:CartesianChart x:Name="graph_0" Grid.Row="3"
+                                    Visibility="{Binding IsGraphVisible2}"
                                     Series="{Binding SeriesData[0].series}"
                                     XAxes="{Binding SeriesData[0].XAxes}"
                                     YAxes="{Binding SeriesData[0].YAxes}"
@@ -85,7 +86,8 @@
                 <TextBlock Grid.Row="0" TextAlignment="Center"  Visibility="{Binding IsGraphVisible}"
                        Text="{Binding VM_TwoFeaturesGraphs_CorrelatedString}"
                        Padding="10, 10, 0, 5" Foreground="White" FontSize="18"/>
-                <lvc:CartesianChart x:Name="graph_1" Grid.Row="3"  Visibility="{Binding IsGraphVisible}"
+                <lvc:CartesianChart x:Name="graph_1" Grid.Row="3"
+                                    Visibility="{Binding IsGraphVisible}"
                                     Series="{Binding SeriesData[1].series}"
                                     XAxes="{Binding SeriesData[1].XAxes}"
                                     YAxes="{Binding SeriesData[1].YAxes}"

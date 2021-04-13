@@ -77,8 +77,6 @@ namespace FlightGearTestExec
             }
             catch (Exception e)
             {
-                Trace.WriteLine(e.ToString());
-                Trace.WriteLine("Can't send Data");
             }
         }
 

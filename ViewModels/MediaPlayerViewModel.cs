@@ -33,7 +33,7 @@ namespace FlightGearTestExec.ViewModels
             }
         }
 
-        public int VM_MediaPlayer_current_line
+        public int VM_MediaPlayer_CurrentLineNumber
         {
             get {
                 Trace.WriteLine("get current line");

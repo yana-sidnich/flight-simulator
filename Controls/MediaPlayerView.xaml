@@ -63,13 +63,13 @@
                     <Border Grid.Column="0" HorizontalAlignment="Left">
                         <Label Width="50"
                                x:Name="currentFrameLabel"
-                               Content="{Binding VM_MediaPlayer_current_line, Converter={StaticResource timeConverter }}"/>
+                               Content="{Binding VM_MediaPlayer_CurrentLineNumber, Converter={StaticResource timeConverter }}"/>
                     </Border>
 
                     <Border Grid.Column="1" HorizontalAlignment="Stretch">
                         <Slider x:Name="currentFrameSlider"
                             TickPlacement="BottomRight" IsSnapToTickEnabled="True" TickFrequency="10" Height="Auto" VerticalAlignment="Center"
-                            Value="{Binding VM_MediaPlayer_current_line}" IsMoveToPointEnabled="True"/>
+                            Value="{Binding VM_MediaPlayer_CurrentLineNumber}" IsMoveToPointEnabled="True"/>
                     </Border>
 
                     <Border Grid.Column="2" Width="50" HorizontalAlignment="Right">

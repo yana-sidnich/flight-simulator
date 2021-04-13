@@ -108,7 +108,7 @@
                     </Grid.RowDefinitions>
 
                     <Border x:Name="Border3" Grid.Row="0" Grid.RowSpan="4" CornerRadius="15" Background="White" />
-                    <Border Grid.Row="0" Grid.RowSpan="4" Background="#c43e00" av:IsHidden="True" Visibility="{Binding IsGraphVisible}"/>
+                    <Border Grid.Row="0" Grid.RowSpan="4" Background="#280680" av:IsHidden="True" Visibility="{Binding IsGraphVisible}"/>
                     <Border Grid.Row="0" Grid.RowSpan="4" Background="#C62828" av:IsHidden="True" Visibility="{Binding IsErrorVisible}"/>
 
                     <TextBlock Grid.Row="2" Grid.RowSpan="4" TextAlignment="Center" VerticalAlignment="Center"

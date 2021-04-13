@@ -31,6 +31,8 @@ namespace FlightGearTestExec.ViewModels
             return _model?.DataDictionary;
         }
 
+        public Dictionary<string, string> VM_FeatureList_CorrelatedFeatures => _model.CorrelatedFeatures;
+
         public string VM_FeaturesList_SelectedString
         {
             get { return _model.SelectedString; }

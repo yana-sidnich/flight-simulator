@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
+using System.Windows.Threading;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
@@ -33,6 +34,8 @@ namespace FlightGearTestExec.ViewModels
         private string _selectedDll = "";
 
         private Visibility _isGraphVisible = Visibility.Visible;
+
+        private bool isDllRunning = false;
 
         public Visibility IsGraphVisible
         {
@@ -92,10 +95,16 @@ namespace FlightGearTestExec.ViewModels
                 throw new Exception("Class UCExported Was Not Implemented In DLL");
 
 
-            string test = _model.Configuration.FlightTestCSVPath;
-            string train = _model.Configuration.FlightTrainCSVPath;
+            // string test = _model.Configuration.FlightTestCSVPath;
+            // string train = _model.Configuration.FlightTrainCSVPath;
+            string test = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\reg_flight_col.csv";
+            string train = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\anomaly_flight_col.csv";
             dllGraphOutput = _dllInterface.CreateUC(test, train);
-            GetCorrelatedFeatures();
+            if (dllGraphOutput != null)
+            {
+                isDllRunning = true;
+                GetCorrelatedFeatures();
+            }
         }
 
         public void UpdatePoints(string name)
@@ -110,7 +119,12 @@ namespace FlightGearTestExec.ViewModels
                     {
                         return;
                     }
-                    _dllInterface.UpdateChosenFeature(VM_DllGraph_SelectedString);
+
+                    if (isDllRunning)
+                    {
+                        _dllInterface.UpdateChosenFeature(VM_DllGraph_SelectedString);
+                    }
+
                     break;
                 case "VM_DllGraph_CorrelatedString":
                     if (string.IsNullOrEmpty(VM_DllGraph_CorrelatedString))
@@ -127,27 +141,43 @@ namespace FlightGearTestExec.ViewModels
 
         public void UpdateThreshold()
         {
-            Dictionary<String, String> correlatedFeatures = _dllInterface.UpdateThreshold((float)_threshold);
-            _model.CorrelatedFeatures = correlatedFeatures;
+            if (isDllRunning)
+            {
+                isDllRunning = false;
+                Dictionary<String, String> correlatedFeatures = _dllInterface.UpdateThreshold((float)_threshold);
+                _model.CorrelatedFeatures = correlatedFeatures;
+                isDllRunning = true;
+            }
         }
 
         public void GetCorrelatedFeatures()
         {
-            Dictionary<String, String> correlatedFeatures = _dllInterface.GetCorrelatedFeatures();
-            _model.CorrelatedFeatures = correlatedFeatures;
+            if (isDllRunning)
+            {
+                Dictionary<String, String> correlatedFeatures = _dllInterface.GetCorrelatedFeatures();
+                _model.CorrelatedFeatures = correlatedFeatures;
+            }
         }
 
         public void UpdateFrame(long timeStep)
         {
-            _dllInterface.UpdateFrame(timeStep);
+            if (isDllRunning)
+            {
+                if (Application.Current != null)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        _dllInterface.UpdateFrame(timeStep);
+                    });
+                }
+            }
         }
 
-        private static string path = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins";
         public List<ComboBoxItem> VM_DllGraph_DllNames
         {
             get
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(path);
+                DirectoryInfo dirInfo = new DirectoryInfo(_model.Configuration.AnomalyAlgorithmDLL);
                 List<ComboBoxItem> dllFiles = new List<ComboBoxItem>();
                 FileInfo[] info = dirInfo.GetFiles("*.dll");
                 foreach (FileInfo f in info)
@@ -185,8 +215,9 @@ namespace FlightGearTestExec.ViewModels
             {
                 ComboBoxItem item = value as ComboBoxItem;
                 _selectedDll = item?.Path;
+                isDllRunning = false;
                 loadDll();
-                UpdateThreshold();
+                NotifyPropertyChanged("VM_DllGraph_SelectedDll");
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -159,7 +159,7 @@ namespace FlightGearTestExec
         {
             // Trace.Write(this.isConnected());
             this.dataHandler = new DataHandler(this.conf.FlightTestCSVPath, this.conf.FlightXMLPath);
-            Trace.Write(this.dataHandler.DataByRow.Count);
+            // Trace.Write(this.dataHandler.DataByRow.Count);
             Thread t = new Thread(new ThreadStart((delegate ()
            {
                this.stopped = false;
@@ -199,7 +199,7 @@ namespace FlightGearTestExec
                        this.paused = true;
                    }
 
-                   this.NotifyPropertyChanged("current_line");
+                   this.NotifyPropertyChanged("CurrentLineNumber");
                    if (stopped)
                    {
                        break;
@@ -212,12 +212,16 @@ namespace FlightGearTestExec
         public void Connect(string ip, int port)
         {
             this.myClient.connect(ip, port);
+        }
+
+        public void StartAfterConnect()
+        {
             this.Start();
             if (this.dataHandler != null)
             {
                 this._dataDictionary = this.dataHandler.DataDictionary;
             }
-        }
+        }        
 
         public void Disconnect()
         {
@@ -264,8 +268,7 @@ namespace FlightGearTestExec
         }
         public int GetNumLines()
         {
-            return 2314;
-            return this.dataHandler.DataByColumn.First().Value.Count; ;
+            return this.dataHandler.DataByColumn.First().Value.Count;
         }
 
         public void pauseRun()

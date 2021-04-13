@@ -28,6 +28,11 @@ namespace FlightGearTestExec.ViewModels
             this.model.Connect(ip, Int32.Parse(port));
         }
 
+        public void Start()
+        {
+            this.model.StartAfterConnect();
+        }
+
         public void executeSimulator(string ip, string port)
         {
             this.model.executeSimulator(ip, port);

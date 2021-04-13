@@ -33,7 +33,6 @@ namespace FlightGearTestExec.Controls
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
-            // this.validatedAndParsePort();
             try
             {
                 this._vm.connect(this.ipTextBox.Text, this.portTextBox.Text);
@@ -45,6 +44,7 @@ namespace FlightGearTestExec.Controls
                 errWindow.Show();
                 return;
             }
+            this._vm.Start();
             MainWindow mainWindow = new MainWindow();
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();

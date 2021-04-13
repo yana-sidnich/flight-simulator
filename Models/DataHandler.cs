@@ -63,6 +63,7 @@ namespace FlightGearTestExec
             Trace.Write(this.attributes);
 
             this.initData();
+
             this.createCSV();
 
         }

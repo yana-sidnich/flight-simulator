@@ -36,7 +36,7 @@ namespace FlightGearTestExec.Views
         {
             InitializeComponent();
             vm = this.DataContext as DllGraphViewModel;
-        
+
             vm.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
@@ -51,13 +51,16 @@ namespace FlightGearTestExec.Views
                     {
                         int lineNumber = vm.VM_DllGraph_CurrentLineNumber;
                         vm.UpdateFrame(lineNumber);
-
+                    }
+                    else if (name == "VM_DllGraph_SelectedDll")
+                    {
+                        dllGraphDock.Children?.Clear();
+                        dllGraphDock.Children.Add(vm.dllGraphOutput);
                     }
                 };
 
             // set default value
             DllComboBox.SelectedIndex = 0;
-            // dllGraphDock.Children.Add(vm.dllGraphOutput);
         }
 
         public void doneDraggingThreshold(object sender, RoutedEventArgs e)

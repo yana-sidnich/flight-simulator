@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +24,10 @@ namespace FlightGearTestExec.ViewModels
 
             //set default values:
             VM_FileExplorer_SimulatorPath = "C:\\Program Files\\FlightGear 2019.1.2";
+            // !!!!!!!!!!!!!!!!!!!!!!!!! delete
+            VM_FileExplorer_FlightTrainCSVPath = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\reg_flight.csv";
+            VM_FileExplorer_FlightTestCSVPath =  "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\anomaly_flight.csv";
+            VM_FileExplorer_AnomalyAlgorithmDLL = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\";
         }
         public string VM_FileExplorer_FlightTrainCSVPath
         {

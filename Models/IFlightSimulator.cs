@@ -17,6 +17,8 @@ namespace FlightGearTestExec
 
         public void Start();
 
+        public void StartAfterConnect();
+
         public void Stop();
 
         public bool isRunning();

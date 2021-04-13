@@ -34,6 +34,7 @@ namespace FlightGearTestExec.ViewModels
             {
                 SolidColorPaintTask separatorsBrush = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = 0.3f };
                 points = new ObservableCollection<ObservablePointF>();
+                points.Add(new ObservablePointF(-1, 0));
 
                 XAxes = new List<Axis>
                 {
@@ -51,6 +52,8 @@ namespace FlightGearTestExec.ViewModels
                         ShowSeparatorWedges = false,
                         SeparatorsBrush = separatorsBrush,
                         MinStep = 1,
+                        MinLimit = -5000,
+                        MaxLimit = 5000,
                     }
                 };
             }
@@ -62,7 +65,20 @@ namespace FlightGearTestExec.ViewModels
 
         private readonly IFlightSimulator _model;
 
-        private const int STROKE_THICKNESS = 5;
+        private const int STROKE_THICKNESS = 7;
+
+        private Visibility _isGraphVisible2 = Visibility.Visible;
+        public Visibility IsGraphVisible2
+        {
+            get => _isGraphVisible2;
+            set
+            {
+                if (value == _isGraphVisible2) return;
+                _isGraphVisible2 = value;
+                NotifyPropertyChanged("IsGraphVisible2");
+                NotifyPropertyChanged("IsErrorVisible2");
+            }
+        }
 
         private Visibility _isGraphVisible = Visibility.Visible;
         public Visibility IsGraphVisible
@@ -131,6 +147,8 @@ namespace FlightGearTestExec.ViewModels
                         SeriesData[index].points.Clear();
                         return;
                     }
+
+                    // IsGraphVisible2 = Visibility.Hidden;
                     data = getFeatureData(VM_TwoFeaturesGraphs_SelectedString);
                     break;
                 case "VM_TwoFeaturesGraphs_CorrelatedString":
@@ -146,21 +164,42 @@ namespace FlightGearTestExec.ViewModels
                 default:
                     return;
             }
-
+            // int OLD_SIZE = SeriesData[index].points.Count;
+            // int NEW_SIZE = data.values.Count;
+            
+            // // if new points size is bigger than current - clean all current points
+            //     while (OLD_SIZE > 0)
+            //     {
+            //         SeriesData[index].points.RemoveAt(0);
+            //         OLD_SIZE--;
+            //     }
+            //
+            // float y;
+            // int x = 0;
+            // // add additional points
+            // for (; x < NEW_SIZE; x++)
+            // {
+            //     y = data.values[x];
+            //     SeriesData[index].points.Add(new ObservablePointF(x, y));
+            // }
             int OLD_SIZE = SeriesData[index].points.Count;
             int NEW_SIZE = data.values.Count;
             
             // if new points size is bigger than current - clean all current points
-            if (OLD_SIZE > NEW_SIZE)
+            if (OLD_SIZE > NEW_SIZE && OLD_SIZE > 0 && NEW_SIZE > 0)
             {
-                SeriesData[index].points.Clear();
-                OLD_SIZE = 0;
+                int i = OLD_SIZE - NEW_SIZE;
+                while (i > 0)
+                {
+                    SeriesData[index].points.RemoveAt(0);
+                    i--;
+                }
             }
-
+            
             float y;
             int x = 0;
             // first update old points values to new
-            for (x = 0; x < OLD_SIZE; x++)
+            for (x = 0; x < OLD_SIZE && x < NEW_SIZE; x++)
             {
                 y = data.values[x];
                 SeriesData[index].points[x].Y = y;
@@ -171,10 +210,10 @@ namespace FlightGearTestExec.ViewModels
                 y = data.values[x];
                 SeriesData[index].points.Add(new ObservablePointF(x, y));
             }
-
             // set y axis range a bit bigger than min and max values
-            SeriesData[index].YAxes[0].MinLimit = data.minValue * 1.1;
-            SeriesData[index].YAxes[0].MaxLimit = data.maxValue * 1.1;
+            SeriesData[index].YAxes[0].MinLimit = Math.Min(data.minValue * 1.1, -5);
+            SeriesData[index].YAxes[0].MaxLimit = Math.Max(data.maxValue * 1.1, 5);
+            // IsGraphVisible2 = Visibility.Visible;
         }
 
         public FlightDataContainer getFeatureData(string name)

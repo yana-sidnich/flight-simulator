@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightGearTestExec"
         mc:Ignorable="d"
-        Title="ErrorMessageWindow" Height="140" Width="220">
+        Title="ErrorMessageWindow" Height="250" Width="400">
     <Grid>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="88,60,0,0" VerticalAlignment="Top" Height="21" Width="36" Click="Button_Click"/>
-        <TextBlock TextAlignment="Center" Margin="2,6,-2,31">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock TextAlignment="Center" Grid.Row="0" FontSize="17">
             Connection Failed!<LineBreak/>
             Please Verify your IP and Port number<LineBreak/> 
             and verify that FlightGear is running<LineBreak/>
         </TextBlock>
+        <Button Content="OK" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="Auto" Click="Button_Click"/>
     </Grid>
 </Window>
