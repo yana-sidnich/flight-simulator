@@ -8,10 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LiveChartsCore" Version="1.0.3" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="1.0.3" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="1.0.3" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="LiveChartsCore" Version="1.0.4" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="1.0.4" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="1.0.4" />
   </ItemGroup>
 
 </Project>
