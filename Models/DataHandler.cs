@@ -156,6 +156,9 @@ namespace FlightGearTestExec
                 for (int i = 0; i < s_vals.Length; i++)
 
                 {
+                    // if first line contains column names - continue
+                    if (!float.TryParse(s_vals[i], out _))
+                        continue;
                     if (last_attr != attributes[i])
                     {
                         _dataByColumn[attributes[i]].Add(float.Parse(s_vals[i]));

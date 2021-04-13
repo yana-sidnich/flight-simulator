@@ -68,10 +68,18 @@ namespace FlightGearTestExec
 
         public void send(byte[] data)
         {
+            try
+            {
             NetworkStream sendStream = this.myClient.GetStream();
             sendStream.Write(data);
             sendStream.Flush();
             Trace.WriteLine("sending");
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.ToString());
+                Trace.WriteLine("Can't send Data");
+            }
         }
 
         void ITcpClient.flushStream()

@@ -1,4 +1,4 @@
-﻿using FlightGearTestExec.ViewModels;
+using FlightGearTestExec.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,7 +40,6 @@ namespace FlightGearTestExec.Controls
             }
             catch (Exception er)
             {
-                Debug.Print(e);
                 ErrorMessageWindow errWindow = new ErrorMessageWindow();
                 Application.Current.MainWindow = errWindow;
                 errWindow.Show();
