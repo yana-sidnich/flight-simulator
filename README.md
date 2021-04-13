@@ -11,7 +11,7 @@ It uses csv file to register a proper flight parameters, and the purpose is to i
 
 
 
-[alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/entireThing.png)
+![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/entireThing.png)
 
 
 
@@ -41,7 +41,7 @@ Once that is done, open the directory of the extraction, open the folder and the
 
 
 
-[alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths.PNG)
+![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths.PNG)
 
 
 #### Path selection
@@ -55,29 +55,29 @@ In the next window we will see the app has several requests for paths:
 
 #### IP and port selection
 
-[alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%94%D7%92%D7%93%D7%A8%D7%AA%20IP%20%D7%95-Port.png)
+![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%94%D7%92%D7%93%D7%A8%D7%AA%20IP%20%D7%95-Port.png)
 
 After that the user may be able to change to a different IP address and port (**optional**), but there's the default settings of local host IP address and FlightGear's port already selected.
 
 The user **must** press 'Launch Flight Gear' and wait for it to finish loading in order for the Simulator Controller to open up. if not, the user will be notified the connection failed.
 
-[alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%9C%D7%97%D7%99%D7%A6%D7%94%20%D7%A2%D7%9C%20launch%20flightgear.png)
+![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%9C%D7%97%D7%99%D7%A6%D7%94%20%D7%A2%D7%9C%20launch%20flightgear.png)
 
 Only When FlightGear's Window completed it's loading screen, the user may press 'Connect to Simulator Conntroller'.
 
-[alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%9C%D7%97%D7%99%D7%A6%D7%94%20%D7%A2%D7%9C%20connect%20to%20simulator.png)
+![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%9C%D7%97%D7%99%D7%A6%D7%94%20%D7%A2%D7%9C%20connect%20to%20simulator.png)
 
 After the Simulator Controller opened, the user may start by changing the speed, or the time requested to be queried, or just hold until the anomaly come up on screen as a red-dot on the correlation graph.
 
  - **Media Player**
  
- [alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/MediaPlayer%20in%20MainWindow.PNG)
+ ![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/MediaPlayer%20in%20MainWindow.PNG)
  
  The user can use the multimedia buttons to control or target a specific frame in the flight, or speed things up, or even start playing backwards.
  
  - **Steers, rudder and throttle**
  
- [alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/Joystick%20in%20mainWindow.PNG)
+ ![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/Joystick%20in%20mainWindow.PNG)
  
  The user can be notified with the steering joystick's direction in the current time of flight, and also the rudder and throttle values.
  
