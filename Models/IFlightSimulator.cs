@@ -36,7 +36,6 @@ namespace FlightGearTestExec
 
         public void pauseRun();
         public void unPauseRun();
-        public float DefaultTicksPerSec();
 
         // PROPERTIES
 

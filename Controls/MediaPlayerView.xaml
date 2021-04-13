@@ -75,7 +75,7 @@
                     <Border Grid.Column="2" Width="50" HorizontalAlignment="Right">
                         <Label Width="50"
                            x:Name="lastFrameLabel"
-                           Content="{Binding VM_MediaPlayer_last_line, Converter={StaticResource timeConverter }}"/>
+                           Content="{Binding VM_MediaPlayer_last_line, Converter={StaticResource timeConverter}}"/>
                     </Border>
 
                 </Grid>
@@ -119,8 +119,7 @@
                     Click="playButton_Click"
                     Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
                     materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                    materialDesign:ButtonProgressAssist.Value="{Binding VM_MediaPlayer_PlayPercent}"
-            >
+                    materialDesign:ButtonProgressAssist.Value="{Binding VM_MediaPlayer_PlayPercent}">
                     <materialDesign:PackIcon
                     Kind="PlayCircle"
                     Height="30"

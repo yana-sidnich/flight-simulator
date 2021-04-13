@@ -73,32 +73,25 @@ namespace FlightGearTestExec.Controls
 
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
-            vm.increaseSpeed();
-
+            vm.updateSpeed(0.1f);
         }
 
         private void PlusTimesFive_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                vm.increaseSpeed();
-            }            
+                vm.updateSpeed(0.5f);
+           
 
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
-            vm.decreaseSpeed();
+            vm.updateSpeed(-0.1f);
 
         }
 
         private void MinusTimesFive_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                vm.decreaseSpeed();
-            }
-
+                vm.updateSpeed(0.5f);
         }
     }
 

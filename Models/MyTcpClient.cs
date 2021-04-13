@@ -73,7 +73,6 @@ namespace FlightGearTestExec
             NetworkStream sendStream = this.myClient.GetStream();
             sendStream.Write(data);
             sendStream.Flush();
-            Trace.WriteLine("sending");
             }
             catch (Exception e)
             {

@@ -14,7 +14,9 @@ namespace FlightGearTestExec
 {
     class FlightSimulator : IFlightSimulator
     {
-        private const int DEFAULT_MILLIS_PER_TICK = 100;
+        // we set 10 hz play rate
+        private const float DEFAULT_SLEEP_TIME = 100.0f;
+        private int sleepTime = (int) DEFAULT_SLEEP_TIME;
 
         private ITcpClient myClient;
         Process simulatorExec;
@@ -113,15 +115,6 @@ namespace FlightGearTestExec
             }
         }
 
-        private void notifyAll()
-        {
-            foreach (string prop in this.dataHandler.DataByColumn.Keys)
-            {
-                this.NotifyPropertyChanged(prop);
-            }
-
-        }
-
         public double getRequetedProp(string propName)
         {
             if (this.dataHandler != null)
@@ -131,18 +124,6 @@ namespace FlightGearTestExec
             return 0.0;
         }
 
-        private void WaitForNextInput(int timeDiff = 0)
-        {
-            // in correct the time taken to notify all changes, and wait only differnce needed.
-            int sleep = (int)(DEFAULT_MILLIS_PER_TICK / this.speed);
-            Trace.WriteLine($"speed: {this.speed}");
-            if (timeDiff < sleep)
-            {
-                Trace.WriteLine($"sleeping: {sleep - timeDiff}");
-
-                Thread.Sleep(sleep - timeDiff);
-            }
-        }
         public void executeSimulator(string ip, string port)
         {
             ProcessStartInfo info = new ProcessStartInfo(conf.simulatorBinaryPath);
@@ -189,19 +170,13 @@ namespace FlightGearTestExec
                    {
                        // in case we are paused - we do busy waiting, stopping for the same time between frames.
                        // THat way we can lose a maximum if a frame when unpaused/ stopped.
-                       WaitForNextInput();
+                       Thread.Sleep(sleepTime);
                        // TODO change how you wait on pause
                        continue;
                    }
-                   Trace.WriteLine("raw number is");
-                   Trace.WriteLine(currentLine);
                    string line = this.dataHandler.DataByRow[currentLine];
                    byte[] byteLine = Encoding.ASCII.GetBytes(line + System.Environment.NewLine);
                    this.myClient.send(byteLine);
-
-                   int before = DateTime.Now.Millisecond;
-                   this.notifyAll();
-                   int after = DateTime.Now.Millisecond;
                    // check if not stopped
                    if (stopped)
                    {
@@ -209,7 +184,7 @@ namespace FlightGearTestExec
                    }
                    // iterate to next line, please note that this variable can be configured from an outside source. 
 
-                   WaitForNextInput(after - before);
+                   Thread.Sleep(sleepTime);
                    // check if after waiting
                    this.currentLine = this.forward ? Math.Min(this.currentLine + 1, GetNumLines() - 1) : Math.Max(this.currentLine - 1, 0);
                    if ((this.forward && this.currentLine == GetNumLines() - 1) || (!this.forward && this.currentLine == 0))
@@ -266,6 +241,7 @@ namespace FlightGearTestExec
         public void SetSpeed(double value)
         {
             this.speed = Math.Round(value, 1);
+            this.sleepTime = (int) (DEFAULT_SLEEP_TIME / value);
             this.NotifyPropertyChanged("speed");
         }
         public void SetForward(bool forward)
@@ -297,11 +273,6 @@ namespace FlightGearTestExec
         {
             this.paused = false;
 
-        }
-        public float DefaultTicksPerSec()
-        {
-
-            return (float)(1000 / DEFAULT_MILLIS_PER_TICK);
         }
 
     }
