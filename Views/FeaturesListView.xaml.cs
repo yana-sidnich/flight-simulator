@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using static FlightGearTestExec.FlightDataContainer;
+using FlightGearTestExec.Models;
+using static FlightGearTestExec.Models.FlightDataContainer;
 using FlightGearTestExec.ViewModels;
 
 namespace FlightGearTestExec.Views

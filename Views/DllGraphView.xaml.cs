@@ -23,7 +23,7 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.WPF;
-using static FlightGearTestExec.FlightDataContainer;
+using static FlightGearTestExec.Models.FlightDataContainer;
 
 
 namespace FlightGearTestExec.Views

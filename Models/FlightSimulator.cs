@@ -8,6 +8,7 @@ using System.Threading;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Net;
+using FlightGearTestExec.Models;
 
 namespace FlightGearTestExec
 {

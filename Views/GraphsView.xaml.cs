@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlightGearTestExec.ViewModels;
-using static FlightGearTestExec.FlightDataContainer;
+using static FlightGearTestExec.Models.FlightDataContainer;
 
 namespace FlightGearTestExec.Views
 {

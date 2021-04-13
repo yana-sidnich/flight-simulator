@@ -10,11 +10,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
+using static FlightGearTestExec.Models.FlightDataContainer;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using FlightGearTestExec.Models;
 
 namespace FlightGearTestExec.ViewModels
 {
@@ -93,45 +95,14 @@ namespace FlightGearTestExec.ViewModels
             }
         }
 
-        private const int STROKE_THICKNESS = 5;
+        public Visibility IsErrorVisible => IsGraphVisible == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
 
-        private Visibility _isGraphVisible = Visibility.Visible;
-        public Visibility IsGraphVisible
-        {
-            get
-            {
-                return _isGraphVisible;
-            }
-            set
-            {
-                if (value != _isGraphVisible)
-                {
-                    _isGraphVisible = value;
-                    NotifyPropertyChanged("IsGraphVisible");
-                    NotifyPropertyChanged("IsErrorVisible");
-                }
-            }
-        }
-
-        public Visibility IsErrorVisible
-        {
-            get
-            {
-                if (IsGraphVisible == Visibility.Hidden)
-                    return Visibility.Visible;
-                else
-                    return Visibility.Hidden;
-            }
-        }
-
-
-        private ObservableCollection<SeriesHolder> _seriesData = new ObservableCollection<SeriesHolder>();
 
         const int GRAPHS_NUM = 2;
 
         public TwoFeaturesGraphsViewModel()
         {
-            _model = model as FlightSimulator;
+            _model = simulator;
             _model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
@@ -144,9 +115,9 @@ namespace FlightGearTestExec.ViewModels
         {
             for (int i = 0; i < GRAPHS_NUM; i++)
             {
-                _seriesData.Add(new SeriesHolder());
+                SeriesData.Add(new SeriesHolder());
 
-                _seriesData[i].series = new ObservableCollection<ISeries>
+                SeriesData[i].series = new ObservableCollection<ISeries>
                 {
                     new LineSeries<ObservablePointF>
                     {
@@ -175,9 +146,11 @@ namespace FlightGearTestExec.ViewModels
                     index = 0;
                     if (string.IsNullOrEmpty(VM_TwoFeaturesGraphs_SelectedString))
                     {
-                        _seriesData[index].points.Clear();
+                        SeriesData[index].points.Clear();
                         return;
                     }
+
+                    // IsGraphVisible2 = Visibility.Hidden;
                     data = getFeatureData(VM_TwoFeaturesGraphs_SelectedString);
                     break;
                 case "VM_TwoFeaturesGraphs_CorrelatedString":
@@ -248,7 +221,7 @@ namespace FlightGearTestExec.ViewModels
         public FlightDataContainer getFeatureData(string name)
         {
             if (string.IsNullOrEmpty(name)) return null;
-            if (_model.dataDictionary.ContainsKey(name))
+            if (_model.DataDictionary.ContainsKey(name))
             {
                 return _model.DataDictionary[name];
             }
