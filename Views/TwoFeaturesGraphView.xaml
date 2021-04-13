@@ -29,9 +29,9 @@
                     <Setter Property="ZoomMode" Value="None"/>
                     <Setter Property="TooltipPosition" Value="Hidden"/>
                     <Setter Property="LegendPosition" Value="Hidden"/>
+                    <Setter Property="Width" Value="450"/>
+                    <Setter Property="Height" Value="450"/>
                 </Style>
-                <!-- <Setter Property="Width" Value="600"/> -->
-                <!-- <Setter Property="Height" Value="600"/> -->
             </UniformGrid.Resources>
 
             <Grid Margin="5">
