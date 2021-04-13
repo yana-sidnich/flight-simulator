@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,8 +11,6 @@ namespace FlightGearTestExec
 {
     class DataHandler
     {
-        private string timeseriesCSV;
-
         private string pathCSV;
 
         private string pathXML;
@@ -50,8 +48,6 @@ namespace FlightGearTestExec
 
             this.pathXML = xml;
 
-            timeseriesCSV = "myFlight.csv";
-
             attributes = new List<string>();
 
             _dataByColumn = new Dictionary<string, List<float>>();
@@ -64,8 +60,6 @@ namespace FlightGearTestExec
             Trace.Write(this.attributes);
 
             this.initData();
-
-            this.createCSV();
 
         }
 
@@ -182,17 +176,17 @@ namespace FlightGearTestExec
 
 
 
-        private void createCSV(string pathToCSV, string nameOfNewCSV);
+        public void createCSV(string pathOldCSV, string pathNewCSV)
 
         {
 
-            StreamReader sr = File.OpenText(pathToCSV);
+            StreamReader sr = File.OpenText(pathOldCSV);
 
             string text = sr.ReadToEnd();
 
             sr.Close();
 
-            StreamWriter sw = File.CreateText(nameOfNewCSV);
+            StreamWriter sw = File.CreateText(pathNewCSV);
 
             string s = attributes[0];
 
