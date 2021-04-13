@@ -11,7 +11,13 @@ namespace FlightGearTestExec
 {
     class DataHandler
     {
-        private string pathCSV;
+        private string _pathTestCsv;
+
+        private string _pathTrainCsv;
+
+        private string _pathTestCsvWithCol;
+
+        private string _pathTrainCsvWithCol;
 
         private string pathXML;
 
@@ -41,10 +47,16 @@ namespace FlightGearTestExec
             set { }
         }
 
-        public DataHandler(string csv, string xml)
+        public DataHandler(string testCsv, string trainCsv, string testCsvWithCol, string trainCsvWithCol, string xml)
 
         {
-            this.pathCSV = csv;
+            this._pathTestCsv = testCsv;
+
+            this._pathTrainCsv = trainCsv;
+
+            this._pathTestCsvWithCol = testCsvWithCol;
+
+            this._pathTrainCsvWithCol = trainCsvWithCol;
 
             this.pathXML = xml;
 
@@ -57,6 +69,11 @@ namespace FlightGearTestExec
             dataByRow = new List<string>();
 
             this.parseXmlAttributes();
+
+            this.createCSVWithColumn(testCsv, testCsvWithCol);
+
+            this.createCSVWithColumn(trainCsv, trainCsvWithCol);
+
             Trace.Write(this.attributes);
 
             this.initData();
@@ -133,11 +150,11 @@ namespace FlightGearTestExec
                 if (!_dataDictionary.ContainsKey(att))
                 {
                     _dataDictionary.Add(att, new FlightDataContainer());
-                }                
+                }
 
             }
 
-            StreamReader sr = File.OpenText(pathCSV);
+            StreamReader sr = File.OpenText(_pathTestCsv);
 
             string line;
 
@@ -164,7 +181,7 @@ namespace FlightGearTestExec
                     {
                         _dataDictionary[attributes[i]].addValue(float.Parse(s_vals[i]));
                     }
-                                        
+
                     last_attr = attributes[i];
 
 
@@ -176,10 +193,9 @@ namespace FlightGearTestExec
 
 
 
-        public void createCSV(string pathOldCSV, string pathNewCSV)
+        public void createCSVWithColumn(string pathOldCSV, string pathNewCSV)
 
         {
-
             StreamReader sr = File.OpenText(pathOldCSV);
 
             string text = sr.ReadToEnd();
@@ -193,9 +209,7 @@ namespace FlightGearTestExec
             for (int i = 1; i < attributes.Count; i++)
 
             {
-
                 s += "," + attributes[i];
-
             }
 
             sw.WriteLine(s);
@@ -203,10 +217,7 @@ namespace FlightGearTestExec
             sw.Write(text);
 
             sw.Close();
-
         }
-
-
     }
 
 }

@@ -156,10 +156,27 @@ namespace FlightGearTestExec
             this.simulatorExec = Process.Start(info);
 
         }
+
+        private static string GetTempFile(string baseFileName, string extension)
+        {
+            var path = Path.GetTempPath();
+            var fileName = baseFileName + Guid.NewGuid().ToString() + extension;
+            return Path.Combine(path, fileName);
+        }
+
+        private void CreateTempFileNames()
+        {
+            this.conf.FlightTestCSVPath_WithColumns = GetTempFile("test_columns", ".csv");
+            this.conf.FlightTrainCSVPath_WithColumns = GetTempFile("train_columns", ".csv");
+        }
+
         public void Start()
         {
-            // Trace.Write(this.isConnected());
-            this.dataHandler = new DataHandler(this.conf.FlightTestCSVPath, this.conf.FlightXMLPath);
+            // create temporal csv files with columns names in first row
+            CreateTempFileNames();
+            this.dataHandler = new DataHandler(this.conf.FlightTestCSVPath, this.conf.FlightTrainCSVPath,
+                                        this.conf.FlightTestCSVPath_WithColumns, this.conf.FlightTrainCSVPath_WithColumns,
+                                        this.conf.FlightXMLPath);
             // Trace.Write(this.dataHandler.DataByRow.Count);
             Thread t = new Thread(new ThreadStart((delegate ()
            {
@@ -222,7 +239,7 @@ namespace FlightGearTestExec
             {
                 this._dataDictionary = this.dataHandler.DataDictionary;
             }
-        }        
+        }
 
         public void Disconnect()
         {

@@ -95,10 +95,10 @@ namespace FlightGearTestExec.ViewModels
                 throw new Exception("Class UCExported Was Not Implemented In DLL");
 
 
-            // string test = _model.Configuration.FlightTestCSVPath;
-            // string train = _model.Configuration.FlightTrainCSVPath;
-            string test = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\reg_flight_col.csv";
-            string train = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\anomaly_flight_col.csv";
+            string test = _model.Configuration.FlightTestCSVPath_WithColumns;
+            string train = _model.Configuration.FlightTrainCSVPath_WithColumns;
+            // string test = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\reg_flight_col.csv";
+            // string train = "C:\\Users\\ItayYaakov\\OneDrive-BIU\\Desktop\\plugins\\anomaly_flight_col.csv";
             dllGraphOutput = _dllInterface.CreateUC(test, train);
             if (dllGraphOutput != null)
             {
