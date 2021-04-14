@@ -147,6 +147,11 @@ For further information, the app files includes the following folders -
 
 Contains the DLLs' - the algorithms in C# language which is responsible for any anomaly detection in the app.
 
+**Custom DLL Making**
+To make your own custom dll, implement the C# class defined in the included CustomDLLImplement.txt file.
+"<userControl Class Name> represents the name of the class which inherits from UserControl.
+Implement the class inside the dll, and add it to the plugins Folder before running the app, and you are good to go!
+
 
 - **local_packages**
   - *LiveChartsCore.1.0.4*
