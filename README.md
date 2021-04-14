@@ -84,6 +84,7 @@ After the Simulator Controller opened, the user may start by changing the speed,
  The user can be notified with the steering joystick's direction in the current time of flight, and also the rudder and throttle values.
  
 - **Graphs**
+
   - **Variable graphs**
   
   
@@ -94,6 +95,7 @@ After the Simulator Controller opened, the user may start by changing the speed,
   
   
   - **Correlation graph**
+  
   ![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/Graph%20no2%20in%20MainWindow.PNG)
   
   After the user selected certain value and it's correlated feature, he will be notified by red dots whenever anomaly have been discovered by the app.
@@ -103,15 +105,18 @@ After the Simulator Controller opened, the user may start by changing the speed,
   
 
 - **Controls**
+
 Contains the controllers - which means, part of the views which manages the interactions with the user. Creating the MVVM design pattern.
 
 - **Views**
+
 Contains the rest of the views.
 
 
 - **DLL**
   - *LinearRegression.dll* - for linear based correlations between features - creates a line that represent the correlation between the 2 features. if a point a further away from the line, it means the correlation is smaller than usual. shows the last 30 values of both features.
   - *MinimumCircle.dll* - created for smaller correlations between the features - creates a circle that shows the last 30 values of both features - if a point is outside the circle, it means the correlation is smaller than usual.
+
 Contains the DLLs' - the algorithms in C# language which is responsible for any anomaly detection in the app.
 
 
@@ -119,12 +124,15 @@ Contains the DLLs' - the algorithms in C# language which is responsible for any 
   - *LiveChartsCore.1.0.4*
   - *LiveChartsCore.SkiaSharpView.1.0.4*
   - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
+
 Special features, external packages that was required to create the unique and vivid view of the Simulation Controller and it's graphs.
 
 - **Models**
+
 Contains the models, continuation of the MVVM design pattern. responsible for reading the CSV files, and updating the view models from any changes in the values.
 
 - **View Models**
+
 Contains the view models, responsible for bridging between the 2 classes - the model, and the view. Finishing the MVVM design pattern.
 
 
