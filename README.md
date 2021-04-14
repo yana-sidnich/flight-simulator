@@ -124,6 +124,7 @@ Contains the DLLs' - the algorithms in C# language which is responsible for any 
   - *LiveChartsCore.1.0.4*
   - *LiveChartsCore.SkiaSharpView.1.0.4*
   - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
+  - *MaterialDesignThemes.4.0.0*
 
 Special features, external packages that was required to create the unique and vivid view of the Simulation Controller and it's graphs.
 Added Dark mode so it will avert your eyes pain as quickly and have a slick, cool look to it.
