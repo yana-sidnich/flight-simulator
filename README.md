@@ -28,6 +28,7 @@ Before using this application, we need the to install the following:
 After the installations are done:
  - Open Visual Studio Installer > Modify > Under `Desktop & Mobile`, select `.NET desktop development` and click `Modity`.
  - In FlightGear, click on `Settings`, and under "Additional Settings", copy the following:
+ 
      ```
      --generic=socket,in,10,127.0.0.1,5400,tcp,playback_small
      --fdm=null
