@@ -7,14 +7,6 @@ It's usage is for, but not restricted to, flight researchers and flight enthusia
 It uses csv file to register a proper flight parameters, and the purpose is to include another csv file representing a captured flight to test for any anomalies there might be.
 (*Should add that the csv files provided is representing 10 lines in the table as a second in real-life flight, which means time differences between a line and it's former is only 100ms.*)
 
-## Special features
-
-The design team have implemented a few features so the app will have it's looks:
-1. *Live Charts* - this feature is including a clearer charts, emphasizes the changes of the different charts by their colors
-2. *Dark mode* - adding this was also a requirement for our development team to reduce migraine during night-watch.
-3. *GPS positioning* - including a map inside our Simulation Controller window to indicates the plane's positioning. Now, does anyone know russian?
-
-
 ## Preview 
 
 
@@ -27,6 +19,7 @@ The design team have implemented a few features so the app will have it's looks:
 
 Before using this application, we need the to install the following:
  - FlightGear Simulator ( Download [here](https://www.flightgear.org/download/) )
+     (We tested version 2019.1.2 - any other version may not work as expected - ( Download [here](https://sourceforge.net/projects/flightgear/files/release-2019.1/))
    - After the installation, we will require to add commands to the start menu.
      first open up FlightGear, in the menu select the 'Setting' tab, and from there go all the way down to 'Additional Settings'.
 
@@ -43,6 +36,13 @@ Before using this application, we need the to install the following:
 
 Up next, we will have to download the .ZIP file of the app, and extract.
 Once that is done, get to the directory of the extraction, open the app folder and then the solution file **FlightGearTestExec.sln**, and simply press the 'Debug' button.
+
+## Special features
+
+The design team have implemented a few features so the app will have it's looks:
+1. *Live Charts* - this feature is including a clearer charts, emphasizes the changes of the different charts by their colors
+2. *Dark mode* - adding this was also a requirement for our development team to reduce migraine during night-watch.
+3. *GPS positioning* - a custom static map indicates the plane gps position. (More information # Views)
 
 ## Instructions
 
@@ -79,11 +79,21 @@ Only When FlightGear's Window completed it's loading screen, the user may press 
 
 After the Simulator Controller loaded up, the user may start by changing the speed, or the time requested to be queried, or just hold until anomalies will come up on screen as a red-dot on the correlation graph.
 
+# Views
+
  - **Media Player**
  
  ![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/MediaPlayer%20in%20MainWindow.PNG)
  
  The user can use the multimedia buttons to control or target a specific frame in the flight, or speed things up, or even start playing backwards.
+ On each side of the slider there's a time indicator.
+ The play button also indicates the current time.
+ 
+ - **GPS Map**
+  Upon Initialization, we download a static map (using yandx maps - one of only free maps provider) which center is the avarage of the gps lat lon values.
+  The lat lon values are converted to x,y pixels location on the image.
+  This map is saved to byte[] (using async download method). With SkiSharp.WPF library we draw the map as background and draw circles representing all known GPS locations (up untill current time).
+  The user can also control the zoom via slider (Which behind the scenes download a new image, recalculate the points x,y pixels position and redraw).
  
  - **Steers, rudder and throttle**
  
