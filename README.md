@@ -23,12 +23,12 @@ Before using this application, we need the to install the following:
 
    once there just copy-paste the lines below:
    
-   '''C++
+   ```C++
    --generic=socket,in,10,127.0.0.1,5400,tcp,playback_small
    
    
    --fdm=null
-   '''
+   ```
  - .Net Framework ( Download the recommended version [here](https://dotnet.microsoft.com/download/dotnet-framework/) )
  - Microsoft Visual Studio, or another development environment for C# ( Download Visual Studio [here](https://visualstudio.microsoft.com/downloads/) )
  
