@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using FlightGearTestExec.Models;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,57 +13,125 @@ namespace FlightGearTestExec.ViewModels
     class DashboardViewModel : BaseViewModel
     {
         private readonly IFlightSimulator model;
+        private readonly Dictionary<string, FlightDataContainer> dataDictionary;
+        private int line;
         public DashboardViewModel()
         {
             this.model = simulator;
+            this.dataDictionary = this.model.DataDictionary;
             this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
-                    this.NotifyPropertyChanged(/*"VM_Joystick_" +*/e.PropertyName);
+                    this.NotifyPropertyChanged("VM_Dashboard" + e.PropertyName);
+                    if (e.PropertyName == "CurrentLineNumber")
+                    {
+                        updateLine();
+                    }
                 };
         }
 
+        public int VM_DashboardCurrentLineNumber => this.model.GetCurrentLine();
 
-        public double altitude
+        private void updateLine()
         {
-            get {
-                /*Trace.WriteLine($"throttle_1 val : {this.model.getRequetedProp("throttle_1")}");*/
-                return this.model.getRequetedProp("altitude-ft"); }
-            set { }
-        }
+            int newLine = VM_DashboardCurrentLineNumber;
+            if (newLine != line)
+            {
+                line = newLine
+;
 
-        public double airspeed
-        {
-        get { return this.model.getRequetedProp("airspeed-kt"); }
-            set { }
-        }
-        public double heading
-        {   
-            get {
-                return convert(this.model.getRequetedProp("heading-deg")); }
-            set { }
-        }
-        public double pitch
-        {
-            get { return convert(this.model.getRequetedProp("pitch-deg")); }
-            set { }
-        }
-        public double roll
-        {
-            get { return convert(this.model.getRequetedProp("roll-deg")); }
-            set { }
-        }
-        public double yaw
-        {
-            get { return convert(this.model.getRequetedProp("side-slip-deg")); }
-            set { }
+                VM_Dashboard_Altitude = dataDictionary["altitude-ft"].values[line];
+                VM_Dashboard_Airspeed = dataDictionary["airspeed-kt"].values[line];
+                VM_Dashboard_Heading = dataDictionary["heading-deg"].values[line];
+                VM_Dashboard_Pitch = dataDictionary["pitch-deg"].values[line];
+                VM_Dashboard_Roll = dataDictionary["roll-deg"].values[line];
+                // yaw
+                VM_Dashboard_Side = dataDictionary["side-slip-deg"].values[line];
+            }
         }
 
-        //TODO CREATE CONVERTER IN VIEW
-        private double convert(double d)
+
+        private double _altitude;
+        private double _airspeed;
+        private double _heading;
+        private double _pitch;
+        private double _roll;
+        private double _side_slip;
+
+        public double VM_Dashboard_Altitude
         {
-            return 125 + 80 * d; 
+            get
+            {
+                return _altitude;
+            }
+            set
+            {
+                _altitude = value;
+                NotifyPropertyChanged("VM_Dashboard_Altitude");
+            }
         }
 
+
+        public double VM_Dashboard_Airspeed
+        {
+            get
+            {
+                return _airspeed;
+            }
+            set
+            {
+                _airspeed = value;
+                NotifyPropertyChanged("VM_Dashboard_Airspeed");
+            }
+        }
+        public double VM_Dashboard_Heading
+        {
+            get
+            {
+                return _heading;
+            }
+            set
+            {
+                _heading = value;
+                NotifyPropertyChanged("VM_Dashboard_Heading");
+            }
+        }
+        public double VM_Dashboard_Pitch
+        {
+            get
+            {
+                return _pitch;
+            }
+            set
+            {
+                _pitch = value;
+                NotifyPropertyChanged("VM_Dashboard_Pitch");
+            }
+        }
+        public double VM_Dashboard_Roll
+        {
+            get
+            {
+                return _roll;
+            }
+            set
+            {
+                _roll = value;
+                NotifyPropertyChanged("VM_Dashboard_Roll");
+            }
+        }
+        // yaw
+        public double VM_Dashboard_Side
+        {
+            get
+            {
+                return _side_slip;
+            }
+            set
+            {
+                _side_slip = value;
+                NotifyPropertyChanged("VM_Dashboard_Side");
+            }
+        }
     }
 }

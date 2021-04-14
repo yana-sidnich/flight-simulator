@@ -29,10 +29,9 @@ namespace FlightGearTestExec.ViewModels
         private List<float[]> _gpsDataLatLon { get; set; }
 
         const string urlTemplate = "https://static-maps.yandex.ru/1.x/?lang=en-US&ll={0},{1}&z={2}&l=map&size={3},{3}";
-        private int _zoom;
 
         private int size = 300;
-
+        private int _zoom;
         private float latAvg = 0;
         private float lonAvg = 0;
         public MapsViewModel()
@@ -40,6 +39,7 @@ namespace FlightGearTestExec.ViewModels
             _gpsDataLatLon = new List<float[]>();
             GpsDataXY = new List<float[]>();
             _model = simulator;
+            VM_Maps_Zoom = 11;
             getGpsPointsData();
             downloadImage(getUrl(latAvg, lonAvg));
             _model.PropertyChanged +=
@@ -47,7 +47,6 @@ namespace FlightGearTestExec.ViewModels
                 {
                     this.NotifyPropertyChanged("VM_Maps_" + e.PropertyName);
                 };
-            VM_Maps_Zoom = 10;
         }
 
         const double OFFSET = 268435456;
@@ -74,6 +73,17 @@ namespace FlightGearTestExec.ViewModels
                 Math.PI / 180))) / 2));
         }
 
+        private void updateLatLonPoitnsToXY()
+        {
+            double tileSize = size / Math.Pow(2, _zoom);
+            for (int i = 0; i < _gpsDataLatLon.Count; i++)
+            {
+                int[] xy = Adjust(_gpsDataLatLon[i][0], _gpsDataLatLon[i][1], latAvg, lonAvg, _zoom, size);
+                _gpsDataXY[i][0] = (float)xy[1];
+                _gpsDataXY[i][1] = (float)xy[0];
+            }
+        }
+
         private void getGpsPointsData()
         {
             int size = Math.Min(_model.DataDictionary["latitude-deg"].values.Count, _model.DataDictionary["longitude-deg"].values.Count);
@@ -91,15 +101,6 @@ namespace FlightGearTestExec.ViewModels
             lonAvg /= size;
         }
 
-        private void updateLatLonPoitnsToXY()
-        {
-            for (int i = 0; i < _gpsDataLatLon.Count; i++)
-            {
-                int[] xy = Adjust(_gpsDataLatLon[i][0], _gpsDataLatLon[i][1], latAvg, lonAvg, _zoom, size);
-                _gpsDataXY[i][0] = (float)xy[1];
-                _gpsDataXY[i][1] = (float)xy[0];
-            }
-        }
 
         private string getUrl(float lat, float lon)
         {
@@ -129,14 +130,13 @@ namespace FlightGearTestExec.ViewModels
 
         public int VM_Maps_Zoom
         {
-            get { return _zoom; }
+            get => _zoom;
             set
             {
                 _zoom = value;
                 NotifyPropertyChanged("VM_Maps_Zoom");
             }
         }
-
         public List<float[]> GpsDataXY
         {
             get
@@ -152,5 +152,6 @@ namespace FlightGearTestExec.ViewModels
                 NotifyPropertyChanged("GpsDataXY");
             }
         }
+
     }
 }

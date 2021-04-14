@@ -43,6 +43,7 @@
                     </Viewbox>
 
                         <views:MapsView/>
+                        <views:DashboardView/>
                     </StackPanel>
 
                     <views:GraphsView x:Name="graphs" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>

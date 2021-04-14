@@ -14,6 +14,7 @@ namespace FlightGearTestExec.ViewModels
     {
         private readonly IFlightSimulator model;
         private readonly Dictionary<string, FlightDataContainer> dataDictionary;
+        private int line;
         public JoystickViewModel()
         {
             this.model = simulator;
@@ -41,12 +42,15 @@ namespace FlightGearTestExec.ViewModels
         private double _aileron;
         public void updateLine()
         {
-            int line = VM_Joystick_CurrentLineNumber;
-
-            VM_Joystick_throttle_1 = convert(dataDictionary["throttle_1"].values[line]);
-            VM_Joystick_rudder = convert(dataDictionary["rudder"].values[line]);
-            VM_Joystick_elevator = convert(dataDictionary["elevator"].values[line]);
-            VM_Joystick_aileron = convert(dataDictionary["aileron"].values[line]);
+            int newLine = VM_Joystick_CurrentLineNumber;
+            if (newLine != line)
+            {
+                line = newLine;
+                VM_Joystick_throttle_1 = convert(dataDictionary["throttle_1"].values[line]);
+                VM_Joystick_rudder = convert(dataDictionary["rudder"].values[line]);
+                VM_Joystick_elevator = convert(dataDictionary["elevator"].values[line]);
+                VM_Joystick_aileron = convert(dataDictionary["aileron"].values[line]);
+            }
         }
         public double VM_Joystick_throttle_1
         {
@@ -97,8 +101,7 @@ namespace FlightGearTestExec.ViewModels
                 NotifyPropertyChanged("VM_Joystick_aileron");
             }
         }
-
-        //TODO CREATE CONVERTER IN VIEW
+        
         private double convert(double d)
         {
             return 125 + 80 * d;
