@@ -43,7 +43,8 @@ In the Solution Window, inside Dependencies > Packages, make sure you have the f
   - *MaterialDesignThemes.4.0.0*
   
 If not, right-click the solution > Manage NuGet packages for the Solution > click the cogwheel > add a new path to the directory of the solution itself.
-Then, select it in `Package source` next to the cogwheel, and install the packages.
+Then, select it in `Package source` next to the cogwheel, and install the packages. further explanation is provided under **local packages** below. 
+
 
 And now, you are good to go! Just press the button up top!
 
@@ -197,8 +198,8 @@ Introduction to the application:
 
 ## Documentation
 
-[Here](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
+[Here](https://github.com/yana-sidnich/flight-simulator/blob/main/UML.pdf) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
-The flow chart might give a better overall view on the project and how the app is running.
+The [flow charts](https://github.com/yana-sidnich/flight-simulator/blob/main/Flowchart.pdf) might give a better overall view on the project and how the app is running.
 
-[Flow charts download link](https://github.com/yana-sidnich/flight-simulator/raw/main/Flowchart.pdf)
+
