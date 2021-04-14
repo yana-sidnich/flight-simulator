@@ -85,7 +85,7 @@ After the Simulator Controller loaded up, the user may start by changing the spe
  
  ![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/MediaPlayer%20in%20MainWindow.PNG)
  
- The user can use the multimedia buttons to control or target a specific frame in the flight, or speed things up, or even start playing backwards.
+ The user can use the multimedia buttons to control or target a specific frame in the flight, or speed things up, or even start playing backwards (Indicated by negative speed).
  On each side of the slider there's a time indicator.
  The play button also indicates the current time.
  
@@ -102,7 +102,7 @@ After the Simulator Controller loaded up, the user may start by changing the spe
  The user can be notified with the steering joystick's direction in the current time of flight, and also the rudder and throttle values.
  
 - **Graphs**
-
+- 
   - **Variable graphs**
   
   
@@ -118,7 +118,8 @@ After the Simulator Controller loaded up, the user may start by changing the spe
   
   After the user selected certain value and it's correlated feature, he will be notified by red dots whenever anomaly have been discovered by the app.
   
-  (In order to change the threshold of correlation between features - just move the slider just left of the correlation graph. In order to change algorithm the user might need to add a DLL file accordingly, for the developer's needs).
+  To choose a different DLL - select dll from drop down menu (left to the graph) (the listed files are the ones that was avilable in the user dll selected plugins path)
+  To choose a different Threshold - drag the slider to a desired value (left to the graph)
   
   
 For further information, the app files includes the following folders -
@@ -136,6 +137,17 @@ Contains the DLLs' - the algorithms in C# language which is responsible for any 
   - *LiveChartsCore.SkiaSharpView.1.0.4*
   - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
   - *MaterialDesignThemes.4.0.0*
+
+ Some of this packages are not avilable in the Nuget Manager and therfor are attached in local_packages (in this git) folder.
+ Visual studio should recognize nuget.config, but if not - 
+ you can simply go to the Tools menu at the top, then select NuGet Package Manager and Package Manager Settings. In the screen that pops up you should add a reference to the local_packages folder.
+ ![alt text](https://blog.verslu.is/wp-content/uploads/2018/02/Untitled.png)
+ Afterward - you can install the packages:
+ - 1. right click the procject
+ - 2. Manage Nuget Packages...
+ - 3. Set Package Source to Local Packages
+ - 4. Install the 4 packages above
+ - 5. (In some computers you should also install SkiaSharpView.WPF - which is avilable directly from Nuget packages)
 
 Special features as specified above at the beginning.
 External packages that were required to create the unique and vivid view of the Simulation Controller and it's graphs.
