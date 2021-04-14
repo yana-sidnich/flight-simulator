@@ -11,7 +11,7 @@ It uses csv file to register a proper flight parameters, and the purpose is to i
 
 
 
-![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/entireThing.png)
+![alt text](https://github.com/eladoni1/pictures-for-ADP2/blob/main/Demo.png?raw=true)
 
 
 
