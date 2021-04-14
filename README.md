@@ -104,14 +104,6 @@ After the Simulator Controller loaded up, the user may start by changing the spe
   
 For further information, the app files includes the following folders -
 
-- **Controls**
-
-Contains the controllers - which means, part of the views which manages the interactions with the user. Creating the MVVM design pattern.
-
-- **Views**
-
-Contains the rest of the views.
-
 
 - **DLL \ Plugins**
   - *LinearRegression.dll* - for linear based correlations between features - creates a line that represent the correlation between the 2 features. if a point a further away from the line, it means the correlation is smaller than usual. shows the last 30 values of both features.
@@ -130,6 +122,10 @@ Special features, external packages that was required to create the unique and v
 Added Dark mode so it will avert your eyes pain as quickly and have a slick, cool look to it.
 Also added a GPS positioning of the plane, and map view of the area around to it's location; It also records your movement across the map!
 
+
+#### Directory Structure
+
+
 - **Models**
 
 Contains the models, continuation of the MVVM design pattern. responsible for reading the CSV files, and updating the view models from any changes in the values.
@@ -137,6 +133,14 @@ Contains the models, continuation of the MVVM design pattern. responsible for re
 - **View Models**
 
 Contains the view models, responsible for bridging between the 2 classes - the model, and the view. Finishing the MVVM design pattern.
+
+- **Views**
+
+Contains the rest of the views.
+
+- **Controls**
+
+Contains the controllers - which means, part of the views which manages the interactions with the user. Creating the MVVM design pattern.
 
 
 [Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
