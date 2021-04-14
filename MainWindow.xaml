@@ -20,8 +20,8 @@
     <materialDesign:Card>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" CanContentScroll="True" DockPanel.Dock="Top">
                 <Grid>
