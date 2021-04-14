@@ -70,7 +70,7 @@ Only When FlightGear's Window completed it's loading screen, the user may press 
 
 ![alt text](https://raw.githubusercontent.com/eladoni1/pictures-for-ADP2/main/%D7%AA%D7%A4%D7%A8%D7%99%D7%98%20paths%20%2B%20%D7%9C%D7%97%D7%99%D7%A6%D7%94%20%D7%A2%D7%9C%20connect%20to%20simulator.png)
 
-After the Simulator Controller opened, the user may start by changing the speed, or the time requested to be queried, or just hold until the anomaly come up on screen as a red-dot on the correlation graph.
+After the Simulator Controller loaded up, the user may start by changing the speed, or the time requested to be queried, or just hold until anomalies will come up on screen as a red-dot on the correlation graph.
 
  - **Media Player**
  
