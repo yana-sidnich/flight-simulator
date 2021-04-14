@@ -1,0 +1,10 @@
+public class UCExported
+    {
+        <UserControl Class Name> graph;
+        public <UserControl Class Name> CreateUC(string testCSV, string trainCSV);
+        public void UpdateFrame(long timeStep);
+        public void UpdateChosenFeature(string feature);
+        public Dictionary<string, string> UpdateThreshold(float newThreshold);
+        public Dictionary<string, string> GetCorrelatedFeatures();
+        
+    }
