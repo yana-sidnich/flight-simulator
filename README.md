@@ -137,8 +137,6 @@ Contains the models, continuation of the MVVM design pattern. responsible for re
 Contains the view models, responsible for bridging between the 2 classes - the model, and the view. Finishing the MVVM design pattern.
 
 
-# C@n s0m3oN3 pls 3xpl@In beTTer tHaN m3??
-
 [Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
 
