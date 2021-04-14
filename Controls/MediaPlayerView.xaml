@@ -83,7 +83,7 @@
 
             <Border Grid.Row="1" Grid.Column="0">
                 <Button
-                Click="weirdForwardButton_Click"
+                Click="weirdBackwardButton_Click"
                 Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
                     <materialDesign:PackIcon
                     Kind="SkipBackward"
@@ -173,7 +173,7 @@
 
             <Border Grid.Row="1" Grid.Column="6">
                 <Button
-                Click="weirdBackwardButton_Click"
+                Click="weirdForwardButton_Click"
                 Style="{StaticResource MaterialDesignFloatingActionDarkButton}">
                     <materialDesign:PackIcon
                     Kind="SkipForward"

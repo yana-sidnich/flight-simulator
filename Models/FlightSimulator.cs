@@ -268,6 +268,7 @@ namespace FlightGearTestExec
         public void SetCurrentLine(int value)
         {
             currentLine = value;
+            this.NotifyPropertyChanged("CurrentLineNumber");
         }
         public int GetNumLines()
         {
