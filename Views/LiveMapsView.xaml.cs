@@ -47,14 +47,14 @@ namespace FlightGearTestExec.Views
         {
             double latMiddle = (63.97978031 + 63.99375811);
             double lonMiddle = (-22.64160255 + -22.60492759);
-            double tileSize = size / Math.Pow(2, Zoom);
 
-            List<double> latLon = vm.getLocation();
+            List<double> latLon = null; // vm.getLocation();
             string lat = latLon[0].ToString();
             string lon = latLon[1].ToString();  
             double latd = latLon[0];
             double lond = latLon[1];
 
+            double tileSize = size / Math.Pow(2, Zoom);
             var xy = MapConverter.PositionToGlobalPixel(new double[] {latd, lond}, Zoom, tileSize);
             Debug.Print(xy[0] + "    y=" + xy[1]);
         }

@@ -15,7 +15,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1800">
+        Title="MainWindow" Height="1000" Width="1600">
 
     <materialDesign:Card>
         <Grid>
@@ -27,7 +27,6 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -43,12 +42,10 @@
                         <controls:JoystickView x:Name="joystick"/>
                     </Viewbox>
 
-                        <views:LiveMapsView/>
+                        <views:MapsView/>
                     </StackPanel>
 
-                    <GridSplitter HorizontalAlignment="Stretch" ResizeDirection="Columns" Grid.RowSpan="3" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Width="10"/>
-
-                    <views:GraphsView x:Name="graphs" Grid.Column="2" Grid.Row="0" Grid.RowSpan="3"/>
+                    <views:GraphsView x:Name="graphs" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
                 </Grid>
             </ScrollViewer>
 

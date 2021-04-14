@@ -14,7 +14,9 @@ namespace FlightGearTestExec.ViewModels
     class MediaPlayerViewModel : BaseViewModel
     {
         private int _maxLine;
+
         private int _playerPercent;
+
         private int _currentLine;
 
         private readonly IFlightSimulator model;
@@ -63,6 +65,7 @@ namespace FlightGearTestExec.ViewModels
             }
             set { }
         }
+
 
         public int VM_MediaPlayer_PlayPercent
         {

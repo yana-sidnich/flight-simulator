@@ -32,7 +32,6 @@ namespace FlightGearTestExec.ViewModels
                 };
         }
 
-
         public int VM_Joystick_CurrentLineNumber => this.model.GetCurrentLine();
 
 

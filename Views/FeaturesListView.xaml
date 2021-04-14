@@ -20,19 +20,18 @@
         <viewModels:FeaturesListViewModel/>
     </UserControl.DataContext>
 
-    <!-- <materialDesign:Card> -->
-        <Grid MaxHeight="1000">
-            <ListView Name="FeaturesList" SelectionChanged ="List_Selected" MaxHeight="{Binding ElementName=ParentGrid, Path=ActualHeight}"
+    <materialDesign:Card>
+        <ListView Name="FeaturesList" SelectionChanged ="List_Selected" HorizontalContentAlignment="Center"
+                  HorizontalAlignment="Stretch"
+                  MaxHeight="{Binding ElementName=ParentGrid, Path=ActualHeight}"
             >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="auto" Header="Features   " DisplayMemberBinding="{Binding Path=FeatureName}"/>
-                        <GridViewColumn Width="auto"  Header="Correlated Feature   " DisplayMemberBinding="{Binding Path=CorrelatedName}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
-
-    <!-- </materialDesign:Card> -->
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="Auto" Header="Features   " DisplayMemberBinding="{Binding Path=FeatureName}"/>
+                    <GridViewColumn Width="Auto"  Header="Correlated Feature" DisplayMemberBinding="{Binding Path=CorrelatedName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </materialDesign:Card>
 
 </UserControl>

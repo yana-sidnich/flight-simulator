@@ -13,8 +13,7 @@
              TextOptions.TextRenderingMode="Auto"        
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"        
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="1000">
+             mc:Ignorable="d" >
 
     <UserControl.DataContext>
         <viewModels:GraphsViewModel/>
@@ -24,8 +23,8 @@
         <Grid HorizontalAlignment="Stretch" Width="1100" Height="1100">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -36,8 +35,8 @@
             <Grid Grid.Column="2" HorizontalAlignment="Stretch">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="450"/>
+                        <RowDefinition Height="450"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -51,7 +50,9 @@
                 </Grid>
             </Grid>
 
-            <views:FeaturesListView Grid.Column="0" VerticalAlignment="Stretch" x:Name="ListUserControl"/>
+            <views:FeaturesListView Grid.Column="0" MinWidth="400"
+                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                    VerticalAlignment="Stretch" x:Name="ListUserControl"/>
         </Grid>
     </materialDesign:Card>
 

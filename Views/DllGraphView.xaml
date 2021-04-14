@@ -41,7 +41,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
 
@@ -79,7 +79,7 @@
                             Thumb.DragCompleted="doneDraggingThreshold"
                             Height="Auto"
                             VerticalAlignment="Stretch"
-                            Ticks="0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95"
+                            Ticks="0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 0.99"
                             TickPlacement="Both"
                             Minimum="0.05"
                             Maximum="0.95"
@@ -108,7 +108,7 @@
                     </Grid.RowDefinitions>
 
                     <Border x:Name="Border3" Grid.Row="0" Grid.RowSpan="4" CornerRadius="15" Background="White" />
-                    <Border Grid.Row="0" Grid.RowSpan="4" Background="#280680" av:IsHidden="True" Visibility="{Binding IsGraphVisible}"/>
+                    <Border Grid.Row="0" Grid.RowSpan="4" Background="#512da8" av:IsHidden="True" Visibility="{Binding IsGraphVisible}"/>
                     <Border Grid.Row="0" Grid.RowSpan="4" Background="#C62828" av:IsHidden="True" Visibility="{Binding IsErrorVisible}"/>
 
                     <TextBlock Grid.Row="2" Grid.RowSpan="4" TextAlignment="Center" VerticalAlignment="Center"
@@ -120,7 +120,7 @@
                            Text="{Binding VM_TwoFeaturesGraphs_CorrelatedString}"
                            Padding="10, 10, 0, 5" Foreground="White" FontSize="18"/>
 
-                    <DockPanel x:Name="dllGraphDock" Grid.Row="3" d:IsHidden="true"
+                    <DockPanel x:Name="dllGraphDock" Grid.Row="3" d:IsHidden="true" Margin="40, 20, 0, 0"
                            Visibility="{Binding IsGraphVisible}"
                 />
                 </Grid>
