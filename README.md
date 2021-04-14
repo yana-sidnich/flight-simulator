@@ -65,6 +65,7 @@ The design team have implemented a few features so the app will have it's looks:
 
 
 #### Path selection
+(Provide flight csv files **without columns names** in first raw) 
 
 In the next window we will see the app has several requests for paths:
 1. CSV file's path for the flight in for testing.
