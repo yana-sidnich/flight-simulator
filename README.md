@@ -191,7 +191,7 @@ Contains the controllers - which means, part of the views which manages the inte
 
 Introduction to the application:
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/njRA-27rcQ4/0.jpg)](http://www.youtube.com/watch?v=njRA-27rcQ4 "Introduction to the app")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/hMtKQpLmde4/0.jpg)](http://www.youtube.com/watch?v=hMtKQpLmde4 "Introduction to the app")
 
 
 
