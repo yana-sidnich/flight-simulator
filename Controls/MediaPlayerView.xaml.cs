@@ -91,7 +91,7 @@ namespace FlightGearTestExec.Controls
 
         private void MinusTimesFive_Click(object sender, RoutedEventArgs e)
         {
-                vm.updateSpeed(0.5f);
+                vm.updateSpeed(-0.5f);
         }
     }
 

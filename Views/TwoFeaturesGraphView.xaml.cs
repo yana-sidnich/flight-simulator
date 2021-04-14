@@ -85,35 +85,6 @@ namespace FlightGearTestExec.Views
 
                     }
                 };
-
-            // FOR TESTING
-            // Task.Run(() =>
-            // {
-            //     int lineNumber = 0;
-            //     while (true)
-            //     {
-            //         Thread.Sleep(50);
-            //         // if (Application.Current != null)
-            //         // {
-            //         //     Application.Current.Dispatcher.Invoke(() =>
-            //         //     {
-            //         //         BaseViewModel.modelllllllll.CurrentLineNumber++; 
-            //         //     });
-            //         // }   
-            //         if (Application.Current != null)
-            //         {
-            //             Application.Current.Dispatcher.Invoke(() =>
-            //             {
-            //                 if (x_axis_0 != null)
-            //                     x_axis_0.MaxLimit = lineNumber;
-            //                 if (x_axis_1 != null)
-            //                     x_axis_1.MaxLimit = lineNumber;
-            //                 lineNumber++;
-            //             });
-            //         }
-
-            //     }
-            // });
         }
     }
 }

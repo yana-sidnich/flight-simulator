@@ -16,7 +16,7 @@ namespace FlightGearTestExec
     {
         // we set 10 hz play rate
         private const float DEFAULT_SLEEP_TIME = 100.0f;
-        private int sleepTime = (int) DEFAULT_SLEEP_TIME;
+        private int sleepTime = (int)DEFAULT_SLEEP_TIME;
 
         private ITcpClient myClient;
         Process simulatorExec;
@@ -241,17 +241,26 @@ namespace FlightGearTestExec
         public void SetSpeed(double value)
         {
             this.speed = Math.Round(value, 1);
-            this.sleepTime = (int) (DEFAULT_SLEEP_TIME / value);
+            if (this.speed < 0.1 && this.speed > 0)
+            {
+                this.speed = 0.1;
+            }  
+            if (this.speed > -0.1 && this.speed < 0)
+            {
+                this.speed = -0.1;
+            }                        
+            if (this.speed > 0)
+            {
+                this.forward = true;
+            }
+            else if (this.speed < 0)
+            {
+                this.forward = false;
+            }
+            this.sleepTime = Math.Abs((int)(DEFAULT_SLEEP_TIME / value));
             this.NotifyPropertyChanged("speed");
         }
-        public void SetForward(bool forward)
-        {
-            this.forward = forward;
-        }
-        public bool GetForward()
-        {
-            return forward;
-        }
+
         public int GetCurrentLine()
         {
             return currentLine;

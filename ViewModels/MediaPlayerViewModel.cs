@@ -20,10 +20,11 @@ namespace FlightGearTestExec.ViewModels
         private int _currentLine;
 
         private readonly IFlightSimulator model;
+
         public MediaPlayerViewModel()
         {
             this.model = simulator;
-            this.model.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            this.model.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("VM_MediaPlayer_" + e.PropertyName);
                 if (e.PropertyName == "CurrentLineNumber")
@@ -36,10 +37,7 @@ namespace FlightGearTestExec.ViewModels
 
         public int VM_MediaPlayer_last_line
         {
-            get
-            {
-                return _maxLine;
-            }
+            get { return _maxLine; }
         }
 
         public int VM_MediaPlayer_CurrentLineNumber
@@ -52,17 +50,14 @@ namespace FlightGearTestExec.ViewModels
             set
             {
                 this.model.SetCurrentLine(value);
-                VM_MediaPlayer_PlayPercent = (int)((float)value / (float)_maxLine * 100);
+                VM_MediaPlayer_PlayPercent = (int) ((float) value / (float) _maxLine * 100);
                 NotifyPropertyChanged("VM_MediaPlayer_CurrentLineNumber");
             }
         }
 
         public double VM_MediaPlayer_speed
         {
-            get
-            {
-                return this.model.Speed;
-            }
+            get { return this.model.Speed; }
             set { }
         }
 
@@ -71,7 +66,7 @@ namespace FlightGearTestExec.ViewModels
         {
             get
             {
-                _playerPercent = (int)((float)_currentLine / (float)_maxLine * 100);
+                _playerPercent = (int) ((float) _currentLine / (float) _maxLine * 100);
                 return _playerPercent;
             }
             set
@@ -81,52 +76,69 @@ namespace FlightGearTestExec.ViewModels
             }
         }
 
-        public int getTotalFrameNumber() { return simulator.GetNumLines(); }
+        public int getTotalFrameNumber()
+        {
+            return simulator.GetNumLines();
+        }
 
         private void SetWithCheck(double speed)
         {
-            if (speed < 0.2f)
+            if (speed >= 0 && speed < 0.1f)
             {
-                Trace.WriteLine($"cannot update speed to {speed} - speed too low");
-                return;
+                speed = 0.1f;
             }
+            else if (speed < 0 && speed > -0.1f)
+            {
+                speed = -0.1f;
+            }            
+            else if (speed < -16.0f)
+            {
+                speed = -16.0f;
+            }
+
             else if (speed > 32.0f)
             {
-                Trace.WriteLine($"cannot update speed to {speed} - speed too high");
-                return;
+                speed = 32.0f;
             }
+
             this.model.SetSpeed(speed);
         }
+
         public void pause()
         {
             this.model.pauseRun();
         }
+
         public void play()
         {
             this.model.SetSpeed(1.0f);
-            this.model.SetForward(true);
 
             this.model.unPauseRun();
         }
+
         public void stop()
         {
             this.model.pauseRun();
             this.model.SetCurrentLine(0);
         }
+
         public void startOverLines()
         {
             this.model.pauseRun();
             this.model.SetCurrentLine(0);
         }
+
         public void finishLines()
         {
             this.model.pauseRun();
             this.model.SetCurrentLine(getTotalFrameNumber() - 1);
         }
+
         public void moveToLine(int x)
         {
             this.model.SetCurrentLine(x);
         }
+
         public void updatePlaySpeed(String s)
         {
             float f;
@@ -140,29 +152,28 @@ namespace FlightGearTestExec.ViewModels
         {
             SetWithCheck(this.model.Speed + value);
         }
-        
+
         public void forward()
         {
-            if (this.model.GetForward())
+            if (Math.Sign(this.model.Speed) == 1)
             {
                 SetWithCheck(this.model.Speed * 2);
             }
             else
             {
-                this.model.SetForward(true);
-                this.model.SetSpeed(2.0f);
+                this.model.SetSpeed(1.0f);
             }
         }
+
         public void rewind()
         {
-            if (!this.model.GetForward())
+            if (Math.Sign(this.model.Speed) == -1)
             {
                 SetWithCheck(this.model.Speed * 2);
             }
             else
             {
-                this.model.SetForward(false);
-                this.model.SetSpeed(2.0f);
+                this.model.SetSpeed(-1.0f);
             }
         }
     }

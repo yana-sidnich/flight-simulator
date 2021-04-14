@@ -125,7 +125,7 @@ namespace FlightGearTestExec.Views
                 canvas.DrawBitmap(bitmap, 0, 0);
                 canvas.DrawPath(path, paintLine);
             }
-
+            // check if redraw needs every 5 seconds
             await Task.Delay(5);
             skia.InvalidateVisual();
         }

@@ -27,8 +27,6 @@ namespace FlightGearTestExec
         public double getRequetedProp(string propName);
         public void executeSimulator(string ip, string port);
         public void SetSpeed(double value);
-        public void SetForward(bool forward);
-        public bool GetForward();
 
         public int GetCurrentLine();
         public int GetNumLines();
