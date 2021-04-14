@@ -120,7 +120,7 @@
                            Text="{Binding VM_TwoFeaturesGraphs_CorrelatedString}"
                            Padding="10, 10, 0, 5" Foreground="White" FontSize="18"/>
 
-                    <DockPanel x:Name="dllGraphDock" Grid.Row="3" d:IsHidden="true" Margin="40, 20, 0, 0"
+                    <DockPanel x:Name="dllGraphDock" Grid.Row="3" d:IsHidden="true"
                            Visibility="{Binding IsGraphVisible}"
                 />
                 </Grid>

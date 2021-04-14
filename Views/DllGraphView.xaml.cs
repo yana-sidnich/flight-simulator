@@ -55,8 +55,8 @@ namespace FlightGearTestExec.Views
                     else if (name == "VM_DllGraph_SelectedDll")
                     {
                         dllGraphDock.Children?.Clear();
-                        vm.dllGraphOutput.Height = 500;
-                        vm.dllGraphOutput.Width = 500;
+                        vm.dllGraphOutput.Height = 350;
+                        vm.dllGraphOutput.Width = 350;
                         dllGraphDock.Children.Add(vm.dllGraphOutput);
                     }
                 };
