@@ -103,6 +103,7 @@ After the Simulator Controller opened, the user may start by changing the speed,
   (In order to change the threshold of correlation between features - just move the slider just left of the correlation graph. In order to change algorithm the user might need to add a DLL file accordingly, for the developer's needs).
   
   
+For further information, the app files includes the following folders -
 
 - **Controls**
 
@@ -113,7 +114,7 @@ Contains the controllers - which means, part of the views which manages the inte
 Contains the rest of the views.
 
 
-- **DLL**
+- **DLL\Plugins**
   - *LinearRegression.dll* - for linear based correlations between features - creates a line that represent the correlation between the 2 features. if a point a further away from the line, it means the correlation is smaller than usual. shows the last 30 values of both features.
   - *MinimumCircle.dll* - created for smaller correlations between the features - creates a circle that shows the last 30 values of both features - if a point is outside the circle, it means the correlation is smaller than usual.
 
