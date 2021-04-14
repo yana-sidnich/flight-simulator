@@ -41,6 +41,7 @@ In the Solution Window, inside Dependencies > Packages, make sure you have the f
   - *LiveChartsCore.SkiaSharpView.1.0.4*
   - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
   - *MaterialDesignThemes.4.0.0*
+  
 If not, right-click the solution > Manage NuGet packages for the Solution > click the cogwheel > add a new path to the directory of the solution itself.
 Then, select it in `Package source` next to the cogwheel, and install the packages.
 
