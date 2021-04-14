@@ -61,6 +61,7 @@ In the next window we will see the app has several requests for paths:
 3. DLL's folder path that is included inside the extracted folder (This is for programmers to change the algorithm of the anomaly detection if needed be).
 4. FlightGear's folder path.
 
+If the user doesn't have any flight file that should represent a proper flight in-action, then the user may choose our own settings for a standarized flight, which is the CSV included *reg_flight*.
 
 #### IP and port selection
 
@@ -167,5 +168,7 @@ Introduction to the application:
 [Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
 [UML download link](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf)
+
+The flow chart might give a better overall view on the project and how the app is running.
 
 [Flow charts](https://github.com/yana-sidnich/flight-simulator/raw/main/Flowchart.pdf)
