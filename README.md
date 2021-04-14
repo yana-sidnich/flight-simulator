@@ -171,4 +171,4 @@ Introduction to the application:
 
 The flow chart might give a better overall view on the project and how the app is running.
 
-[Flow charts](https://github.com/yana-sidnich/flight-simulator/raw/main/Flowchart.pdf)
+[Flow charts download link](https://github.com/yana-sidnich/flight-simulator/raw/main/Flowchart.pdf)
