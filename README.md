@@ -19,24 +19,31 @@ It uses csv file to register a proper flight parameters, and the purpose is to i
 
 Before using this application, we need the to install the following:
  - FlightGear Simulator:
-   - Version 2020.3.x Download [here](https://www.flightgear.org/download/) )
-   - Version 2019.1.2 Download [here](https://sourceforge.net/projects/flightgear/files/release-2019.1/))
-   - After the installation, we will require to add commands to the start menu.
-     first open up FlightGear, in the menu select the 'Setting' tab, and from there go all the way down to 'Additional Settings'.
-
-   once there just copy-paste the lines below:
-   
-   ```C++
-   --generic=socket,in,10,127.0.0.1,5400,tcp,playback_small
-   --fdm=null
-   ```
- - .Net 5.0 ( Download the recommended version [here](https://dotnet.microsoft.com/download/dotnet-framework/) )
+   - Version 2020.3.x Download [here](https://www.flightgear.org/download/)
+   - Version 2019.1.2 Download [here](https://sourceforge.net/projects/flightgear/files/release-2019.1/)
  - Microsoft Visual Studio, or another development environment for C# ( Download Visual Studio [here](https://visualstudio.microsoft.com/downloads/) )
  
+### Setup
 
+After the installations are done:
+ - Open Visual Studio Installer > Modify > Under "Desktop & Mobile", select '.NET desktop development' and click 'Modity'.
+ - In FlightGear, click on 'Settings', and under "Additional Settings", copy the following:
+     ```
+     --generic=socket,in,10,127.0.0.1,5400,tcp,playback_small
+     --fdm=null
+     ```     
+Next, download the .ZIP file of the app, and extract.
+Once that is done, get to the directory of the extraction, open the app folder and then open the solution file **FlightGearTestExec.sln**.
 
-Up next, we will have to download the .ZIP file of the app, and extract.
-Once that is done, get to the directory of the extraction, open the app folder and then the solution file **FlightGearTestExec.sln**, and simply press the 'Debug' button.
+In the Solution Window, inside Dependencies > Packages, make sure you have the following packages installed:
+  - *LiveChartsCore.1.0.4*
+  - *LiveChartsCore.SkiaSharpView.1.0.4*
+  - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
+  - *MaterialDesignThemes.4.0.0*
+If not, right-click the solution > Manage NuGet packages for the Solution > click the cogwheel > add a new path to the directory of the solution itself.
+Then, select it in 'Package source' next to the cogwheel, and install the packages.
+
+And now, you are good to go! Just press the button up top!
 
 ## Special features
 
