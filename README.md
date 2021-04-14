@@ -197,9 +197,7 @@ Introduction to the application:
 
 ## Documentation
 
-[Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
-
-[UML download link](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf)
+[Here](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
 The flow chart might give a better overall view on the project and how the app is running.
 
