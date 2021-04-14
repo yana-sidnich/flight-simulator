@@ -15,7 +15,7 @@ It uses csv file to register a proper flight parameters, and the purpose is to i
 
 
 
-### Installation & First run
+## Installation & First run
 
 Before using this application, we need the to install the following:
  - FlightGear Simulator ( Download [here](https://www.flightgear.org/download/) )
@@ -36,7 +36,7 @@ Before using this application, we need the to install the following:
 Up next, we will have to download the .ZIP file of the app, and extract.
 Once that is done, get to the directory of the extraction, open the app folder and then the solution file **FlightGearTestExec.sln**, and simply press the 'Debug' button.
 
-### Instructions
+## Instructions
 
 #### Connection Window - Path, IP & port selection
 
@@ -126,6 +126,8 @@ Contains the DLLs' - the algorithms in C# language which is responsible for any 
   - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
 
 Special features, external packages that was required to create the unique and vivid view of the Simulation Controller and it's graphs.
+Added Dark mode so it will avert your eyes pain as quickly and have a slick, cool look to it.
+Also added a GPS positioning of the plane, and map view of the area around to it's location; It also records your movement across the map!
 
 - **Models**
 
