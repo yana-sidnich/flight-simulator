@@ -7,6 +7,14 @@ It's usage is for, but not restricted to, flight researchers and flight enthusia
 It uses csv file to register a proper flight parameters, and the purpose is to include another csv file representing a captured flight to test for any anomalies there might be.
 (*Should add that the csv files provided is representing 10 lines in the table as a second in real-life flight, which means time differences between a line and it's former is only 100ms.*)
 
+## Special features
+
+The design team have implemented a few features so the app will have it's looks:
+1. *Live Charts* - this feature is including a clearer charts, emphasizes the changes of the different charts by their colors
+2. *Dark mode* - adding this was also a requirement for our development team to reduce migraine during night-watch.
+3. *GPS positioning* - including a map inside our Simulation Controller window to indicates the plane's positioning. Now, does anyone know russian?
+
+
 ## Preview 
 
 
@@ -118,7 +126,8 @@ Contains the DLLs' - the algorithms in C# language which is responsible for any 
   - *LiveChartsCore.SkiaSharpView.WPF.1.0.4*
   - *MaterialDesignThemes.4.0.0*
 
-Special features, external packages that was required to create the unique and vivid view of the Simulation Controller and it's graphs.
+Special features as specified above at the beginning.
+External packages that were required to create the unique and vivid view of the Simulation Controller and it's graphs.
 Added Dark mode so it will avert your eyes pain as quickly and have a slick, cool look to it.
 Also added a GPS positioning of the plane, and map view of the area around to it's location; It also records your movement across the map!
 
