@@ -35,6 +35,11 @@ namespace LinearRegression
         public float threshold;
         long currentFrame = -1;
         string feature1 = null;
+
+        public List<Axis> XAxes { get; set; }
+        public List<Axis> YAxes { get; set; }
+        public TimeSpan AnimationSpeed { get; set; } = TimeSpan.FromMilliseconds(10);
+
         List<float> x, y;
 
         public Graph(string testCSV, string trainCSV)
@@ -50,11 +55,32 @@ namespace LinearRegression
             setDetector();
             defaultGraph();
 
+            SolidColorPaintTask separatorsBrush = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = 0.3f };
+
+            XAxes = new List<Axis>
+                {
+                    new Axis
+                    {
+                        MinStep = 1,
+                        SeparatorsBrush = separatorsBrush,  }
+                };
+            YAxes = new List<Axis>
+                {
+                    new Axis
+                    {
+                        ShowSeparatorLines = false,
+                        ShowSeparatorWedges = false,
+                        SeparatorsBrush = separatorsBrush,
+                        MinStep = 1,
+                    }
+                };
+
             seriesCollection = new ObservableCollection<ISeries>
             {
                 new LineSeries<ObservablePointF>
                 {
                 Values = linearReg,
+                Stroke = new SolidColorPaintTask { Color = SKColors.DarkOrange, StrokeThickness = 2 },
                 GeometrySize = 0,
                 Fill = null,
                 },
@@ -93,8 +119,8 @@ namespace LinearRegression
         public void setColors()
         {
             regularFill = new SolidColorPaintTask() { Color = SKColors.LightGray };
-            regularStroke = new SolidColorPaintTask() { Color = SKColors.Gray };
-            anomalyFill = new SolidColorPaintTask() { Color = SKColors.Red };
+            regularStroke = new SolidColorPaintTask() { Color = SKColors.FloralWhite };
+            anomalyFill = new SolidColorPaintTask() { Color = SKColors.MediumVioletRed };
             anomalyStroke = new SolidColorPaintTask() { Color = SKColors.DarkRed };
         }
 
@@ -123,19 +149,21 @@ namespace LinearRegression
             int j = (int)currentFrame;
             bool isAnomaly = detector.isAnomalous(x[j], y[j], detector.getCFbyFeature(feature1));
             pointsIsAnomalyQueue.Enqueue(isAnomaly);
-            if (isAnomaly) {
+            if (isAnomaly)
+            {
                 pointsAnomalies.Add(new ObservablePointF(x[j], y[j]));
-            } 
+            }
             else
             {
                 pointsRegular.Add(new ObservablePointF(x[j], y[j]));
             }
-            if (pointsIsAnomalyQueue.Count >= MAX_SIZE + 1) {
+            if (pointsIsAnomalyQueue.Count >= MAX_SIZE + 1)
+            {
                 bool isFirstPointAnomaly = pointsIsAnomalyQueue.Dequeue();
                 if (isFirstPointAnomaly)
                 {
                     pointsAnomalies.RemoveAt(0);
-                } 
+                }
                 else
                 {
                     pointsRegular.RemoveAt(0);
@@ -170,11 +198,11 @@ namespace LinearRegression
 
         public void changePoints(long newFrame)
         {
-            if (newFrame < MAX_SIZE-1)
+            if (newFrame < MAX_SIZE - 1)
             {
                 currentFrame = -1;
                 DeleteAll(pointsRegular);
-                DeleteAll(pointsAnomalies);                
+                DeleteAll(pointsAnomalies);
                 pointsIsAnomalyQueue.Clear();
             }
             else
@@ -185,7 +213,7 @@ namespace LinearRegression
                 moveOneFrame();
         }
 
-        
+
         public void updateFrame(long newFrame)
         {
             if (feature1 != null && detector.getCFbyFeature(feature1).feature2 != null)

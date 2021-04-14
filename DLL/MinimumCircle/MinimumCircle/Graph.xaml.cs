@@ -37,6 +37,9 @@ namespace MinimumCircle
         Queue<bool> pointsIsAnomalyQueue = new Queue<bool>();
         long currentFrame = -1;
         string feature1 = null;
+        public List<Axis> XAxes { get; set; }
+        public List<Axis> YAxes { get; set; }
+        public TimeSpan AnimationSpeed { get; set; } = TimeSpan.FromMilliseconds(10);
         List<float> x, y;
 
         public Graph(string testCSV, string trainCSV)
@@ -51,7 +54,26 @@ namespace MinimumCircle
             setColors();
             setDetector(testCSV, trainCSV);
             defaultGraph();
-            
+
+            SolidColorPaintTask separatorsBrush = new SolidColorPaintTask { Color = SKColors.FloralWhite, StrokeThickness = 0.3f };
+
+            XAxes = new List<Axis>
+                {
+                    new Axis
+                    {
+                        MinStep = 1,
+                        SeparatorsBrush = separatorsBrush,  }
+                };
+            YAxes = new List<Axis>
+                {
+                    new Axis
+                    {
+                        ShowSeparatorLines = false,
+                        ShowSeparatorWedges = false,
+                        SeparatorsBrush = separatorsBrush,
+                        MinStep = 1,
+                    }
+                };
 
             seriesCollection = new ObservableCollection<ISeries>
             {
@@ -60,6 +82,7 @@ namespace MinimumCircle
                 Values = circle,
                 GeometrySize = 0,
                 Fill = null,
+                Stroke = new SolidColorPaintTask { Color = SKColors.DarkOrange, StrokeThickness = 2 },
                 },
                 new ScatterSeries<ObservablePointF>
                 {
@@ -96,7 +119,7 @@ namespace MinimumCircle
         public void setColors()
         {
             regularFill = new SolidColorPaintTask() { Color = SKColors.LightGray };
-            regularStroke = new SolidColorPaintTask() { Color = SKColors.Gray };
+            regularStroke = new SolidColorPaintTask() { Color = SKColors.FloralWhite };
             anomalyFill = new SolidColorPaintTask() { Color = SKColors.Red };
             anomalyStroke = new SolidColorPaintTask() { Color = SKColors.DarkRed };
         }
@@ -118,7 +141,7 @@ namespace MinimumCircle
             float absMax = x.Max() >= y.Max() ? x.Max() : y.Max();
             GraphDim.Add(new ObservablePointF(absMin, absMin));
             GraphDim.Add(new ObservablePointF(absMax, absMax));
-            generateCircle(c.minCircle.c.x, c.minCircle.c.y, c.minCircle.r); 
+            generateCircle(c.minCircle.c.x, c.minCircle.c.y, c.minCircle.r);
         }
 
         public ObservableCollection<ObservablePointF> generateCircle(float cx, float cy, float r)
@@ -259,7 +282,7 @@ namespace MinimumCircle
             }
             return cf;
         }
-        
+
     }
 
 }

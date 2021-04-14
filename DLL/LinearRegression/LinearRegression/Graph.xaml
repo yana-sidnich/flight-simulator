@@ -9,9 +9,19 @@
              d:DesignHeight="400" d:DesignWidth="450">
 
     <Grid>
-        <lvc:CartesianChart x:Name="graph" 
-        Series="{Binding seriesCollection}"
-        Width="auto" Height="auto" ZoomMode="None">
+        <Grid.Resources>
+            <Style TargetType="{x:Type lvc:CartesianChart}">
+                <Setter Property="ZoomMode" Value="None"/>
+                <Setter Property="TooltipPosition" Value="Hidden"/>
+                <Setter Property="LegendPosition" Value="Hidden"/>
+            </Style>
+        </Grid.Resources>
+        <lvc:CartesianChart x:Name="graph"
+                            AnimationsSpeed="{Binding AnimationSpeed}"
+                            XAxes="{Binding XAxes}"
+                            YAxes="{Binding YAxes}"
+                            Series="{Binding seriesCollection}"
+                            Width="Auto" Height="Auto">
         </lvc:CartesianChart>
 
     </Grid>
