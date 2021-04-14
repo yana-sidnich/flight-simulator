@@ -141,4 +141,4 @@ Contains the view models, responsible for bridging between the 2 classes - the m
 [Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
 
-
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/njRA-27rcQ4/0.jpg)]((http://www.youtube.com/watch?v=njRA-27rcQ4 "Introduction to the app"))
