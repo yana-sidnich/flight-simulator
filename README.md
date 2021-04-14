@@ -101,6 +101,10 @@ After the Simulator Controller loaded up, the user may start by changing the spe
  The play button also indicates the current time.
  
  - **GPS Map**
+
+![alt text](https://github.com/eladoni1/pictures-for-ADP2/blob/main/ani%20mapa.png?raw=true)
+
+
   Upon Initialization, we download a static map (using yandx maps - one of only free maps provider) which center is the avarage of the gps lat lon values.
   The lat lon values are converted to x,y pixels location on the image.
   This map is saved to byte[] (using async download method). With SkiSharp.WPF library we draw the map as background and draw circles representing all known GPS locations (up untill current time).
@@ -187,13 +191,7 @@ Contains the rest of the views.
 Contains the controllers - which means, part of the views which manages the interactions with the user. Creating the MVVM design pattern.
 
 
-
-
-
-Introduction to the application:
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/hMtKQpLmde4/0.jpg)](http://www.youtube.com/watch?v=hMtKQpLmde4 "Introduction to the app")
-
+[Introduction to the application](http://www.youtube.com/watch?v=hMtKQpLmde4)
 
 
 ## Documentation
