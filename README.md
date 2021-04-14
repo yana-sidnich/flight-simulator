@@ -18,8 +18,9 @@ It uses csv file to register a proper flight parameters, and the purpose is to i
 ## Installation & First run
 
 Before using this application, we need the to install the following:
- - FlightGear Simulator ( Download [here](https://www.flightgear.org/download/) )
-     (We tested version 2019.1.2 - any other version may not work as expected - ( Download [here](https://sourceforge.net/projects/flightgear/files/release-2019.1/))
+ - FlightGear Simulator:
+   - Version 2020.3.x Download [here](https://www.flightgear.org/download/) )
+   - Version 2019.1.2 Download [here](https://sourceforge.net/projects/flightgear/files/release-2019.1/))
    - After the installation, we will require to add commands to the start menu.
      first open up FlightGear, in the menu select the 'Setting' tab, and from there go all the way down to 'Additional Settings'.
 
