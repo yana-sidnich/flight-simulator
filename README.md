@@ -19,7 +19,8 @@ It uses csv file to register a proper flight parameters, and the purpose is to i
 
 Before using this application, we need the to install the following:
  - FlightGear Simulator ( Download [here](https://www.flightgear.org/download/) )
-   - After the installation, we will require to first open up FlightGear, and in the menu, select the 'Setting' tab, and from there go all the way down to 'Additional Settings'.
+   - After the installation, we will require to add commands to the start menu.
+     first open up FlightGear, in the menu select the 'Setting' tab, and from there go all the way down to 'Additional Settings'.
 
    once there just copy-paste the lines below:
    
@@ -35,7 +36,7 @@ Before using this application, we need the to install the following:
 
 
 Up next, we will have to download the .ZIP file of the app, and extract.
-Once that is done, open the directory of the extraction, open the folder and the solution file **FlightGearTestExec.sln**, and simply press the 'Debug' button.
+Once that is done, get to the directory of the extraction, open the app folder and then the solution file **FlightGearTestExec.sln**, and simply press the 'Debug' button.
 
 ### Instructions
 
@@ -114,7 +115,7 @@ Contains the controllers - which means, part of the views which manages the inte
 Contains the rest of the views.
 
 
-- **DLL\Plugins**
+- **DLL \ Plugins**
   - *LinearRegression.dll* - for linear based correlations between features - creates a line that represent the correlation between the 2 features. if a point a further away from the line, it means the correlation is smaller than usual. shows the last 30 values of both features.
   - *MinimumCircle.dll* - created for smaller correlations between the features - creates a circle that shows the last 30 values of both features - if a point is outside the circle, it means the correlation is smaller than usual.
 
