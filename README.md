@@ -28,7 +28,7 @@ Before using this application, we need the to install the following:
    --generic=socket,in,10,127.0.0.1,5400,tcp,playback_small
    --fdm=null
    ```
- - .Net Framework ( Download the recommended version [here](https://dotnet.microsoft.com/download/dotnet-framework/) )
+ - .Net 5.0 ( Download the recommended version [here](https://dotnet.microsoft.com/download/dotnet-framework/) )
  - Microsoft Visual Studio, or another development environment for C# ( Download Visual Studio [here](https://visualstudio.microsoft.com/downloads/) )
  
 
@@ -138,7 +138,7 @@ Contains the view models, responsible for bridging between the 2 classes - the m
 
 [Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
-[test link](https://github.com/yana-sidnich/flight-simulator/blob/main/UML.pdf)
+[UML download link](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf)
 
 
 Introduction to the application:
