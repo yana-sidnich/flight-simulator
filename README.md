@@ -153,9 +153,7 @@ Contains the rest of the views.
 Contains the controllers - which means, part of the views which manages the interactions with the user. Creating the MVVM design pattern.
 
 
-[Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
-[UML download link](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf)
 
 
 Introduction to the application:
@@ -166,5 +164,8 @@ Introduction to the application:
 
 ## Documentation
 
+[Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can check out the UML that is representing the main classes of the project and the structure of each class and their relations with the other classes, fields, and which interfaces they are implementing.
 
-[EmptyLink]()
+[UML download link](https://github.com/yana-sidnich/flight-simulator/raw/main/UML.pdf)
+
+[Flow charts](https://github.com/yana-sidnich/flight-simulator/raw/main/Flowchart.pdf)
